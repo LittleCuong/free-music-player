@@ -1,0 +1,69 @@
+.wrapper {
+    position: relative;
+    width: 390px;
+    height: 66%;
+    display: flex;
+    background-color: hsla(0,0%,100%,.1);
+    border-radius: 4px;
+    margin: 0 4px;
+    transition: all 0.2s;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.wrapper-image {
+    // width: 70px;
+    width: 15%;
+    height: 100%;
+    display: flex;
+}
+
+.wrapper-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wrapper-infor {
+    display: flex;
+    // width: 240px;
+    width: 70%;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    padding-left: 10px;
+}
+
+.wrapper-infor--name {
+    color: var(--white-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.2rem;
+}
+
+.wrapper-infor--artist {
+    color: var(--white-color);
+    font-size: 1rem;
+}
+
+.wrapper-icon {
+    width: 15%;
+    // height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    font-size: 3.6rem;
+    color: var(--white-color);
+    transition: all 0.2s;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.2);
+    }
+}

@@ -1,0 +1,73 @@
+.wrapper {
+    position: relative;
+    height: 300px;
+    border-radius: var(--border-radius);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.wrapper-button--explore {
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    padding: 8px 14px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--white-color);
+    background-color: var(--main-color);
+    border: none;
+    border-radius: var(--border-radius);
+    transition: all 0.4s;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+}
+
+@media (max-width: 319px) {
+    .wrapper {
+        height: 160px;
+    }
+
+    .wrapper-button--explore {
+        padding: 4px 8px;
+        font-size: .8rem;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 399px) {
+    .wrapper {
+        height: 180px;
+    }
+
+    .wrapper-button--explore {
+        padding: 4px 8px;
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 739px) {
+    .wrapper {
+        height: 200px;
+    }
+
+    .wrapper-button--explore {
+        padding: 4px 8px;
+        font-size: 1rem;
+    }
+}
+
+
+@media (min-width: 740px) and (max-width: 1023px) {
+    .wrapper {
+        // width: 300px;
+        height: 172px;
+    }
+
+    .wrapper-button--explore {
+        padding: 4px 8px;
+        font-size: 1.2rem;
+    }
+}
