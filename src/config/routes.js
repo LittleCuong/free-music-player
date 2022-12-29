@@ -1,5 +1,5 @@
 const routes = {
-    home: '/',
+    home: '/free-music-player',
     category: '/:category/:id',
     playlist: '/:playlistId',
 };
