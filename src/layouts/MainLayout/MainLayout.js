@@ -1,18 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
 import classname from 'classnames/bind'
 import style from './MainLayout.module.scss'
-import { memo, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Search from '../../components/Search/Search';
 import Slide from '../../components/Slide/Slide';
 import Player from '../../components/Player/Player';
-import Categories from '../../components/Categories/Categories';
 import PlayerBar from '../../components/PlayerBar/PlayBar';
-import spotifyApi from '../../api/spotifyApi';
+import Categories from '../../components/Categories/Categories';
 import Sidebar from '../Sidebar/Sidebar';
 import TracksList from '../../components/TracksList/TracksList';
-import { setCurrentPlaylist, playerBar } from '../../redux/features/playerSlice';
-import axios from 'axios';
+import { playerBar } from '../../redux/features/playerSlice';
 import { useAuth } from '../../Context/AuthContext';
+import MenuMobileButton from '../../components/MenuMobileButton/MenuMobileButton';
+import SidebarMobile from '../SidebarMobile/SidebarMobile';
+import { Link } from 'react-router-dom';
 
 const cx = classname.bind(style)
 
@@ -23,6 +24,7 @@ function MainLayout() {
     const [track, setTrack] = useState([])
     const [order, setOrder] = useState()
     const { activeSong, isPlaying, isActive} = useSelector((state) => state.player);
+    const { active } = useSelector((state) => state.menuMobile);
     const dispatch = useDispatch()
 
     const wrapperMainRef = useRef()
@@ -41,8 +43,8 @@ function MainLayout() {
         
         if (window.innerWidth < 1480) {
             dispatch(playerBar(true))
-        }
-    }, [isActive])
+        }        
+    }, [isActive, dispatch])
 
     return ( 
         <div className={cx('wrapper', 'grid')}>
@@ -50,7 +52,8 @@ function MainLayout() {
                 <Sidebar/>
                 <div ref={wrapperMainRef} className={cx('wrapper-main', 'col l-11 m-11 c-12')}>
                     <div className={cx('wrapper-main--header')}>
-                        <h3 className={cx('header')}>Home</h3>
+                        <h3 className={cx('header')}>Home</h3>      
+                        <MenuMobileButton/>            
                         <div ref={searchInputRef} className={cx('wrapper-main--header-search')}>
                             <Search/>
                         </div>
@@ -75,7 +78,10 @@ function MainLayout() {
                             </div>                        
                         </div>
                         <div ref={wrapperMainBodyRight} className={cx('wrapper-main-body--right', 'col l-4 m-4 c-12')}>
-                            <h3 className={cx('main-body--right-header')}>Category</h3>
+                            <div className={cx('wrapper-main-body--right-header')}>
+                                <h3 className={cx('main-body--right-header')}>Category</h3>
+                                <Link to='/categories' className={cx('expand')}>See more</Link>
+                            </div>
                             <div className={cx('main-body--right-category')}>
                                 <Categories accessToken={token}/>                           
                             </div>
@@ -84,11 +90,10 @@ function MainLayout() {
                     <PlayerBar 
                         data={track} 
                         index={order} 
-                        // onClick={handleControlTrack} 
-                        // random={isRandom}
                     /> 
                 </div>
             </div>
+            <SidebarMobile/>
         </div>  
     );
 }

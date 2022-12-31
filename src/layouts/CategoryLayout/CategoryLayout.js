@@ -8,6 +8,11 @@ import Sidebar from '../Sidebar/Sidebar';
 import { useParams } from 'react-router-dom';
 import Playlist from '../../components/Playlist/Playlist';
 import { useAuth } from '../../Context/AuthContext';
+import MenuMobileButton from '../../components/MenuMobileButton/MenuMobileButton';
+import SidebarMobile from '../SidebarMobile/SidebarMobile';
+import { Link } from 'react-router-dom';
+import PlayerBar from '../../components/PlayerBar/PlayBar';
+import axios from 'axios';
 
 const cx = classname.bind(style)
 
@@ -23,7 +28,7 @@ function CategoryLayout() {
     useEffect(() => {
         const getCategoryPlaylist = async () => {
             const response = await spotifyApi.getCategoryPlaylist(id, auth)
-            setPlaylists(response.data.playlists.items)
+            setPlaylists(response.data.playlists.items)          
         }
         getCategoryPlaylist()
     }, [id, auth])
@@ -33,7 +38,8 @@ function CategoryLayout() {
             <Sidebar/>
             <div className={cx('wrapper-main', 'col l-11 m-11 c-12')}>
                 <div className={cx('wrapper-main--header')}>
-                    <h3 className={cx('header')}>Top Tracks</h3>
+                    <h3 className={cx('header')}>Explore</h3>
+                    <MenuMobileButton/>
                     <div ref={searchInputRef} className={cx('wrapper-main--header-search')}>
                         <Search/>
                     </div>
@@ -53,13 +59,18 @@ function CategoryLayout() {
                         </div>                         
                     </div>
                     <div className={cx('wrapper-main-body--right', 'col l-4 m-4 c-0')}>
-                        <h3 className={cx('main-body--right-header')}>Category</h3>
+                        <div className={cx('wrapper-main-body--right-header')}>
+                            <h3 className={cx('main-body--right-header')}>Category</h3>
+                            <Link to='/categories' className={cx('expand')}>See more</Link>
+                        </div>
                         <div className={cx('main-body--right-category')}>
                             <Categories/>                           
                         </div>
                     </div>
                 </div>
+                <PlayerBar/> 
             </div>
+            <SidebarMobile/>
         </div>
     );
 }

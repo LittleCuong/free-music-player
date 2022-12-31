@@ -7,7 +7,7 @@ import style from './Categories.module.scss'
 
 const cx = classname.bind(style)
 
-function Categories() {
+function Categories({page}) {
 
     const wrapperRef = useRef()
     const auth = JSON.parse(localStorage.getItem('token'))
@@ -28,7 +28,7 @@ function Categories() {
     return ( 
         <div className={cx('wrapper')} ref={wrapperRef}>
             {category?.map((item, index)=> (                 
-                    <Category key={index} data={item}/>
+                <Category key={index} data={item} page={page}/>
             ))}
         </div>
     );

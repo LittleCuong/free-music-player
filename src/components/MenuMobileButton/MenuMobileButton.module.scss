@@ -1,0 +1,28 @@
+.burger-btn {
+    display: none;
+    padding: 0 0 0 10px;
+    border: none;
+    background-color: transparent;
+}
+
+.burger-icon {
+    font-size: 2rem;
+}
+
+@media (max-width: 319px) {
+    .burger-btn {
+        display: block;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 399px) {
+    .burger-btn {
+        display: block;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 739px) {
+    .burger-btn {
+        display: block;
+    }
+}

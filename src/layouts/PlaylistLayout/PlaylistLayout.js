@@ -1,22 +1,34 @@
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAuth } from '../../Context/AuthContext';
+import { Link } from 'react-router-dom';
+import { playerBar } from '../../redux/features/playerSlice';
+
 import classname from 'classnames/bind'
 import style from './PlaylistLayout.module.scss'
-import { useEffect, useRef, useState } from 'react';
 import Search from '../../components/Search/Search';
-import Track from '../../components/Track/Track';
 import TracksList from '../../components/TracksList/TracksList';
 import Player from '../../components/Player/Player';
 import Categories from '../../components/Categories/Categories';
 import PlayerBar from '../../components/PlayerBar/PlayBar';
-import spotifyApi from '../../api/spotifyApi';
 import Sidebar from '../Sidebar/Sidebar';
-import { useParams } from 'react-router-dom';
-import { useAuth } from '../../Context/AuthContext';
-import axios from 'axios';
+import spotifyApi from '../../api/spotifyApi';
+import MenuMobileButton from '../../components/MenuMobileButton/MenuMobileButton';
+import SidebarMobile from '../SidebarMobile/SidebarMobile';
 
 const cx = classname.bind(style)
 
 function PlaylistLayout() {
-    
+
+    const dispatch = useDispatch()
+    const auth = JSON.parse(localStorage.getItem('token'))
+
+    const { activeSong, currentSongs, currentIndex, isActive, isPlaying, currentPlaylist, imageUrl, artistName } = useSelector((state) => state.player);
+    console.log(artistName);
+    // const {isActive} = useSelector((state) => state.player);
+
     const {token} = useAuth()
     const {playlistId} = useParams()
     const [name, setName] = useState()
@@ -28,15 +40,23 @@ function PlaylistLayout() {
     const testRef = useRef()
 
     useEffect(() => {
-        axios(`https://api.spotify.com/v1/playlists/${playlistId}`,
-        {
-            method: 'GET',
-            headers: { 'Authorization' : 'Bearer ' + token}
-        })
-        .then(res => {
-            setName(res.data.name)
-        })
-    }, [playlistId, token])
+        const getList = async () => {
+            const response = await spotifyApi.getPlaylist(playlistId, auth)
+            setName(response.data.name)
+        } 
+        getList()
+
+        if (isActive && window.innerWidth >= 1480) {
+            playerRef.current.style.display = 'block'
+            wrapperMainRef.current.style.transform = 'translateX(32%)'
+            searchInputRef.current.style.transform = 'translateX(-90%)'
+            wrapperMainBodyRight.current.style.display = 'none'
+        } 
+        
+        if (window.innerWidth < 1480) {
+            dispatch(playerBar(true))
+        } 
+    }, [playlistId, auth, isActive])
 
     return ( 
         <div className={cx('wrapper', 'grid')}>
@@ -45,6 +65,7 @@ function PlaylistLayout() {
                 <div ref={wrapperMainRef} className={cx('wrapper-main', 'col l-11 m-11 c-12')}>
                     <div className={cx('wrapper-main--header')}>
                         <h3 className={cx('header')}>{name}</h3>
+                        <MenuMobileButton/>
                         <div ref={searchInputRef} className={cx('wrapper-main--header-search')}>
                             <Search/>
                         </div>
@@ -61,13 +82,17 @@ function PlaylistLayout() {
                             </div>                        
                         </div>
                         <div ref={wrapperMainBodyRight} className={cx('wrapper-main-body--right', 'col l-4 m-4 c-12')}>
-                            <h3 className={cx('main-body--right-header')}>Category</h3>
+                            <div className={cx('wrapper-main-body--right-header')}>
+                                <h3 className={cx('main-body--right-header')}>Category</h3>
+                                <Link to='/categories' className={cx('expand')}>See more</Link>
+                            </div>
                             <div className={cx('main-body--right-category')}>
                                 <Categories accessToken={token}/>                           
                             </div>
                         </div>
                     </div>
                     <PlayerBar/> 
+                    <SidebarMobile/>
                 </div>
             </div>
         </div>  

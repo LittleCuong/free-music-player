@@ -15,7 +15,7 @@
 .wrapper-main {
     position: relative;
     width: 98%;
-    height: 98%;
+    height: 100%;
     background-color: var(--white-color);
     border-radius: var(--border-radius);
     display: flex;
@@ -74,15 +74,37 @@
     height: 100%;  
 }
 
+.wrapper-main-body--right-header {
+    display: flex;
+    align-items: center;
+}
+
+.expand {
+    display: block;
+    text-decoration: none;
+    color: #3c3abe;
+    margin-left: 24px;
+    transition: all 0.2s;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+}
+
 .main-body--right-header {
     margin: 10px 0;
+    width: 70%;
+    margin-left: 10px;
 }
 
 .main-body--right-category {
-    height: 46%;
+    height: 43%;
     margin: 0 5px;
-    overflow-y: auto;
+    // overflow-y: auto;
+    overflow: hidden;
 }
+
 
 .wrapper-music--list {
     width: 100%;
@@ -143,6 +165,10 @@
 }
 
 @media (max-width: 319px) {
+    .wrapper-main {
+        height: 100%;
+    }
+
     .wrapper-sidebar {
         display: none !important;
     }
@@ -155,6 +181,10 @@
         font-size: 1.8rem;
     }
 
+    .wrapper-music--list {
+        height: 91%;
+    }
+
     .wrapper-music--list-tracks {
         padding-left: 0;
     }
@@ -165,6 +195,10 @@
 }
 
 @media (min-width: 320px) and (max-width: 399px) {
+    .wrapper-main {
+        height: 100%;
+    }
+
     .wrapper-sidebar {
         display: none !important;
     }
@@ -186,6 +220,10 @@
         font-size: 1.8rem;
     }
 
+    .wrapper-music--list {
+        height: 90%;
+    }
+
     .wrapper-music--list-tracks {
         padding-left: 0;
     }
@@ -196,6 +234,10 @@
 }
 
 @media (min-width: 400px) and (max-width: 739px) {
+    .wrapper-main {
+        height: 100%;
+    }
+
     .wrapper-sidebar {
         display: none !important;
     }
@@ -220,10 +262,18 @@
         font-size: 1.8rem;
     }
 
+    .wrapper-music--list {
+        height: 87%;
+    }
+
     .wrapper-music--list-tracks {
         width: 100%;
         padding-left: 0px;
     }  
+
+    .wrapper-main-body--right {
+        display: none;
+    }
 
     .wrapper-player {
         display: none;
@@ -240,11 +290,28 @@
         height: 30px;
     }
 
+    .wrapper-music--list {
+        height: 90%;
+    }
+
     .wrapper-music--list-tracks {
         height: 98%;
     }
 
     .wrapper-player {
         display: none;
+    }
+
+    .wrapper-main-body--right-header {
+        font-size: 1.4rem;
+    }
+
+    .main-body--right-category {
+        height: 37%;
+    }
+
+    .expand {
+        font-size: 1.2rem;
+        margin-left: 0;
     }
 }

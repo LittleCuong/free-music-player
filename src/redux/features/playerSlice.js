@@ -1,8 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-const clientId = '331ec2d4422e40158118ed7027542e1b';
-const clientSecret = 'cdbfe903116848bf98cf47ad3ab24f22';
 
 const initialState = {
     activeSong: {},
@@ -12,6 +8,8 @@ const initialState = {
     isActive: false,
     isPlaying: false,
     playerBar: false,      
+    imageUrl: undefined,
+    artistName: undefined,
 };
 
 const playerSlice = createSlice({
@@ -22,8 +20,15 @@ const playerSlice = createSlice({
             state.currentPlaylist = action.payload;
         },
 
+        setImageUrl: (state, action) => {
+            state.imageUrl = action.payload
+        },
+
+        setArtistName: (state, action) => {
+            state.artistName = action.payload
+        },
         setActiveSong: (state, action) => {
-            state.activeSong = action.payload.track;
+            state.activeSong = action.payload.track.name;
             state.currentSongs = action.payload.track;
             state.currentIndex = action.payload.index;
             state.isActive = true;
@@ -52,6 +57,6 @@ const playerSlice = createSlice({
     },
 });
 
-export const {setCurrentPlaylist, setActiveSong, nextSong, prevSong, playPause, playerBar} = playerSlice.actions;
+export const {setCurrentPlaylist, setActiveSong, nextSong, prevSong, playPause, playerBar, setImageUrl, setArtistName} = playerSlice.actions;
 
 export default playerSlice.reducer;

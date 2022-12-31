@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../../Context/AuthContext';
 import axios from 'axios';
 import { setCurrentPlaylist } from '../../redux/features/playerSlice';
+import spotifyApi from '../../api/spotifyApi';
+
+
 const cx = classname.bind(style)
 
 function TracksList({data, accessToken}) {
@@ -18,15 +21,21 @@ function TracksList({data, accessToken}) {
     const { activeSong, isPlaying } = useSelector((state) => state.player);
 
     useEffect(() => { 
-        axios(`https://api.spotify.com/v1/playlists/${data}`,
-        {
-            method: 'GET',
-            headers: { 'Authorization' : 'Bearer ' + auth}
-        })
-        .then(res => {
-            setPlaylists(res.data.tracks.items)
-            dispatch(setCurrentPlaylist(res.data.tracks.items))
-        })
+        // axios(`https://api.spotify.com/v1/playlists/${data}`,
+        // {
+        //     method: 'GET',
+        //     headers: { 'Authorization' : 'Bearer ' + auth}
+        // })
+        // .then(res => {
+        //     setPlaylists(res.data.tracks.items)
+        //     dispatch(setCurrentPlaylist(res.data.tracks.items))
+        // })
+        const getList = async () => {
+            const response = await spotifyApi.getPlaylist(data, auth)
+            setPlaylists(response.data.tracks.items)
+            dispatch(setCurrentPlaylist(response.data.tracks.items))
+        } 
+        getList()
     }, [data, token, dispatch])
 
     return ( 

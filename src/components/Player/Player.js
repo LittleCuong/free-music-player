@@ -5,7 +5,7 @@ import { HiPlay, HiBackward, HiForward, HiPause } from "react-icons/hi2";
 import { BiShuffle, BiRepeat } from "react-icons/bi";
 import RecommendTrack from '../RecommendTrack/RecommendTrack';
 
-import { nextSong, prevSong, playPause } from '../../redux/features/playerSlice';
+import { nextSong, prevSong, playPause, setArtistName, setImageUrl } from '../../redux/features/playerSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -14,7 +14,7 @@ const cx = classname.bind(style)
 function Player() {
 
     const audioRef = useRef()
-    const { activeSong, currentSongs, currentIndex, isActive, isPlaying, currentPlaylist } = useSelector((state) => state.player);
+    const { currentSongs, currentIndex, isPlaying, currentPlaylist, imageUrl, artistName } = useSelector((state) => state.player);
 
     const [track, setTrack] = useState()
     const [url, setUrl] = useState()
@@ -28,24 +28,32 @@ function Player() {
 
     useEffect(() => {
         setTrack(currentSongs)
-
+        
         if (track) {
             setArtists(currentSongs.artists)
             setImage(currentSongs.album?.images)
         }
 
         if (image !== undefined) {
-            setUrl(image.find(item => {
+            setUrl(image?.find(item => {
                 if (item.width === 300) {
+                    dispatch(setImageUrl(item.url))
                     return item.url
                 }
             }))
+            
         }
         if (artists !== undefined) {
-            setArtist(artists.map(item => item.name))
+            setArtist(artists.map(item => {
+                return item.name
+            }))
+            dispatch(setArtistName((artists.map(item => {
+                return item.name
+            }))))
         }
     
     }, [currentSongs, image, artists])
+
 
     const handleRepeated = () => {
         setIsRepeated(!isRepeated)
@@ -90,9 +98,6 @@ function Player() {
         dispatch(playPause(false));
     }
 
-    const handleOnEnded = () => {
-    }
-
     return (
         <div className={cx('wrapper')}>
             <div className={cx('wrapper-header')}>
@@ -104,11 +109,17 @@ function Player() {
             </div>
             <div className={cx('wrapper-main')}>
                 <div className={cx('wrapper-main-image')}>
-                    <img className={cx('track-image')} src={url?.url} alt={currentSongs.name}/>
+                    <img className={cx('track-image')} 
+                        // src={url?.url} 
+                        src={imageUrl} 
+                        alt={currentSongs.name}
+                    />
                 </div>
                 <div className={cx('wrapper-main-infor')}>
                     <span className={cx('track-name')}>{currentSongs.name}</span>
-                    <span className={cx('track-artist')}>{artist?.join(", ")}</span>    
+                    <span className={cx('track-artist')}>
+                        {artistName?.join(", ")}
+                    </span>    
                 </div>
                 <div className={cx('wrapper-main-control')}>
                     <div className={cx('player-control')}>
@@ -130,7 +141,7 @@ function Player() {
                         <BiShuffle className={isRandom ? cx('clicked-button') : cx('random-icon')} onClick={handleRandomTrack}/>           
                     </div>
                     <div className={cx('player-seekbar')}>     
-                        <audio ref={audioRef} src={currentSongs.preview_url} onEnded={handleOnEnded}/>
+                        <audio ref={audioRef} src={currentSongs.preview_url}/>
                     </div>
                 </div>
             </div>
