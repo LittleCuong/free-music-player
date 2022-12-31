@@ -28,12 +28,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 10px 0;
     padding-left: 14px;
 }
 
 .header {
     display: block;
-    width: 200px;
+    width: 100%;
     font-size: 2.6rem;
 }
 
@@ -78,8 +79,8 @@
 }
 
 .main-body--right-category {
-    height: 64%;
-    margin-right: 10px;
+    height: 46%;
+    margin: 0 5px;
     overflow-y: auto;
 }
 
@@ -186,7 +187,6 @@
     }
 
     .wrapper-music--list-tracks {
-        max-height: 450px;
         padding-left: 0;
     }
 
@@ -221,7 +221,6 @@
     }
 
     .wrapper-music--list-tracks {
-        max-height: 590px;
         width: 100%;
         padding-left: 0px;
     }  
@@ -242,7 +241,7 @@
     }
 
     .wrapper-music--list-tracks {
-        max-height: 450px;
+        height: 98%;
     }
 
     .wrapper-player {

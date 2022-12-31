@@ -25,7 +25,7 @@ function Playlist({data}) {
     }, [image])
 
     return ( 
-        <Link to={url} className={cx('wrapper', 'col l-2-4')}>
+        <Link to={url} className={cx('wrapper')}>
             <div className={cx('wrapper-contain')}> 
                 <img 
                     className={cx('wrapper-image')} 

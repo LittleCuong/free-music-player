@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import {Pagination, Autoplay } from 'swiper';
 import spotifyApi from '../../api/spotifyApi';
 import SlideCard from '../SlideCard/SlideCard';
+import axios from 'axios';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -13,21 +14,23 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/autoplay';
 
-
+import { useAuth } from '../../Context/AuthContext';
 
 const cx = classname.bind(style)
 
 function Slide({className}) {
 
+    const {token} = useAuth()
+    const auth = JSON.parse(localStorage.getItem('token'))
     const [albums, setAlbums] = useState([])
 
     useEffect(() => {
         const getNewRelease = async () => {
-            const response = await spotifyApi.getNewRelease()
-            setAlbums(response.albums.items)
+            const response = await spotifyApi.getNewRelease(auth)
+            setAlbums(response.data.albums.items)
         } 
         getNewRelease()
-    }, [])
+    }, [auth])
 
     const classes = cx('wrapper', {
         [className]: className

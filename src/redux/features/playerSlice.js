@@ -30,24 +30,14 @@ const playerSlice = createSlice({
         },
 
         nextSong: (state, action) => {
-            // if (state.currentPlaylist.at(action.payload)?.track) {
-                state.currentSongs = state.currentPlaylist.at(action.payload).track                                       
-                state.activeSong = state.currentPlaylist.at(action.payload);
-            // } else {
-            //     state.currentSongs = state.currentPlaylist.at(action.payload).track                                         
-            //     state.activeSong = state.currentPlaylist[action.payload];
-            // }
+            state.currentSongs = state.currentPlaylist.at(action.payload).track                                       
+            state.activeSong = state.currentPlaylist.at(action.payload);
             state.currentIndex = action.payload;
             state.isActive = true;
         },
 
         prevSong: (state, action) => {
-            if (state.currentSongs[action.payload]?.track) {
-                state.activeSong = state.currentSongs[action.payload]?.track;
-            } else {
-                state.activeSong = state.currentSongs[action.payload];
-            }
-
+            state.currentSongs = state.currentPlaylist.at(action.payload).track
             state.currentIndex = action.payload;
             state.isActive = true;
         },

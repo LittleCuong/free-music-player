@@ -13,7 +13,7 @@ const cx = classname.bind(style)
 function PlayerBar() {
 
     const { playerBar, currentSongs, currentIndex, isActive, isPlaying, currentPlaylist } = useSelector((state) => state.player)
-    console.log(playerBar);
+
     const audioRef = useRef()
     const wrapperRef = useRef()
 

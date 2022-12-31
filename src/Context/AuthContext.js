@@ -27,6 +27,7 @@ function AuthProvider({ children }) {
         .then(tokenResponse => {      
             // console.log(tokenResponse);
             setToken(tokenResponse.data.access_token);
+            localStorage.setItem('token', JSON.stringify(tokenResponse.data.access_token))
             console.log(tokenResponse.data.access_token);
         });
     }, [clientId, clientSecret]); 

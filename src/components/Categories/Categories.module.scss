@@ -1,8 +1,8 @@
 .wrapper {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
-    margin-right: 10px;
 }
 
 @media (min-width: 740px) and (max-width: 1023px) {

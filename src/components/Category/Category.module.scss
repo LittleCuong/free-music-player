@@ -1,15 +1,14 @@
 .wrapper {
-    width: 200px;
-    height: 200px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    width: 138px;
+    height: 138px;
+    margin: 2px auto;
     border-radius: var(--border-radius);
     overflow: hidden;
     transition: all 0.4s;
 
     &:hover {
         cursor: pointer;
-        transform: scale(1.01);
+        filter: brightness(120%);
     }
 }
 
@@ -25,7 +24,8 @@
 
 .container-name {
     margin-top: 100px;
-    font-size: 1.6rem;
+    white-space: nowrap;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--white-color);
 }

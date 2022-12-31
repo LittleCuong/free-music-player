@@ -1,10 +1,12 @@
 .wrapper {
-    height: 275px;
+    width: 180px;
+    height: 265px;
     overflow: hidden;
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     transition: all 0.2s;
 
     &:hover {
@@ -15,7 +17,7 @@
 
 .wrapper-contain {
     position: relative;
-    width: 100%;
+    width: 90%;
     height: 100%;
     border-radius: var(--border-radius);
     overflow: hidden;
@@ -44,7 +46,10 @@
 }
 
 .text {
+    width: 120px;
     display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font-size: 1.2rem;
     font-weight: 600;
     line-height: 100%;
@@ -69,4 +74,82 @@
 .wrapper:hover .wrapper-icon {
     opacity: 1;
     transform: translateY(-40px);
+}
+
+@media (min-width: 320px) and (max-width: 399px) {
+    .wrapper {
+        width: 180px;
+        height: 200px;
+    }
+
+    .wrapper-text {
+        height: 14px;
+    }
+
+    .text {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 0.8rem;
+        width: 90px;
+    }
+
+    .wrapper-icon {
+        bottom: -10%;
+        right: 6%;
+        font-size: 2rem;
+        margin: 0 10px;
+        padding: 10px 10px;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 739px) {
+    .wrapper {
+        width: 180px;
+        height: 200px;
+    }
+
+    .wrapper-text {
+        height: 14px;
+    }
+
+    .text {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 0.8rem;
+        width: 90px;
+    }
+
+    .wrapper-icon {
+        bottom: -10%;
+        right: 6%;
+        font-size: 2rem;
+        margin: 0 10px;
+        padding: 10px 10px;
+    }
+}
+
+@media (min-width: 740px) and (max-width: 1023px) {
+    .wrapper {
+        width: 127px;
+        height: 180px;
+    }
+
+    .wrapper-text {
+        height: 16px;
+    }
+
+    .text {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 0.8rem;
+        width: 90px;
+    }
+
+    .wrapper-icon {
+        bottom: 0;
+        right: 6%;
+        font-size: 2rem;
+        margin: 0 10px;
+        padding: 5px 5px;
+    }
 }

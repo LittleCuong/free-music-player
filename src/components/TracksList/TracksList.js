@@ -1,35 +1,33 @@
 import classname from 'classnames/bind'
 import style from './TracksList.module.scss'
-import { useEffect, useRef, useState } from 'react';
-import { HiHome, HiHeart, HiUser, HiOutlineMusicNote, HiCollection } from "react-icons/hi";
+import { useEffect, useState } from 'react';
 import Track from '../../components/Track/Track';
-import spotifyApi from '../../api/spotifyApi';
-import { useSelector } from 'react-redux';
-import { logDOM } from '@testing-library/react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { useAuth } from '../../Context/AuthContext';
+import axios from 'axios';
+import { setCurrentPlaylist } from '../../redux/features/playerSlice';
 const cx = classname.bind(style)
 
-function TracksList({data, callback}) {
+function TracksList({data, accessToken}) {
 
+    const { token } = useAuth()
+    const auth = JSON.parse(localStorage.getItem('token'))
+
+    const dispatch = useDispatch()
     const [playlists, setPlaylists] = useState([])
-    const [chooseTrack, setChooseTrack] = useState(false)
-    const [track, setTrack] = useState([])
-    const [order, setOrder] = useState()
-    const [isRandom, setIsRandom] = useState(false)
     const { activeSong, isPlaying } = useSelector((state) => state.player);
 
-    useEffect(() => {
-        const getList = async () => {
-            const response = await spotifyApi.getPlaylist(data)
-            setPlaylists(response.tracks.items)
-        }
-        getList()
-    }, [data])
-
-    // const handleChooseTrack = (value, index) => {
-    //     callback(value, index)
-    //     // dispatch(currentSongs(e.target.value))
-    // }
+    useEffect(() => { 
+        axios(`https://api.spotify.com/v1/playlists/${data}`,
+        {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + auth}
+        })
+        .then(res => {
+            setPlaylists(res.data.tracks.items)
+            dispatch(setCurrentPlaylist(res.data.tracks.items))
+        })
+    }, [data, token, dispatch])
 
     return ( 
         <div className={cx('wrapper')}>

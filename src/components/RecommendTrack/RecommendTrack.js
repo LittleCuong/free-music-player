@@ -19,6 +19,9 @@ const cx = classname.bind(style)
 
 function RecommendTrack({index}) {
     const order = index
+    
+    const { token } = useAuth()
+
     const dispatch = useDispatch()
     const { currentSongs, isPlaying } = useSelector((state) => state.player)
     const [artists, setArtists] = useState()
@@ -26,55 +29,28 @@ function RecommendTrack({index}) {
     const [tracks, setTracks] = useState()
 
     useEffect(() => {
-        // if (data !== undefined) {
-        //     setArtist(data.map(item => item.id))
-        // }
-        // if (currentSongs) {
-            setArtists(currentSongs.artists)
-        // }
-    }, [currentSongs])
-
-    useEffect(() => {
-        // if (artist) {
-        //     console.log(artist);
-        //     const array = artist.join('?')
-
-        //     const getRecommend = async () => {
-        //         const response = await spotifyApi.getArtistsTopTracks(array)
-        //         setTracks(response.tracks)
-        //     }
-        //     getRecommend()
-        // }
-        if (artists !== undefined) {
-            setArtist(artists.map(item => item.id))     
-        }
-
-        // if (artist) {
-        //     const array = artist.join('?')
-
-        //     const getRecommend = async () => {
-        //         const response = await spotifyApi.getArtistsTopTracks(array)
-        //         setTracks(response.tracks)
-        //     }
-        //     getRecommend()
-        // } 
-    }, [artists])
-
-    useEffect(() => {
         if (artist) {
             const array = artist.join('?')
-
             const getRecommend = async () => {
-                const response = await spotifyApi.getArtistsTopTracks(array)
-                setTracks(response.tracks)
+                const response = await spotifyApi.getArtistsTopTracks(array, token)
+                setTracks(response.data.tracks)
+                console.log(response);
             }
             getRecommend()
         }
-    },[artist])
+    }, [artist])
 
-    const handleChooseTrack = (data) => {
-        // callback(data);
-    }
+    useEffect(() => {
+        setArtists(currentSongs.artists)
+    }, [currentSongs])
+
+    useEffect(() => {
+        if (artists !== undefined) {
+            setArtist(artists.map(item => item.id))     
+        }
+    }, [artists])
+
+
 
     return ( 
         <div className={cx('wrapper')}>
@@ -89,7 +65,7 @@ function RecommendTrack({index}) {
                     > 
                         {tracks?.map((track, index) => (                                                
                             <SwiperSlide key={index} className={cx('slide')} >   
-                                <RecommendTrackItem key={index} onClick={handleChooseTrack} data={track} order={order}/>
+                                <RecommendTrackItem key={index} data={track} order={order}/>
                             </SwiperSlide>             
                         ))} 
                     </Swiper>

@@ -15,7 +15,8 @@
 }
 
 .wrapper-main--header {
-    height: 8%;
+    // height: 8%;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -69,14 +70,14 @@
 }
 
 .main-body--right-category {
-    height: 64%;
-    margin-right: 10px;
+    height: 44%;
+    margin: 0 5px;
     overflow-y: auto;
 }
 
 .wrapper-music--list {
     width: 100%;
-    height: 100%;
+    height: 99%;
     overflow: hidden;
 }
 
@@ -88,8 +89,12 @@
 }
 
 .wrapper-music--list-tracks {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     height: 100%;
-    padding-left: 14px;
+    margin-right: 18px;
     overflow-y: auto;
 }
 
@@ -177,8 +182,8 @@
     }
 
     .wrapper-music--list-tracks {
-        max-height: 450px;
         padding-left: 0;
+        margin-right: 0px;
     }
 
     .wrapper-player {
@@ -211,8 +216,12 @@
         font-size: 1.8rem;
     }
 
+    .wrapper-music--list {
+        height: 99%;
+    }
+
     .wrapper-music--list-tracks {
-        max-height: 590px;
+        justify-content: center;
         width: 100%;
         padding-left: 0px;
     }  
@@ -233,7 +242,9 @@
     }
 
     .wrapper-music--list-tracks {
-        max-height: 450px;
+        height: 99%;
+        justify-content: center;
+        margin-right: 6px;
     }
 
     .wrapper-player {

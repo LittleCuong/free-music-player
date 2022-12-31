@@ -1,3 +1,4 @@
+import axios from 'axios';
 import classname from 'classnames/bind'
 import { useEffect, useRef, useState } from 'react';
 import spotifyApi from '../../api/spotifyApi';
@@ -9,25 +10,25 @@ const cx = classname.bind(style)
 function Categories() {
 
     const wrapperRef = useRef()
-
+    const auth = JSON.parse(localStorage.getItem('token'))
     const [category, setCategory] = useState()
 
     useEffect(() => {
+        const getCategory = async () => {
+            const res = await spotifyApi.getCategories(auth)
+            setCategory(res.data.categories.items)
+        }
+        getCategory()
+
         if (window.innerWidth >= 1480) {
             wrapperRef.current.style.display = 'flex'
         }
-
-        const getCategories = async () => {
-            const response = await spotifyApi.getCategories()
-            setCategory(response.categories.items)
-        }
-        getCategories()
-    }, [])
+    }, [auth])
 
     return ( 
         <div className={cx('wrapper')} ref={wrapperRef}>
-            {category?.map((item, index)=> (
-                <Category key={index} data={item}/>
+            {category?.map((item, index)=> (                 
+                    <Category key={index} data={item}/>
             ))}
         </div>
     );

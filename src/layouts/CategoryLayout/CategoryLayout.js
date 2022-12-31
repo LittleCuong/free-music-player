@@ -2,33 +2,31 @@ import classname from 'classnames/bind'
 import style from './CategoryLayout.module.scss'
 import { useEffect, useRef, useState } from 'react';
 import Search from '../../components/Search/Search';
-import Track from '../../components/Track/Track';
-import Player from '../../components/Player/Player';
 import Categories from '../../components/Categories/Categories';
-import PlayerBar from '../../components/PlayerBar/PlayBar';
 import spotifyApi from '../../api/spotifyApi';
 import Sidebar from '../Sidebar/Sidebar';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import Playlist from '../../components/Playlist/Playlist';
+import { useAuth } from '../../Context/AuthContext';
 
 const cx = classname.bind(style)
 
 function CategoryLayout() {
 
+    const {token} = useAuth()
+    const auth = JSON.parse(localStorage.getItem('token'))
     const {id} = useParams()
-
     const [playlists, setPlaylists] = useState([])
 
     const searchInputRef = useRef()
 
     useEffect(() => {
         const getCategoryPlaylist = async () => {
-            const response = await spotifyApi.getCategoryPlaylist(id)
-            setPlaylists(response.playlists.items)
+            const response = await spotifyApi.getCategoryPlaylist(id, auth)
+            setPlaylists(response.data.playlists.items)
         }
         getCategoryPlaylist()
-    }, [id])
+    }, [id, auth])
 
     return ( 
         <div className={cx('wrapper', 'grid row no-gutters')}>
@@ -43,7 +41,7 @@ function CategoryLayout() {
                 <div className={cx('wrapper-main-body', 'grid row no-gutters')}>
                     <div className={cx('wrapper-main-body--left', 'col l-8 m-8 c-12')}>                                           
                         <div className={cx('wrapper-music--list')}>
-                            <div className={cx('wrapper-music--list-tracks', 'row sm-gutter')}>
+                            <div className={cx('wrapper-music--list-tracks')}>
                                 {playlists.map((playlist, index) => (
                                     <Playlist
                                         key={index} 

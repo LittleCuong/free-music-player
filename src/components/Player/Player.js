@@ -15,7 +15,7 @@ function Player() {
 
     const audioRef = useRef()
     const { activeSong, currentSongs, currentIndex, isActive, isPlaying, currentPlaylist } = useSelector((state) => state.player);
-    console.log(currentSongs);
+
     const [track, setTrack] = useState()
     const [url, setUrl] = useState()
     const [image, setImage] = useState()
@@ -26,16 +26,12 @@ function Player() {
 
     const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     setTrack(currentSongs)
-    // }, [currentSongs])
-
     useEffect(() => {
         setTrack(currentSongs)
 
         if (track) {
             setArtists(currentSongs.artists)
-            setImage(currentSongs.album.images)
+            setImage(currentSongs.album?.images)
         }
 
         if (image !== undefined) {
@@ -60,10 +56,9 @@ function Player() {
         audioRef.current.pause()
 
         if (isRandom) {
-            dispatch(nextSong(Math.floor(Math.random()*currentIndex)));
+            dispatch(prevSong(Math.floor(Math.random()*currentIndex)));
         } else {
-            dispatch(nextSong(currentIndex - 1));   
-
+            dispatch(prevSong(currentIndex - 1));   
         }
     }
     const handleNextTrack = () => {
