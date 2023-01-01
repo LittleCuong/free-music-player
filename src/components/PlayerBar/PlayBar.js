@@ -10,7 +10,7 @@ import { nextSong, prevSong, playPause } from '../../redux/features/playerSlice'
 
 const cx = classname.bind(style)
 
-function PlayerBar({height}) {
+function PlayerBar() {
 
     const { playerBar, currentSongs, currentIndex, isActive, isPlaying, currentPlaylist } = useSelector((state) => state.player)
 
@@ -33,8 +33,8 @@ function PlayerBar({height}) {
 
     useEffect(() => {
         if (track) {
-            setArtists(currentSongs.artists)
-            setImage(currentSongs.album.images)
+            setArtists(currentSongs?.artists)
+            setImage(currentSongs?.album.images)
         }
 
         if (image !== undefined) {
@@ -65,17 +65,18 @@ function PlayerBar({height}) {
 
         }
     }
+    
     const handleNextTrack = () => {
         dispatch(playPause(false));
         audioRef.current.pause()
-
+        console.log(currentIndex);
         if (isRandom) {
             dispatch(nextSong(Math.floor(Math.random()*(currentPlaylist.length - currentIndex))));
         } else {
-            if (currentIndex !== currentPlaylist.length) {
-                dispatch(nextSong(currentIndex + 1));
-            } else {                      
+            if (currentIndex === currentPlaylist.length - 1) {
                 dispatch(nextSong(0));
+            } else {                      
+                dispatch(nextSong(currentIndex + 1));
             }         
         }
     }
@@ -98,8 +99,8 @@ function PlayerBar({height}) {
     }
 
     return ( 
-        <div ref={wrapperRef} className={playerBar ? cx('wrapper', 'visible') : cx('wrapper', 'hide')} style={{height: `${height}px`}}>
-            { currentSongs.name
+        <div ref={wrapperRef} className={playerBar ? cx('wrapper', 'visible') : cx('wrapper', 'hide')}>
+            { currentSongs?.name
                 ?
                     <div className={cx('wrapper-track')}>
                         <img className={cx('wrapper-track--img')} src={url?.url} alt="name"/>
@@ -126,7 +127,7 @@ function PlayerBar({height}) {
                         <HiForward className={cx('control-icon-small')} onClick={handleNextTrack}/>   
                     </div>                 
                     <BiShuffle className={isRandom ? cx('clicked-button') : cx('random-icon')} onClick={handleRandomTrack}/>   
-                    <audio ref={audioRef} src={currentSongs.preview_url} onEnded={handleOnEnded}/>
+                    <audio ref={audioRef} src={currentSongs?.preview_url} onEnded={handleOnEnded}/>
             </div>
             <div className={cx('wrapper-feature')}>
                 <HiOutlineHeart className={cx('wrapper-track--infor-heart')}/>         

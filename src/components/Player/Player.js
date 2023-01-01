@@ -15,7 +15,6 @@ function Player() {
 
     const audioRef = useRef()
     const { currentSongs, currentIndex, isPlaying, currentPlaylist, imageUrl, artistName } = useSelector((state) => state.player);
-
     const [track, setTrack] = useState()
     const [url, setUrl] = useState()
     const [image, setImage] = useState()
@@ -76,11 +75,11 @@ function Player() {
         if (isRandom) {
             dispatch(nextSong(Math.floor(Math.random()*(currentPlaylist.length - currentIndex))));
         } else {
-            if (currentIndex !== currentPlaylist.length) {
-                dispatch(nextSong(currentIndex + 1));
-            } else {                      
+            if (currentIndex === currentPlaylist.length - 1) {
                 dispatch(nextSong(0));
-            }         
+            } else {                      
+                dispatch(nextSong(currentIndex + 1));
+            }          
         }
     }
 

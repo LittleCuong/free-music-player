@@ -8,7 +8,6 @@
     transition: all 0.4s;
     opacity: 0;
     transform: translateX(-100%);
-    
 }
 
 .close-icon {
@@ -77,5 +76,11 @@
     }
     .sidebar-item {
         font-size: 1rem;
+    }
+}
+
+@media (min-width: 740px) {
+    .wrapper {
+        display: none;
     }
 }

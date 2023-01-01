@@ -103,7 +103,8 @@
 }
 
 .main-body--right-category {
-    height: 43%;
+    // height: 43%;
+    max-height: 286px;
     margin: 0 5px;
     // overflow-y: auto;;
     overflow: hidden;
@@ -292,7 +293,7 @@
     }
 
     .wrapper-music--list {
-        height: 57%;
+        height: 50%;
     }
 
     .wrapper-music--list-tracks {
@@ -349,7 +350,8 @@
     }
 
     .main-body--right-category {
-        height: 37%;
+        // height: 37%;
+        max-height: 330px;
     }
 
     .expand {

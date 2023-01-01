@@ -29,7 +29,6 @@ function AuthProvider({ children }) {
 
             var unsubcribe = onSnapshot(trackRef, track => {
                 if (track.exists()) {
-                    // console.log(track.data());
                     setTracks(track.data().track);
                 } else {
                     console.log("No tracks");
@@ -46,7 +45,6 @@ function AuthProvider({ children }) {
 
             var unsubcribe = onSnapshot(playlistRef, playlist => {
                 if (playlist.exists()) {
-                    console.log(playlist.data());
                     setPlaylists(playlist.data().playlist);
                 } else {
                     console.log("No playlist");
@@ -65,7 +63,6 @@ function AuthProvider({ children }) {
 
             var unsubcribe = onSnapshot(playlistRef, playlist => {
                 if (playlist.exists()) {
-                    console.log(playlist.data());
                     setPlaylists(playlist.data().playlist);
                 } else {
                     console.log("No playlist");

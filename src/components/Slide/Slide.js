@@ -19,8 +19,6 @@ import { useAuth } from '../../Context/AuthContext';
 const cx = classname.bind(style)
 
 function Slide({className}) {
-
-    const {token} = useAuth()
     const auth = JSON.parse(localStorage.getItem('token'))
     const [albums, setAlbums] = useState([])
 

@@ -30,6 +30,14 @@ function Sidebar() {
         nav('/free-music-player')
     }
 
+    const handleFavourites = () => {
+        nav('/favourites')
+    }
+
+    const handleCollection = () => {
+        nav('/playlists')
+    }
+
     return ( 
         <div className={cx('wrapper-sidebar', 'col l-1 m-1 c-0')}>      
             <div className={cx('wrapper-sidebar--top')}>
@@ -49,11 +57,11 @@ function Sidebar() {
                     <HiOutlineMusicNote className={cx('sidebar-icon')}/>
                 </div>
                 <div className={cx('wrapper-sidebar--icon')}>
-                    <HiCollection className={cx('sidebar-icon')}/>
+                    <HiCollection className={cx('sidebar-icon')} onClick={handleCollection}/>
                 </div>
             </div>
             <div className={cx('wrapper-sidebar--bottom')}>
-                <div className={cx('wrapper-sidebar--icon')}>
+                <div className={cx('wrapper-sidebar--icon')} onClick={handleFavourites}>
                     <HiHeart className={cx('sidebar-icon')}/>
                 </div>
             </div>             

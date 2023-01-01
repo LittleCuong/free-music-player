@@ -137,7 +137,47 @@
 }
 
 
+@media (max-width: 319px) {
+    .wrapper {
+        border-radius: 0;
+    }
+
+    .wrapper-track--infor-name {
+        font-size: 1.2rem;
+    }
+
+    .wrapper-track--infor-artist {
+        font-size: 1rem;
+    }
+
+    .player-control--center {
+        margin: 0 10px;
+    }
+
+    .control-icon {
+        font-size: 1.2rem;
+        padding: 8px 8px;
+    }
+
+    .control-icon-small {
+        font-size: 1.4rem;
+        margin: 0 8px;
+    }
+
+    .random-icon {
+        font-size: 1.2rem;
+    }
+    
+    .wrapper-track--infor-heart {
+        font-size: 1.6rem;
+    }
+}
+
 @media (min-width: 320px) and (max-width: 399px)  {
+    .wrapper {
+        border-radius: 0;
+    }
+
     .wrapper-track--infor-name {
         font-size: 1.2rem;
     }
@@ -209,6 +249,7 @@
 
 @media (min-width: 1481px) {
     .wrapper {
-        opacity: 0;
+        height: 70px;
+        // opacity: 0;
     }
 }

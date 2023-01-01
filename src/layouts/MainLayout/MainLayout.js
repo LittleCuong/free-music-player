@@ -9,7 +9,7 @@ import PlayerBar from '../../components/PlayerBar/PlayBar';
 import Categories from '../../components/Categories/Categories';
 import Sidebar from '../Sidebar/Sidebar';
 import TracksList from '../../components/TracksList/TracksList';
-import { playerBar } from '../../redux/features/playerSlice';
+import { playerBar, setFavouritePlaylist } from '../../redux/features/playerSlice';
 import { useAuth } from '../../Context/AuthContext';
 import MenuMobileButton from '../../components/MenuMobileButton/MenuMobileButton';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
@@ -24,10 +24,8 @@ function MainLayout() {
     const [track, setTrack] = useState([])
     const [order, setOrder] = useState()
     const [height, setHeight] = useState()
-    const { activeSong, isPlaying, isActive} = useSelector((state) => state.player);
-    const { active } = useSelector((state) => state.menuMobile);
+    const {isActive} = useSelector((state) => state.player);
     const dispatch = useDispatch()
-
     const wrapperMainRef = useRef()
     const wrapperMainBodyRight = useRef()
     const searchInputRef = useRef()
@@ -37,6 +35,7 @@ function MainLayout() {
     const listRef = useRef()
 
     useEffect(() => {  
+        dispatch(setFavouritePlaylist(false))
         if (isActive && window.innerWidth >= 1480) {
             playerRef.current.style.display = 'block'
             wrapperMainRef.current.style.transform = 'translateX(32%)'
@@ -47,8 +46,6 @@ function MainLayout() {
         if (window.innerWidth < 1480) {
             dispatch(playerBar(true))
         }    
-        
-        setHeight(testRef.current.clientHeight - (slideRef.current.clientHeight + listRef.current.clientHeight))
     }, [isActive, dispatch])
 
 
@@ -67,7 +64,7 @@ function MainLayout() {
                     <div className={cx('wrapper-main-body', 'grid row no-gutters')}>
                         <div ref={testRef} className={cx('wrapper-main-body--left', 'col l-8 m-8 c-12')}>
                             <div ref={slideRef} className={cx('slide-wrapper')}> 
-                                <Slide className={cx('slide')} accessToken={token}/>
+                                <Slide className={cx('slide')}/>
                             </div>                                                 
                             <div ref={listRef} className={cx('wrapper-music--list')}>
                                 <h3 className={cx('wrapper-music--list-header')}>Trending</h3>

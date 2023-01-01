@@ -26,11 +26,10 @@ function PlaylistLayout() {
     const dispatch = useDispatch()
     const auth = JSON.parse(localStorage.getItem('token'))
 
-    const { activeSong, currentSongs, currentIndex, isActive, isPlaying, currentPlaylist, imageUrl, artistName } = useSelector((state) => state.player);
+    const { isActive } = useSelector((state) => state.player);
     const {token} = useAuth()
     const {playlistId} = useParams()
     const [name, setName] = useState()
-    const [height, setHeight] = useState()
 
     const wrapperMainRef = useRef()
     const wrapperMainBodyRight = useRef()
@@ -56,9 +55,6 @@ function PlaylistLayout() {
         if (window.innerWidth < 1480) {
             dispatch(playerBar(true))
         } 
-
-        setHeight(testRef.current.clientHeight - listRef.current.clientHeight)
-
     }, [playlistId, auth, isActive])
 
     return ( 
@@ -95,7 +91,7 @@ function PlaylistLayout() {
                             </div>
                         </div>
                     </div>
-                    <PlayerBar height={height}/> 
+                    <PlayerBar/> 
                     <SidebarMobile/>
                 </div>
             </div>

@@ -1,20 +1,20 @@
 import { HiOutlineHeart } from "react-icons/hi";
 import classname from 'classnames/bind'
-import style from './Track.module.scss'
+import style from './FavouriteTrack.module.scss'
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from "../../firebase";
 import { setDoc, doc } from "firebase/firestore";
-import { playPause, setActiveSong } from '../../redux/features/playerSlice';
+import { playerBar, playPause, setActiveSong } from '../../redux/features/playerSlice';
 import { useAuth } from "../../Context/AuthContext";
 
 const cx = classname.bind(style)
 
-// function Track({data, onClick, index}) {
-function Track({data, index}) {
+function FavouriteTrack({data, index}) {
+
     const { activeSong } = useSelector((state) => state.player);
     const {tracks} = useAuth()
-    const track = data.track
+    const track = data
     const inFav = tracks.includes(track.id)
     const {currentUser} = useAuth()
     const dispatch = useDispatch()
@@ -34,20 +34,9 @@ function Track({data, index}) {
     
     const handleClicked = () => {
         dispatch(setActiveSong({track, index}));
+        dispatch(playerBar(true))
         dispatch(playPause(false))
-    }
-
-    const handleAdd = async () => {
-        const trackRef = doc(db, "tracks", currentUser.uid)
-        try {
-            await setDoc(trackRef, 
-                {track: tracks ? [...tracks, track.id] : [track.id]},
-            )
-            
-            alert(`${track.name} added to Favourite!`)
-        } catch (error) {
-            alert(`${track.name} fail to added to Favourite!`)
-        }
+        console.log(index);
     }
 
     const handleRemove= async () => {
@@ -84,11 +73,11 @@ function Track({data, index}) {
                 <span className={cx('wrapper-duration')}>{minutes}</span>
                 <HiOutlineHeart 
                     className={inFav ? cx('wrapper-track-heart', 'saved') : cx('wrapper-track-heart')} 
-                    onClick={inFav ? handleRemove : handleAdd}
+                    onClick={handleRemove}
                 />
             </div>          
         </div>
     );
 }
 
-export default Track;
+export default FavouriteTrack;
