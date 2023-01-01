@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import classname from 'classnames/bind'
 import style from './Sidebar.module.scss'
-import { HiHome, HiHeart, HiUser, HiOutlineMusicNote, HiCollection } from "react-icons/hi";
+import { HiHome, HiHeart, HiUser, HiOutlineMusicNote, HiCollection, HiLogout } from "react-icons/hi";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
 
@@ -38,6 +38,15 @@ function Sidebar() {
         nav('/playlists')
     }
 
+    async function handleLogOut() {
+        try {
+            await logout()
+            nav('/free-music-player')
+        } catch (error) {
+            console.log("Fail to logout");
+        }
+    }
+
     return ( 
         <div className={cx('wrapper-sidebar', 'col l-1 m-1 c-0')}>      
             <div className={cx('wrapper-sidebar--top')}>
@@ -64,6 +73,14 @@ function Sidebar() {
                 <div className={cx('wrapper-sidebar--icon')} onClick={handleFavourites}>
                     <HiHeart className={cx('sidebar-icon')}/>
                 </div>
+                { currentUser 
+                    ? 
+                        <div className={cx('wrapper-sidebar--icon')} onClick={handleLogOut}>
+                            <HiLogout className={cx('sidebar-icon')}/>
+                        </div>
+                    :
+                        null                    
+                }               
             </div>             
         </div>
     );
