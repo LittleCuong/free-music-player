@@ -17,6 +17,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import spotifyApi from '../../api/spotifyApi';
 import MenuMobileButton from '../../components/MenuMobileButton/MenuMobileButton';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
+import PlaylistDetail from '../../components/PlaylistDetail/PlaylistDetail';
 
 const cx = classname.bind(style)
 
@@ -26,18 +27,17 @@ function PlaylistLayout() {
     const auth = JSON.parse(localStorage.getItem('token'))
 
     const { activeSong, currentSongs, currentIndex, isActive, isPlaying, currentPlaylist, imageUrl, artistName } = useSelector((state) => state.player);
-    console.log(artistName);
-    // const {isActive} = useSelector((state) => state.player);
-
     const {token} = useAuth()
     const {playlistId} = useParams()
     const [name, setName] = useState()
+    const [height, setHeight] = useState()
 
     const wrapperMainRef = useRef()
     const wrapperMainBodyRight = useRef()
     const searchInputRef = useRef()
     const playerRef = useRef()
     const testRef = useRef()
+    const listRef = useRef()
 
     useEffect(() => {
         const getList = async () => {
@@ -56,6 +56,9 @@ function PlaylistLayout() {
         if (window.innerWidth < 1480) {
             dispatch(playerBar(true))
         } 
+
+        setHeight(testRef.current.clientHeight - listRef.current.clientHeight)
+
     }, [playlistId, auth, isActive])
 
     return ( 
@@ -72,7 +75,7 @@ function PlaylistLayout() {
                     </div>
                     <div className={cx('wrapper-main-body', 'grid row no-gutters')}>
                         <div ref={testRef} className={cx('wrapper-main-body--left', 'col l-8 m-8 c-12')}>                                              
-                            <div className={cx('wrapper-music--list')}>
+                            <div ref={listRef} className={cx('wrapper-music--list')}>
                                 <div className={cx('wrapper-music--list-tracks')}>
                                     <TracksList data={playlistId} accessToken={token}/>
                                 </div>
@@ -82,6 +85,7 @@ function PlaylistLayout() {
                             </div>                        
                         </div>
                         <div ref={wrapperMainBodyRight} className={cx('wrapper-main-body--right', 'col l-4 m-4 c-12')}>
+                            <PlaylistDetail id={playlistId}/>
                             <div className={cx('wrapper-main-body--right-header')}>
                                 <h3 className={cx('main-body--right-header')}>Category</h3>
                                 <Link to='/categories' className={cx('expand')}>See more</Link>
@@ -91,7 +95,7 @@ function PlaylistLayout() {
                             </div>
                         </div>
                     </div>
-                    <PlayerBar/> 
+                    <PlayerBar height={height}/> 
                     <SidebarMobile/>
                 </div>
             </div>

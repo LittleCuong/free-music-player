@@ -10,7 +10,7 @@ import { nextSong, prevSong, playPause } from '../../redux/features/playerSlice'
 
 const cx = classname.bind(style)
 
-function PlayerBar() {
+function PlayerBar({height}) {
 
     const { playerBar, currentSongs, currentIndex, isActive, isPlaying, currentPlaylist } = useSelector((state) => state.player)
 
@@ -98,7 +98,7 @@ function PlayerBar() {
     }
 
     return ( 
-        <div ref={wrapperRef} className={playerBar ? cx('wrapper', 'visible') : cx('wrapper', 'hide')}>
+        <div ref={wrapperRef} className={playerBar ? cx('wrapper', 'visible') : cx('wrapper', 'hide')} style={{height: `${height}px`}}>
             { currentSongs.name
                 ?
                     <div className={cx('wrapper-track')}>

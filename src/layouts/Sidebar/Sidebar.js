@@ -10,7 +10,6 @@ const cx = classname.bind(style)
 function Sidebar() {
 
     const { logout, signInWithGoogle, signInWithFacebook, currentUser } = useAuth()
-    console.log(currentUser);
     const nav = useNavigate()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)

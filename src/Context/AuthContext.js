@@ -18,21 +18,57 @@ function AuthProvider({ children }) {
     const clientId = '331ec2d4422e40158118ed7027542e1b';
     const clientSecret = 'cdbfe903116848bf98cf47ad3ab24f22';
 
-    const [isLogIn, setIsLogIn] = useState(false)
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading]  = useState(true)
+    const [playlists, setPlaylists] = useState([])
     const [tracks, setTracks] = useState([])
 
     useEffect(() => {
         if (currentUser) {
             const trackRef = doc(db, "tracks", currentUser.uid);
 
-            var unsubcribe = onSnapshot(trackRef, tracks => {
-                if (tracks.exists()) {
-                    console.log(tracks.data().track);
-                    setTracks(tracks.data().track);
+            var unsubcribe = onSnapshot(trackRef, track => {
+                if (track.exists()) {
+                    // console.log(track.data());
+                    setTracks(track.data().track);
                 } else {
-                    console.log("No movies");
+                    console.log("No tracks");
+                }
+            })
+
+            return () => {
+                unsubcribe()
+            }
+        }; 
+        
+        if (currentUser) {
+            const playlistRef = doc(db, "playlists", currentUser.uid);
+
+            var unsubcribe = onSnapshot(playlistRef, playlist => {
+                if (playlist.exists()) {
+                    console.log(playlist.data());
+                    setPlaylists(playlist.data().playlist);
+                } else {
+                    console.log("No playlist");
+                }
+            })
+
+            return () => {
+                unsubcribe()
+            }
+        };    
+    }, [currentUser])
+
+    useEffect(() => {  
+        if (currentUser) {
+            const playlistRef = doc(db, "playlists", currentUser.uid);
+
+            var unsubcribe = onSnapshot(playlistRef, playlist => {
+                if (playlist.exists()) {
+                    console.log(playlist.data());
+                    setPlaylists(playlist.data().playlist);
+                } else {
+                    console.log("No playlist");
                 }
             })
 
@@ -89,6 +125,7 @@ function AuthProvider({ children }) {
         signInWithFacebook,
         logout,
         tracks,
+        playlists,
     }
 
     return ( 

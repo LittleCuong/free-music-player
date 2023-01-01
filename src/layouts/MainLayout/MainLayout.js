@@ -23,6 +23,7 @@ function MainLayout() {
 
     const [track, setTrack] = useState([])
     const [order, setOrder] = useState()
+    const [height, setHeight] = useState()
     const { activeSong, isPlaying, isActive} = useSelector((state) => state.player);
     const { active } = useSelector((state) => state.menuMobile);
     const dispatch = useDispatch()
@@ -32,6 +33,8 @@ function MainLayout() {
     const searchInputRef = useRef()
     const playerRef = useRef()
     const testRef = useRef()
+    const slideRef = useRef()
+    const listRef = useRef()
 
     useEffect(() => {  
         if (isActive && window.innerWidth >= 1480) {
@@ -43,8 +46,11 @@ function MainLayout() {
         
         if (window.innerWidth < 1480) {
             dispatch(playerBar(true))
-        }        
+        }    
+        
+        setHeight(testRef.current.clientHeight - (slideRef.current.clientHeight + listRef.current.clientHeight))
     }, [isActive, dispatch])
+
 
     return ( 
         <div className={cx('wrapper', 'grid')}>
@@ -60,10 +66,10 @@ function MainLayout() {
                     </div>
                     <div className={cx('wrapper-main-body', 'grid row no-gutters')}>
                         <div ref={testRef} className={cx('wrapper-main-body--left', 'col l-8 m-8 c-12')}>
-                            <div className={cx('slide-wrapper')}> 
+                            <div ref={slideRef} className={cx('slide-wrapper')}> 
                                 <Slide className={cx('slide')} accessToken={token}/>
                             </div>                                                 
-                            <div className={cx('wrapper-music--list')}>
+                            <div ref={listRef} className={cx('wrapper-music--list')}>
                                 <h3 className={cx('wrapper-music--list-header')}>Trending</h3>
                                 <TracksList 
                                     data={'37i9dQZEVXbMDoHDwVN2tF'} 
@@ -90,6 +96,7 @@ function MainLayout() {
                     <PlayerBar 
                         data={track} 
                         index={order} 
+                        height={height}
                     /> 
                 </div>
             </div>

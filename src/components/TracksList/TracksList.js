@@ -21,15 +21,6 @@ function TracksList({data, accessToken}) {
     const { activeSong, isPlaying } = useSelector((state) => state.player);
 
     useEffect(() => { 
-        // axios(`https://api.spotify.com/v1/playlists/${data}`,
-        // {
-        //     method: 'GET',
-        //     headers: { 'Authorization' : 'Bearer ' + auth}
-        // })
-        // .then(res => {
-        //     setPlaylists(res.data.tracks.items)
-        //     dispatch(setCurrentPlaylist(res.data.tracks.items))
-        // })
         const getList = async () => {
             const response = await spotifyApi.getPlaylist(data, auth)
             setPlaylists(response.data.tracks.items)

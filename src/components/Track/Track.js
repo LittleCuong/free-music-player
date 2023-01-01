@@ -13,13 +13,14 @@ const cx = classname.bind(style)
 // function Track({data, onClick, index}) {
 function Track({data, index}) {
 
-    const { currentSongs, activeSong, tracks} = useSelector((state) => state.player);
+    const { activeSong } = useSelector((state) => state.player);
+    const {tracks} = useAuth()
+    const track = data.track
+    const inFav = tracks.includes(track.id)
     const {currentUser} = useAuth()
     const dispatch = useDispatch()
     const wrapperRef = useRef()
-    const track = data.track
     const order = index + 1;
-
     const trackNameRef = useRef()
 
     const [image, setImage] = useState(track.album.images)
@@ -37,16 +38,28 @@ function Track({data, index}) {
         dispatch(playPause(false))
     }
 
-    const handleFavourite = async () => {
-        const trackRef = doc(db, "tracks", currentUser.displayName)
+    const handleAdd = async () => {
+        const trackRef = doc(db, "tracks", currentUser.uid)
         try {
             await setDoc(trackRef, 
-                // trong watchlist co movie thi push them vao
                 {track: tracks ? [...tracks, track.id] : [track.id]},
             )
-            alert(`${track.name} added to Watchlist!`)
+            alert(`${track.name} added to Favourite!`)
         } catch (error) {
-            alert(`${track.name} fail to added to Watchlist!`)
+            alert(`${track.name} fail to added to Favourite!`)
+        }
+    }
+
+    const handleRemove= async () => {
+        const trackRef = doc(db, "tracks", currentUser.uid)
+        try {
+            await setDoc(trackRef, 
+                {track: tracks.filter((item) => item !== track.id)},
+                {merge: "true"}
+            )
+            alert(`${track.name} removed from Favourite!`)
+        } catch (error) {
+            alert(`${track.name} fail to removed from Favourite!`)
         }
     }
 
@@ -56,11 +69,10 @@ function Track({data, index}) {
             className={
                 activeSong === track.name ? cx('wrapper', 'active') : cx('wrapper')           
             } 
-            onClick={handleClicked}
         >
             <span className={cx('wrapper-track--index')}>{order}</span>
-            <div className={cx('wrapper-right')}>
-                <div className={cx('wrapper-track--infor')}>              
+            <div className={cx('wrapper-right')} >
+                <div className={cx('wrapper-track--infor')} onClick={handleClicked}>              
                     <img src={imageUrl.url} className={cx('wrapper-track--infor-img')} alt={track.name}/>  
                     <div 
                         className={cx('wrapper-track-infor--main')} 
@@ -70,7 +82,10 @@ function Track({data, index}) {
                     </div>
                 </div>         
                 <span className={cx('wrapper-duration')}>{minutes}</span>
-                <HiOutlineHeart className={cx('wrapper-track-heart')} onClick={handleFavourite}/>
+                <HiOutlineHeart 
+                    className={inFav ? cx('wrapper-track-heart', 'saved') : cx('wrapper-track-heart')} 
+                    onClick={inFav ? handleRemove : handleAdd}
+                />
             </div>          
         </div>
     );
