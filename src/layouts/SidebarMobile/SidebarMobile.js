@@ -52,12 +52,20 @@ function SidebarMobile() {
         nav('/free-music-player')
     }
 
-    const handleFavourites = () => {
-        nav('/favourites')
+    const handleFavourites = () => {      
+        if (currentUser) {
+            nav('/favourites')
+        } else {
+            alert("You must login first!")
+        }  
     }
 
     const handleCollection = () => {
-        nav('/playlists')
+        if (currentUser) {
+            nav('/playlists')
+        } else {
+            alert("You must login first!")
+        }  
     }
 
     async function handleLogOut() {
@@ -89,10 +97,6 @@ function SidebarMobile() {
                 <div className={cx('wrapper-sidebar--icon')}>
                     <HiOutlineMusicNote className={cx('sidebar-icon')}/>
                     <span className={cx('sidebar-item')}>Categories</span>
-                </div>
-                <div className={cx('wrapper-sidebar--icon')}>
-                    <HiUser className={cx('sidebar-icon')}/>
-                    <span className={cx('sidebar-item')}>Profile</span>
                 </div>
                 <div className={cx('wrapper-sidebar--icon')}>
                     <HiCollection className={cx('sidebar-icon')} onClick={handleCollection}/>

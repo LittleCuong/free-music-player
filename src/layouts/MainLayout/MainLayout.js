@@ -14,6 +14,7 @@ import { useAuth } from '../../Context/AuthContext';
 import MenuMobileButton from '../../components/MenuMobileButton/MenuMobileButton';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
 import { Link } from 'react-router-dom';
+import Artists from '../../components/Artists/Artists';
 
 const cx = classname.bind(style)
 
@@ -24,7 +25,7 @@ function MainLayout() {
     const [track, setTrack] = useState([])
     const [order, setOrder] = useState()
     const [height, setHeight] = useState()
-    const {isActive} = useSelector((state) => state.player);
+    const {isActive, activePlayer} = useSelector((state) => state.player);
     const dispatch = useDispatch()
     const wrapperMainRef = useRef()
     const wrapperMainBodyRight = useRef()
@@ -36,17 +37,25 @@ function MainLayout() {
 
     useEffect(() => {  
         dispatch(setFavouritePlaylist(false))
-        if (isActive && window.innerWidth >= 1480) {
+
+        if (activePlayer && window.innerWidth >= 1480) {
             playerRef.current.style.display = 'block'
             wrapperMainRef.current.style.transform = 'translateX(32%)'
             searchInputRef.current.style.transform = 'translateX(-90%)'
             wrapperMainBodyRight.current.style.display = 'none'
         } 
+
+        if (activePlayer === false) {
+            playerRef.current.style.display = 'none'
+            wrapperMainRef.current.style.transform = 'translateX(0%)'
+            searchInputRef.current.style.transform = 'translateX(0%)'
+            wrapperMainBodyRight.current.style.display = 'block'
+        }
         
         if (window.innerWidth < 1480) {
             dispatch(playerBar(true))
         }    
-    }, [isActive, dispatch])
+    }, [dispatch, activePlayer])
 
 
     return ( 
@@ -81,6 +90,12 @@ function MainLayout() {
                             </div>                        
                         </div>
                         <div ref={wrapperMainBodyRight} className={cx('wrapper-main-body--right', 'col l-4 m-4 c-12')}>
+                            <div className={cx('wrapper-main-body--right-header')}>
+                                <h3 className={cx('main-body--right-header')}>Famous Artists</h3>
+                            </div>
+                            <div className={cx('main-body--right-category')}>
+                                <Artists/>                          
+                            </div>                           
                             <div className={cx('wrapper-main-body--right-header')}>
                                 <h3 className={cx('main-body--right-header')}>Category</h3>
                                 <Link to='/categories' className={cx('expand')}>See more</Link>

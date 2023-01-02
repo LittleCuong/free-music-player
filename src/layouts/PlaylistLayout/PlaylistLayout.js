@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
 import { Link } from 'react-router-dom';
-import { playerBar } from '../../redux/features/playerSlice';
+import { playerBar, playPause } from '../../redux/features/playerSlice';
 
 import classname from 'classnames/bind'
 import style from './PlaylistLayout.module.scss'
@@ -26,7 +26,7 @@ function PlaylistLayout() {
     const dispatch = useDispatch()
     const auth = JSON.parse(localStorage.getItem('token'))
 
-    const { isActive } = useSelector((state) => state.player);
+    const { activePlayer } = useSelector((state) => state.player);
     const {token} = useAuth()
     const {playlistId} = useParams()
     const [name, setName] = useState()
@@ -45,17 +45,25 @@ function PlaylistLayout() {
         } 
         getList()
 
-        if (isActive && window.innerWidth >= 1480) {
+        if (activePlayer && window.innerWidth >= 1480) {
             playerRef.current.style.display = 'block'
             wrapperMainRef.current.style.transform = 'translateX(32%)'
             searchInputRef.current.style.transform = 'translateX(-90%)'
             wrapperMainBodyRight.current.style.display = 'none'
         } 
+
+        if (activePlayer === false) {
+            dispatch(playPause(false))
+            playerRef.current.style.display = 'none'
+            wrapperMainRef.current.style.transform = 'translateX(0%)'
+            searchInputRef.current.style.transform = 'translateX(0%)'
+            wrapperMainBodyRight.current.style.display = 'block'
+        }
         
         if (window.innerWidth < 1480) {
             dispatch(playerBar(true))
         } 
-    }, [playlistId, auth, isActive])
+    }, [playlistId, auth, activePlayer])
 
     return ( 
         <div className={cx('wrapper', 'grid')}>

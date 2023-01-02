@@ -70,7 +70,7 @@
 .header {
     display: block;
     width: 140px;
-    font-size: 2.6rem;
+    font-size: 2rem;
 }
 
 .wrapper-main--header-search {
@@ -100,13 +100,12 @@
     display: block;
     width: 70%;
     margin: 10px 0;
+    margin-left: 6px;
 }
 
 .main-body--right-category {
-    // height: 43%;
     max-height: 286px;
     margin: 0 5px;
-    // overflow-y: auto;;
     overflow: hidden;
 }
 
@@ -150,7 +149,7 @@
     width: 100%;
     display: block;
     margin: 16px 0 16px 14px;
-    font-size: 2.6rem;
+    font-size: 2rem;
 }
 
 .wrapper-music--list-tracks {
@@ -195,7 +194,8 @@
     }
 
     .wrapper-music--list-header {
-        font-size: 1.8rem;
+        font-size: 1.2rem;
+        margin: 6px 0 6px 12px;
     }
 
     .wrapper-music--list-tracks {

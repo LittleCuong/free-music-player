@@ -7,6 +7,7 @@ const initialState = {
     currentPlaylist: [],
     isActive: false,
     isPlaying: false,
+    activePlayer: false,
     playerBar: false,      
     imageUrl: undefined,
     artistName: undefined,
@@ -44,6 +45,10 @@ const playerSlice = createSlice({
             state.isActive = true;
         },
 
+        setActivePlayer : (state, action) => {
+            state.activePlayer = action.payload
+        },
+        
         nextSong: (state, action) => {
             switch (state.favourite) {
                 case true:
@@ -56,12 +61,6 @@ const playerSlice = createSlice({
                 default:
                     break;
             }
-            // if (state.favourite = true) {
-            //     state.currentSongs = state.currentPlaylist.at(action.payload).data                   
-            // } else {
-            //     state.currentSongs = state.currentPlaylist.at(action.payload).track                                     
-            //     state.activeSong = state.currentPlaylist.at(action.payload);
-            // }
             state.currentIndex = action.payload;
             state.isActive = true;
         },
@@ -82,6 +81,6 @@ const playerSlice = createSlice({
     },
 });
 
-export const {setBoolean, setCurrentPlaylist, setActiveSong, nextSong, prevSong, playPause, playerBar, setImageUrl, setArtistName, setFavouritePlaylist} = playerSlice.actions;
+export const {setActivePlayer, setBoolean, setCurrentPlaylist, setActiveSong, nextSong, prevSong, playPause, playerBar, setImageUrl, setArtistName, setFavouritePlaylist} = playerSlice.actions;
 
 export default playerSlice.reducer;

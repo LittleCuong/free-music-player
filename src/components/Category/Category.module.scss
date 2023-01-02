@@ -46,6 +46,20 @@
     }
 }
 
+@media (max-width: 319px)  {
+    .wrapper {
+        width: 80px;
+        height: 130px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    .container-name {
+        margin-top: 60px;
+        font-size: 0.7rem;
+    }
+}
+
 @media (min-width: 320px) and (max-width: 399px)  {
     .wrapper {
         width: 80px;

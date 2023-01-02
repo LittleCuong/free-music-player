@@ -1,12 +1,15 @@
 import classname from 'classnames/bind'
 import style from './Player.module.scss'
 import { useEffect, useRef, useState, memo } from 'react';
+import {HiArrowSmRight} from "react-icons/hi"
 import { HiPlay, HiBackward, HiForward, HiPause } from "react-icons/hi2";
 import { BiShuffle, BiRepeat } from "react-icons/bi";
 import RecommendTrack from '../RecommendTrack/RecommendTrack';
-
-import { nextSong, prevSong, playPause, setArtistName, setImageUrl } from '../../redux/features/playerSlice';
+import { nextSong, prevSong, playPause, setArtistName, setImageUrl, setActivePlayer } from '../../redux/features/playerSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css'
+
 
 
 const cx = classname.bind(style)
@@ -49,10 +52,8 @@ function Player() {
             dispatch(setArtistName((artists.map(item => {
                 return item.name
             }))))
-        }
-    
+        }    
     }, [currentSongs, image, artists])
-
 
     const handleRepeated = () => {
         setIsRepeated(!isRepeated)
@@ -97,19 +98,20 @@ function Player() {
         dispatch(playPause(false));
     }
 
+    const handleClosePlayer = () => {
+        dispatch(setActivePlayer(false))
+    }
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('wrapper-header')}>
-                <RecommendTrack 
-                    // data={currentSongs.artists} 
-                    // callback={(data) => setTrack(data)}
+                <RecommendTrack               
                     index={currentIndex}
                 />      
             </div>
             <div className={cx('wrapper-main')}>
                 <div className={cx('wrapper-main-image')}>
                     <img className={cx('track-image')} 
-                        // src={url?.url} 
                         src={imageUrl} 
                         alt={currentSongs.name}
                     />
@@ -143,6 +145,13 @@ function Player() {
                         <audio ref={audioRef} src={currentSongs.preview_url}/>
                     </div>
                 </div>
+                <div className={cx('close-wrapper')} onClick={handleClosePlayer}>
+                    <Tippy content='Close' placement='bottom'>
+                        <div>
+                            <HiArrowSmRight className={cx('close-icon')}/>
+                        </div>
+                    </Tippy>  
+                </div>                  
             </div>
         </div>
     )

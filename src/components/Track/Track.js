@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from "../../firebase";
 import { setDoc, doc } from "firebase/firestore";
-import { playPause, setActiveSong } from '../../redux/features/playerSlice';
+import { playPause, setActivePlayer, setActiveSong } from '../../redux/features/playerSlice';
 import { useAuth } from "../../Context/AuthContext";
 
 const cx = classname.bind(style)
@@ -35,6 +35,8 @@ function Track({data, index}) {
     const handleClicked = () => {
         dispatch(setActiveSong({track, index}));
         dispatch(playPause(false))
+        dispatch(setActivePlayer(true))
+        console.log(track);
     }
 
     const handleAdd = async () => {

@@ -110,6 +110,21 @@ const spotifyApi = {
         });
         return result
     },
+    getSeveralArtists: async (id, token) => {
+        const result = await axios(`https://api.spotify.com/v1/artists?ids=${id}`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: { 'Authorization' : 'Bearer ' + token}
+        })
+        return result
+    },
+    getAlbums: async (id, token) => {
+        const result = await axios(`https://api.spotify.com/v1/artists/${id}/albums`, {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + token}
+        })
+        return result
+    },
 }
 
 export default spotifyApi;

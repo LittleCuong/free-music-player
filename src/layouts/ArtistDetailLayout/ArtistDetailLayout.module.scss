@@ -15,10 +15,11 @@
 }
 
 .wrapper-main--header {
-    // height: 8%;
-    height: 60px;
+    height: 300px;
+    background-position: center;
+    background-size: cover;
     display: flex;
-    align-items: center;
+    padding-top: 12px;
     justify-content: space-between;
     padding-left: 14px;
 }
@@ -65,35 +66,13 @@
     height: 100%;   
 }
 
-.wrapper-main-body--right-header {
-    display: flex;
-    align-items: center;
-}
-
-.expand {
-    display: block;
-    text-decoration: none;
-    color: #3c3abe;
-    transition: all 0.2s;
-    margin-left: 24px;
-
-    &:hover {
-        cursor: pointer;
-        opacity: 0.8;
-    }
-}
-
 .main-body--right-header {
     margin: 10px 0;
-    width: 70%;
-    margin-left: 10px;
-    
+    margin-left: 12px;
 }
 
 .main-body--right-category {
-    max-height: 286px;
-    margin: 0 5px;
-    overflow: hidden;
+    height: 100%;
 }
 
 .wrapper-music--list {
@@ -146,80 +125,240 @@
     }
 }
 
-@media (min-width: 560px) and (max-width: 739px)  {
+.artist-infor {
+    background-size: cover;
+    background-position: center;
+    padding: 0 32px 24px 32px;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+}
+
+.span {
+    display: block;
+    color: var(--white-color);
+    visibility: visible;
+    width: 100%;
+}
+
+.artist-infor--name {
+    font-size: 6rem;
+    font-weight: 600;
+}
+
+.artist-infor--fame {
+    font-size: 3rem;
+}
+
+.divided {
+    display: flex;
+    // overflow-y: auto;
+    height: 100%;
+}
+
+.list--container {
+    height: 520px;
+}
+
+.wrapper-list {
+    width: 50%;
+    height: 53%;
+    overflow-y: auto;
+}
+
+.wrapper-list--album-header {
+    display: none;
+}
+
+
+.wrapper-list--album {
+    width: 50%;
+    height: 53%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-y: auto;
+    // padding: 0 10px;
+}
+
+
+// @media (min-width: 560px) and (max-width: 739px)  {
+//     .wrapper-main {
+//         width: 100%;
+//         height: 100%;
+//     }
+
+//     .wrapper-main-body {
+//         display: flex !important;
+//         flex-direction: column;
+//     }
+// }
+
+@media (max-width: 319px) {
+    .wrapper {
+        height: unset;
+    }
+
     .wrapper-main {
-        width: 100%;
         height: 100%;
     }
 
-    .wrapper-main-body {
-        display: flex !important;
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 319px) {
     .wrapper-sidebar {
         display: none !important;
     }
 
+    .wrapper-main--header {
+        height: 170px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    
     .header {
         display: none;
     } 
+    
+    .artist-infor {
+        display: none;
+    }
 
+    .wrapper-main--header-search {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+    
     .wrapper-music--list-header {
         font-size: 1.8rem;
     }
 
-    .wrapper-music--list-tracks {
-        padding-left: 0;
-        margin-right: 0;
+    .main-body--right-header {
+        font-size: 1.2rem;
     }
+
+    .wrapper-music--list {
+        height: 99%;
+    }
+
+    .wrapper-music--list-tracks {
+        justify-content: center;
+        width: 100%;
+        padding-left: 0px;
+    }  
 
     .wrapper-player {
         display: none;
+    }
+
+    .divided {
+        flex-direction: column;
+    }
+
+    .wrapper-list {
+        width: 100%;
+        height: 75%;
+    }
+
+    .wrapper-list--album-header {
+        display: block;
+        margin: 0px 0 12px 12px;
+        font-size: 1.2rem;
+    }
+
+    .wrapper-list--album {
+        width: 100%;
     }
 }
 
 @media (min-width: 320px) and (max-width: 399px) {
+    .wrapper {
+        height: unset;
+    }
+
+    .wrapper-main {
+        height: 100%;
+    }
+
     .wrapper-sidebar {
         display: none !important;
     }
 
     .wrapper-main--header {
+        height: 170px;
         justify-content: center;
         padding-left: 0;
     }
-
+    
     .header {
         display: none;
     } 
-
-    .wrapper-main--header-search {
-        margin-right: 0;
+    
+    .artist-infor {
+        display: none;
     }
 
+    .wrapper-main--header-search {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+    
     .wrapper-music--list-header {
         font-size: 1.8rem;
     }
 
-    .wrapper-music--list-tracks {
-        padding-left: 0;
-        margin-right: 0px;
+    .wrapper-music--list {
+        height: 99%;
     }
+
+    .main-body--right-header {
+        font-size: 1.4rem;
+    }
+
+    .wrapper-music--list-tracks {
+        justify-content: center;
+        width: 100%;
+        padding-left: 0px;
+    }  
 
     .wrapper-player {
         display: none;
     }
+
+    .divided {
+        flex-direction: column;
+    }
+
+    .wrapper-list {
+        width: 100%;
+        height: 75%;
+    }
+
+    .wrapper-list--album-header {
+        display: block;
+        margin: 0px 0 12px 12px;
+        font-size: 1.4rem;
+    }
+
+    .wrapper-list--album {
+        width: 100%;
+    }
 }
 
 @media (min-width: 400px) and (max-width: 739px) {
+    .wrapper {
+        height: unset;
+    }
+
+    .wrapper-main {
+        height: 100%;
+    }
+
     .wrapper-sidebar {
         display: none !important;
     }
 
     .wrapper-main--header {
-        height: 60px;
+        height: 170px;
         justify-content: center;
         padding-left: 0;
     }
@@ -228,6 +367,10 @@
         display: none;
     } 
     
+    .artist-infor {
+        display: none;
+    }
+
     .wrapper-main--header-search {
         margin-top: 10px;
         margin-bottom: 10px;
@@ -248,8 +391,31 @@
         padding-left: 0px;
     }  
 
+    .main-body--right-header {
+        font-size: 1.6rem;
+    }
+
     .wrapper-player {
         display: none;
+    }
+
+    .divided {
+        flex-direction: column;
+    }
+
+    .wrapper-list {
+        width: 100%;
+        height: 75%;
+    }
+
+    .wrapper-list--album-header {
+        display: block;
+        margin: 0px 0 12px 12px;
+        font-size: 1.6rem;
+    }
+
+    .wrapper-list--album {
+        width: 100%;
     }
 }
 
@@ -263,11 +429,6 @@
         height: 30px;
     }
 
-    .wrapper-music--list {
-        height: 86%;
-        padding-left: 4px;
-    }
-
     .wrapper-music--list-tracks {
         height: 99%;
         justify-content: center;
@@ -276,15 +437,5 @@
 
     .wrapper-player {
         display: none;
-    }
-
-    .main-body--right-category {
-        // height: 37%;
-        max-height: 330px;
-    }
-
-    .expand {
-        margin-left: 0;
-        font-size: 1.2rem;
     }
 }

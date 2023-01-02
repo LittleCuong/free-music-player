@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../../Context/AuthContext';
 import { db } from "../../firebase";
 import { setDoc, doc } from "firebase/firestore";
-
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css'
 
 const cx = classname.bind(style)
 
@@ -66,10 +67,15 @@ function PlaylistDetail({id}) {
             </div>
             <div className={cx('wrapper-infor')}>
                 <h3 className={cx('wrapper-infor--name')}>About {playlist?.tracks?.items.length} songs</h3>
-                <HiOutlineHeart 
-                    className={inFav ? cx('wrapper-infor--icon', 'saved') : cx('wrapper-infor--icon')} 
-                    onClick={inFav ? handleRemove : handleAddPlaylist}
-                />
+                <Tippy content='Add to favourite lists' offset={[0,1]} placement='bottom'>
+                    <div style={{width: '20px'}}>
+                        <HiOutlineHeart 
+                            className={inFav ? cx('wrapper-infor--icon', 'saved') : cx('wrapper-infor--icon')} 
+                            onClick={inFav ? handleRemove : handleAddPlaylist}
+                        />
+                    </div>
+                </Tippy>
+                
             </div>
           
 

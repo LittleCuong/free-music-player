@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import classname from 'classnames/bind'
 import style from './Sidebar.module.scss'
+import HeadlessTippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
 import { HiHome, HiHeart, HiUser, HiOutlineMusicNote, HiCollection, HiLogout } from "react-icons/hi";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
+
+import 'tippy.js/dist/tippy.css'
 
 const cx = classname.bind(style)
 
@@ -30,12 +34,20 @@ function Sidebar() {
         nav('/free-music-player')
     }
 
-    const handleFavourites = () => {
-        nav('/favourites')
+    const handleFavourites = () => {      
+        if (currentUser) {
+            nav('/favourites')
+        } else {
+            alert("You must login first!")
+        }  
     }
 
     const handleCollection = () => {
-        nav('/playlists')
+        if (currentUser) {
+            nav('/playlists')
+        } else {
+            alert("You must login first!")
+        }  
     }
 
     async function handleLogOut() {
@@ -50,34 +62,44 @@ function Sidebar() {
     return ( 
         <div className={cx('wrapper-sidebar', 'col l-1 m-1 c-0')}>      
             <div className={cx('wrapper-sidebar--top')}>
-                { currentUser 
-                    ?   <div className={cx('wrapper-sidebar--icon')} onClick={handleSignIn}>
-                            <img className={cx('wrapper-sidebar--avt')} src={currentUser.photoURL}/>
-                        </div>
-                    :   <div className={cx('wrapper-sidebar--icon')} onClick={handleSignIn}>
-                            <HiUser className={cx('sidebar-icon')}/>
-                        </div>
+                { currentUser                
+                    ? 
+                        <Tippy content={currentUser.displayName} placement='right'>
+                            <div className={cx('wrapper-sidebar--icon')} onClick={handleSignIn}>
+                                <img className={cx('wrapper-sidebar--avt')} src={currentUser.photoURL}/>
+                            </div>
+                        </Tippy>                   
+                    :   
+                        <Tippy content='Login' placement='right'>
+                            <div className={cx('wrapper-sidebar--icon')} onClick={handleSignIn}>
+                                <HiUser className={cx('sidebar-icon')}/>
+                            </div>
+                        </Tippy>                    
                 }
-                
-                <div className={cx('wrapper-sidebar--icon')}>
-                    <HiHome className={cx('sidebar-icon')} onClick={handleHome}/>
-                </div>
-                <div className={cx('wrapper-sidebar--icon')}>
-                    <HiOutlineMusicNote className={cx('sidebar-icon')}/>
-                </div>
-                <div className={cx('wrapper-sidebar--icon')}>
-                    <HiCollection className={cx('sidebar-icon')} onClick={handleCollection}/>
-                </div>
+                <Tippy content='Home' placement='right'>
+                    <div className={cx('wrapper-sidebar--icon')}>
+                        <HiHome className={cx('sidebar-icon')} onClick={handleHome}/>
+                    </div>
+                </Tippy>     
+                <Tippy content='Collection' placement='right'>
+                    <div className={cx('wrapper-sidebar--icon')}>
+                        <HiCollection className={cx('sidebar-icon')} onClick={handleCollection}/>
+                    </div>                       
+                </Tippy>        
             </div>
             <div className={cx('wrapper-sidebar--bottom')}>
-                <div className={cx('wrapper-sidebar--icon')} onClick={handleFavourites}>
-                    <HiHeart className={cx('sidebar-icon')}/>
-                </div>
+                <Tippy content='Favourite' placement='right'>
+                    <div className={cx('wrapper-sidebar--icon')} onClick={handleFavourites}>
+                        <HiHeart className={cx('sidebar-icon')}/>
+                    </div> 
+                </Tippy>    
                 { currentUser 
                     ? 
-                        <div className={cx('wrapper-sidebar--icon')} onClick={handleLogOut}>
-                            <HiLogout className={cx('sidebar-icon')}/>
-                        </div>
+                        <Tippy content='Logout' placement='right'>
+                                <div className={cx('wrapper-sidebar--icon')} onClick={handleLogOut}>
+                                    <HiLogout className={cx('sidebar-icon')}/>
+                                </div>
+                        </Tippy>               
                     :
                         null                    
                 }               

@@ -52,6 +52,23 @@
     color: white;
 }
 
+.tippy {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    background-color: black;
+    border-radius: 4px;
+    transition: all 0.4s;
+}
+
+.tippy-item {
+    display: block;
+    line-height: 3rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--white-color);
+}
+
 @media (max-width: 319px) {
     .wrapper-sidebar {
         display: none !important;

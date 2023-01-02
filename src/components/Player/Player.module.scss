@@ -10,6 +10,7 @@
 }
 
 .wrapper-main {
+    position: relative;
     display: flex;
     height: 80%;
     flex-direction: column;
@@ -162,6 +163,23 @@
 
 .wrapper-header-body {
     height: 80%;
+}
+
+.close-wrapper {
+    position: absolute;
+    top: -24%;
+    right: 0%;
+    cursor: pointer;    
+    transition: all 0.2s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.close-icon {
+    font-size: 4rem;
+    color: var(--white-color);  
 }
 
 @media (min-width: 319px) and (max-width: 1479){

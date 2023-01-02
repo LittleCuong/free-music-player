@@ -51,28 +51,9 @@ function FavouritesLayout() {
             }
         }
 
-        const getPlaylist = async () => {
-            const promises = playlists.map(async (id) => {
-                return await spotifyApi.getPlaylist(id, auth)
-            })
-            try {
-                const result = await Promise.all(promises)         
-                console.log(result);
-                setFavouritePlaylists(result.map(item => item.data))
-            } catch (err) {
-                console.log(err)
-            }
-        }
-
         getId()    
-        getPlaylist()
     
-
     }, [tracks, playlists])
-
-    // useEffect(() => {
-    //     dispatch(setCurrentPlaylist(favouriteTracks));
-    // })
 
     return ( 
         <div className={cx('wrapper', 'grid')}>
@@ -97,15 +78,15 @@ function FavouritesLayout() {
                                 </div>
                             </div>                   
                         </div>
-                        <div className={cx('wrapper-main-body--right', 'col l-4 m-4 c-12')}>
-                        <div className={cx('wrapper-main-body--right-header')}>
-                            <h3 className={cx('main-body--right-header')}>Category</h3>
-                            <Link to='/categories' className={cx('expand')}>See more</Link>
-                        </div>
-                        <div className={cx('main-body--right-category')}>
-                            <Categories/>                           
-                        </div>                        
-                        </div>
+                        {/* <div className={cx('wrapper-main-body--right', 'col l-4 m-4 c-12')}>
+                            <div className={cx('wrapper-main-body--right-header')}>
+                                <h3 className={cx('main-body--right-header')}>Category</h3>
+                                <Link to='/categories' className={cx('expand')}>See more</Link>
+                            </div>
+                            <div className={cx('main-body--right-category')}>
+                                <Categories/>                           
+                            </div>                        
+                        </div> */}
                     </div>
                     <PlayerBar/> 
                 </div>

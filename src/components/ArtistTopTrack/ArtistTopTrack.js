@@ -1,6 +1,6 @@
 import { HiOutlineHeart } from "react-icons/hi";
 import classname from 'classnames/bind'
-import style from './FavouriteTrack.module.scss'
+import style from './ArtistTopTrack.module.scss'
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from "../../firebase";
@@ -10,7 +10,7 @@ import { useAuth } from "../../Context/AuthContext";
 
 const cx = classname.bind(style)
 
-function FavouriteTrack({data, index}) {
+function ArtistTopTrack({data, index}) {
     const { activeSong } = useSelector((state) => state.player);
     const {tracks} = useAuth()
     const track = data
@@ -79,4 +79,4 @@ function FavouriteTrack({data, index}) {
     );
 }
 
-export default FavouriteTrack;
+export default ArtistTopTrack;
