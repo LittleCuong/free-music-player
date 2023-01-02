@@ -78,8 +78,8 @@
 
 @media (max-width: 319px) {
     .wrapper {
-        width: 100px;
-        height: 140px;
+        width: 80px;
+        height: 110px;
     }
 
     .wrapper-text {
@@ -90,7 +90,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         font-size: 0.8rem;
-        width: 90px;
+        width: 50px;
     }
 
     .wrapper-icon {
@@ -104,8 +104,8 @@
 
 @media (min-width: 320px) and (max-width: 399px) {
     .wrapper {
-        width: 120px;
-        height: 170px;
+        width: 100px;
+        height: 140px;
     }
 
     .wrapper-text {

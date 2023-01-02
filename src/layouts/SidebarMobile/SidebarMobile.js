@@ -60,6 +60,10 @@ function SidebarMobile() {
         }  
     }
 
+    const handleCategories =() => {
+        nav('/categories')
+    }
+
     const handleCollection = () => {
         if (currentUser) {
             nav('/playlists')
@@ -95,7 +99,7 @@ function SidebarMobile() {
                     <span className={cx('sidebar-item')}>Home</span>
                 </div>
                 <div className={cx('wrapper-sidebar--icon')}>
-                    <HiOutlineMusicNote className={cx('sidebar-icon')}/>
+                    <HiOutlineMusicNote className={cx('sidebar-icon')} onClick={handleCategories}/>
                     <span className={cx('sidebar-item')}>Categories</span>
                 </div>
                 <div className={cx('wrapper-sidebar--icon')}>

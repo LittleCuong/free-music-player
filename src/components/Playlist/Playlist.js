@@ -9,7 +9,6 @@ const cx = classname.bind(style)
 
 function Playlist({data}) {
     const track = data
-    console.log(data);
     const url = `/${track.id}`
     const [image, setImage] = useState()
     const [imageUrl, setImageUrl] = useState()
