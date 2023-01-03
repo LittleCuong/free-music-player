@@ -9,7 +9,7 @@ import FavouriteListLayout from "../layouts/FavouriteListlayout/FavouriteListLay
 
 import CategoryPage from '../pages/CategoryPage/CategoryPage';
 import DiscoverPage from '../pages/DiscoverPage/DiscoverPage';
-import FavouritesPage from '../pages/FavouritesPage/CategoryPage';
+import FavouritesPage from '../pages/FavouritesPage/FavouritesPage';
 
 // Components
 import Home from '../pages/Home/Home.js';

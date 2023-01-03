@@ -42,6 +42,10 @@ function Sidebar() {
         }  
     }
 
+    const handleCategories =() => {
+        nav('/categories')
+    }
+
     const handleCollection = () => {
         if (currentUser) {
             nav('/playlists')
@@ -81,6 +85,11 @@ function Sidebar() {
                         <HiHome className={cx('sidebar-icon')} onClick={handleHome}/>
                     </div>
                 </Tippy>     
+                <Tippy content='Collection' placement='right'>
+                    <div className={cx('wrapper-sidebar--icon')}>
+                        <HiOutlineMusicNote className={cx('sidebar-icon')} onClick={handleCategories}/>
+                    </div>
+                </Tippy>             
                 <Tippy content='Collection' placement='right'>
                     <div className={cx('wrapper-sidebar--icon')}>
                         <HiCollection className={cx('sidebar-icon')} onClick={handleCollection}/>

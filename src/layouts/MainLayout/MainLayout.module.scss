@@ -55,7 +55,6 @@
     border-radius: var(--border-radius);
     display: flex;
     flex-direction: column;
-    // overflow: hidden;
     transition: transform 0.4s;
 }
 
@@ -169,6 +168,15 @@
 }
 
 @media (max-width: 319px) {
+    .wrapper {
+        height: 100vh;
+        overflow-y: scroll;
+    }
+
+    .container {
+        height: unset;
+    }
+
     .wrapper-main {
         height: 100%;
     }
@@ -205,9 +213,30 @@
     .wrapper-player {
         display: none;
     }
+
+    .main-body--right-header {
+        font-size: 1.2rem;
+    }
+
+    .display-none {
+        display: none;
+    }
 }
 
 @media (min-width: 320px) and (max-width: 399px) {
+    .wrapper {
+        height: 100vh;
+        overflow-y: scroll;
+    }
+
+    .container {
+        height: unset;
+    }
+
+    .wrapper-main {
+        height: 100%;
+    }
+
     .wrapper-main {
         height: 100%;
     }
@@ -242,20 +271,40 @@
     }
 
     .wrapper-music--list-header {
-        font-size: 1.8rem;
+        font-size: 1.2rem;
     }
 
     .wrapper-music--list-tracks {
-        // max-height: 450px;
         padding-left: 0;
     }
 
     .wrapper-player {
         display: none;
     }
+
+    .main-body--right-header {
+        font-size: 1.2rem;
+    }
+
+    .display-none {
+        display: none;
+    }
 }
 
 @media (min-width: 400px) and (max-width: 739px) {
+    .wrapper {
+        height: 100vh;
+        overflow-y: scroll;
+    }
+
+    .container {
+        height: unset;
+    }
+
+    .wrapper-main {
+        height: 100%;
+    }
+
     .wrapper-main {
         height: 100%;
     }
@@ -285,7 +334,7 @@
     }
     
     .wrapper-music--list-header {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
     }
 
     .slide-wrapper {
@@ -307,11 +356,15 @@
     }
 
     .main-body--right-header {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
 
     .expand {
         font-size: 1rem;
+    }
+
+    .display-none {
+        display: none;
     }
 }
 
@@ -346,11 +399,10 @@
     }
 
     .main-body--right-header {
-        font-size: 1.2rem;
+        font-size: 1.6rem;
     }
 
     .main-body--right-category {
-        // height: 37%;
         max-height: 330px;
     }
 

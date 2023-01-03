@@ -49,7 +49,7 @@ function MainLayout() {
             playerRef.current.style.display = 'none'
             wrapperMainRef.current.style.transform = 'translateX(0%)'
             searchInputRef.current.style.transform = 'translateX(0%)'
-            wrapperMainBodyRight.current.style.display = 'block'
+            // wrapperMainBodyRight.current.style.display = 'block'
         }
         
         if (window.innerWidth < 1480) {
@@ -87,9 +87,9 @@ function MainLayout() {
                                     data={track} 
                                     index={order} 
                                 />
-                            </div>                        
+                            </div>                                        
                         </div>
-                        <div ref={wrapperMainBodyRight} className={cx('wrapper-main-body--right', 'col l-4 m-4 c-12')}>
+                        <div ref={wrapperMainBodyRight} className={cx('wrapper-main-body--right', 'col l-4 m-4 c-0', 'display-none')}>
                             <div className={cx('wrapper-main-body--right-header')}>
                                 <h3 className={cx('main-body--right-header')}>Famous Artists</h3>
                             </div>
@@ -104,13 +104,13 @@ function MainLayout() {
                                 <Categories accessToken={token}/>                           
                             </div>
                         </div>
-                    </div>
-                    <PlayerBar 
-                        data={track} 
-                        index={order} 
-                        height={height}
-                    /> 
+                    </div>                                  
                 </div>
+                <PlayerBar 
+                    data={track} 
+                    index={order} 
+                    height={height}
+                />
             </div>
             <SidebarMobile/>
         </div>  

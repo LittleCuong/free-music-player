@@ -24,7 +24,7 @@ function FavouritesLayout() {
 
     const dispatch = useDispatch()
 
-    const { playlists, tracks } = useAuth()
+    const { tracks } = useAuth()
     const { currentPlaylist, favourite } = useSelector((state) => state.player);
 
     const [favouritePlaylists, setFavouritePlaylists] = useState([])
@@ -53,7 +53,7 @@ function FavouritesLayout() {
 
         getId()    
     
-    }, [tracks, playlists])
+    }, [tracks])
 
     return ( 
         <div className={cx('wrapper', 'grid')}>
@@ -68,14 +68,22 @@ function FavouritesLayout() {
                         </div>
                     </div>
                     <div className={cx('wrapper-main-body', 'grid row no-gutters')}>
-                        <div className={cx('wrapper-main-body--left', 'col l-8 m-8 c-12')}>                                                                   
+                        <div className={cx('wrapper-background')}>
+                            <span className={cx('list-header')}>{tracks.length} songs</span>
+                        </div>
+                        <div className={cx('wrapper-main-body', 'col l-12 m-12 c-12')}>                                                                   
                             <div className={cx('wrapper-music--list')}>
-                                <h3 className={cx('wrapper-music--list-header')}>Tracks</h3>
-                                <div className={cx('track-list')}>
-                                    {favouriteTracks?.map((item, index) => (
-                                        <FavouriteTrack data={item} key={index} index={index}/>
-                                    ))}
-                                </div>
+                                {
+                                    tracks.length == 0 
+                                        ? 
+                                            <span className={cx('list-header')}>Empty</span>
+                                        :
+                                            <div className={cx('track-list')}>
+                                                {favouriteTracks?.map((item, index) => (
+                                                    <FavouriteTrack data={item} key={index} index={index}/>
+                                                ))}
+                                        </div>
+                                }                               
                             </div>                   
                         </div>
                     </div>
