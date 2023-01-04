@@ -46,13 +46,8 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    cursor: pointer;
+    cursor: default;
     transition: all 0.2s;
-
-    &:hover {
-        color: #3B3C60;
-        filter: brightness(2);
-    }
 }
 
 .track-artist {
@@ -60,12 +55,7 @@
     color: var(--white-color);
     white-space: nowrap;
     text-overflow: ellipsis;
-    cursor: pointer;
-
-    &:hover {
-        color: #3B3C60;
-        filter: brightness(2);
-    }
+    cursor: default;
 }
 
 .wrapper-main-control {

@@ -8,8 +8,10 @@ import Sidebar from '../Sidebar/Sidebar';
 import { useParams } from 'react-router-dom';
 import Playlist from '../../components/Playlist/Playlist';
 import { useAuth } from '../../Context/AuthContext';
+import { playerBar } from '../../redux/features/playerSlice';
 import MenuMobileButton from '../../components/MenuMobileButton/MenuMobileButton';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
+import { useDispatch } from 'react-redux';
 
 const cx = classname.bind(style)
 
@@ -17,8 +19,13 @@ function CategoryListLayout() {
 
     const auth = JSON.parse(localStorage.getItem('token'))
     const {id} = useParams()
-
     const searchInputRef = useRef()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(playerBar(false))
+    }, [])
+
 
     return ( 
         <div className={cx('wrapper', 'grid row no-gutters')}>

@@ -9,8 +9,6 @@ const cx = classname.bind(style)
 
 function Album({data}) {
 
-    console.log(data);
-
     const [image, setImage] = useState()
 
     useEffect(() => {

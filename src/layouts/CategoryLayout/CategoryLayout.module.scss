@@ -62,7 +62,12 @@
 }
 
 .wrapper-main-body--right {
-    height: 100%;   
+    // height: 100%;   
+}
+
+.wrapper-main-body--right--heading {
+    display: flex;
+    align-items: center;
 }
 
 .wrapper-main-body--right-header {
@@ -98,7 +103,7 @@
 
 .wrapper-music--list {
     width: 100%;
-    height: 99%;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -145,18 +150,6 @@
         opacity: 0   
     }
 }
-
-// @media (min-width: 560px) and (max-width: 739px)  {
-//     .wrapper-main {
-//         width: 100%;
-//         height: 100%;
-//     }
-
-//     .wrapper-main-body {
-//         display: flex !important;
-//         flex-direction: column;
-//     }
-// }
 
 @media (max-width: 319px) {
     .wrapper-sidebar {
@@ -239,7 +232,7 @@
     }
 
     .wrapper-music--list {
-        height: 99%;
+        height: 100%;
     }
 
     .wrapper-music--list-tracks {
@@ -264,7 +257,7 @@
     }
 
     .wrapper-music--list {
-        height: 86%;
+        height: 100%;
         padding-left: 4px;
     }
 

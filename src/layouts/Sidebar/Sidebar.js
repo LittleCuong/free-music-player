@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import classname from 'classnames/bind'
 import style from './Sidebar.module.scss'
-import HeadlessTippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
 import { HiHome, HiHeart, HiUser, HiOutlineMusicNote, HiCollection, HiLogout } from "react-icons/hi";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
+import { playerBar} from '../../redux/features/playerSlice';
+import { useDispatch } from 'react-redux';
+import { setActivePlayer } from '../../redux/features/playerSlice';
 
 import 'tippy.js/dist/tippy.css'
 
@@ -17,6 +19,8 @@ function Sidebar() {
     const nav = useNavigate()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch()
+
 
     const handleSignIn = async () => {
         try {
@@ -32,6 +36,8 @@ function Sidebar() {
 
     const handleHome = () => {
         nav('/free-music-player')
+        dispatch(playerBar(false))
+        dispatch(setActivePlayer(false))
     }
 
     const handleFavourites = () => {      

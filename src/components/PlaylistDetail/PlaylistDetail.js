@@ -23,7 +23,6 @@ function PlaylistDetail({id}) {
     useEffect(() => {
         const getPlaylist = async () => {
             const res = await spotifyApi.getPlaylist(id, auth)
-            console.log(res);
             setPlaylists(res.data)
         }
         getPlaylist()

@@ -25,7 +25,8 @@ function MainLayout() {
     const [track, setTrack] = useState([])
     const [order, setOrder] = useState()
     const [height, setHeight] = useState()
-    const {isActive, activePlayer} = useSelector((state) => state.player);
+    const {isActive, activePlayer, bar} = useSelector((state) => state.player);
+
     const dispatch = useDispatch()
     const wrapperMainRef = useRef()
     const wrapperMainBodyRight = useRef()
@@ -52,7 +53,7 @@ function MainLayout() {
             // wrapperMainBodyRight.current.style.display = 'block'
         }
         
-        if (window.innerWidth < 1480) {
+        if (activePlayer && window.innerWidth < 1480) {
             dispatch(playerBar(true))
         }    
     }, [dispatch, activePlayer])
@@ -64,7 +65,7 @@ function MainLayout() {
                 <Sidebar/>
                 <div ref={wrapperMainRef} className={cx('wrapper-main', 'col l-11 m-11 c-12')}>
                     <div className={cx('wrapper-main--header')}>
-                        <h3 className={cx('header')}>Home</h3>      
+                        <h3 className={cx('header' ,'text-3xl font-bold underline')}>Home</h3>      
                         <MenuMobileButton/>            
                         <div ref={searchInputRef} className={cx('wrapper-main--header-search')}>
                             <Search/>

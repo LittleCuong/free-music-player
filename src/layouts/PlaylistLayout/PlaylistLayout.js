@@ -26,17 +26,12 @@ function PlaylistLayout() {
     const dispatch = useDispatch()
     const auth = JSON.parse(localStorage.getItem('token'))
 
-    const { activePlayer } = useSelector((state) => state.player);
+    const { activePlayer, bar } = useSelector((state) => state.player);
+    console.log(bar);
     const {token} = useAuth()
     const {playlistId} = useParams()
     const [name, setName] = useState()
-
-    const wrapperMainRef = useRef()
-    const wrapperMainBodyRight = useRef()
     const searchInputRef = useRef()
-    const playerRef = useRef()
-    const testRef = useRef()
-    const listRef = useRef()
 
     useEffect(() => {
         const getList = async () => {
@@ -44,32 +39,13 @@ function PlaylistLayout() {
             setName(response.data.name)
         } 
         getList()
-
-        if (activePlayer && window.innerWidth >= 1480) {
-            playerRef.current.style.display = 'block'
-            wrapperMainRef.current.style.transform = 'translateX(33%)'
-            searchInputRef.current.style.transform = 'translateX(-140%)'
-            // wrapperMainBodyRight.current.style.display = 'none'
-        } 
-
-        if (activePlayer === false) {
-            dispatch(playPause(false))
-            playerRef.current.style.display = 'none'
-            wrapperMainRef.current.style.transform = 'translateX(0%)'
-            searchInputRef.current.style.transform = 'translateX(0%)'
-            // wrapperMainBodyRight.current.style.display = 'block'
-        }
-        
-        if (window.innerWidth < 1480) {
-            dispatch(playerBar(true))
-        } 
     }, [playlistId, auth, activePlayer])
 
     return ( 
         <div className={cx('wrapper', 'grid')}>
             <div className={cx('container', 'row no-gutters')}>
                 <Sidebar/>
-                <div ref={wrapperMainRef} className={cx('wrapper-main', 'col l-11 m-11 c-12')}>
+                <div className={cx('wrapper-main', 'col l-11 m-11 c-12')}>
                     <div className={cx('wrapper-main--header')}>
                         <h3 className={cx('header')}>{name}</h3>
                         <MenuMobileButton/>
@@ -78,17 +54,14 @@ function PlaylistLayout() {
                         </div>
                     </div>
                     <div className={cx('wrapper-main-body', 'grid row no-gutters')}>
-                        <div ref={testRef} className={cx('wrapper-main-body--left', 'col l-8 m-8 c-12')}>                                              
-                            <div ref={listRef} className={cx('wrapper-music--list')}>
+                        <div className={cx('wrapper-main-body--left', 'col l-8 m-8 c-12')}>                                              
+                            <div className={cx('wrapper-music--list')}>
                                 <div className={cx('wrapper-music--list-tracks')}>
                                     <TracksList data={playlistId} accessToken={token}/>
                                 </div>
-                            </div>  
-                            <div ref={playerRef} className={cx('wrapper-player')}>                                          
-                                <Player/>
-                            </div>                        
+                            </div>                       
                         </div>
-                        <div ref={wrapperMainBodyRight} className={cx('wrapper-main-body--right', 'col l-4 m-4 c-0')}>
+                        <div className={cx('wrapper-main-body--right', 'col l-4 m-4 c-0')}>
                             <PlaylistDetail id={playlistId}/>
                             <div className={cx('wrapper-main-body--right-header')}>
                                 <h3 className={cx('main-body--right-header')}>Category</h3>
@@ -99,7 +72,7 @@ function PlaylistLayout() {
                             </div>
                         </div>
                     </div>
-                    <PlayerBar/> 
+                    <PlayerBar/>
                     <SidebarMobile/>
                 </div>
             </div>

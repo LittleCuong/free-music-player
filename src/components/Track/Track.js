@@ -5,22 +5,25 @@ import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from "../../firebase";
 import { setDoc, doc } from "firebase/firestore";
-import { playPause, setActivePlayer, setActiveSong } from '../../redux/features/playerSlice';
+import { playPause, setActivePlayer, setActiveSong, playerBar } from '../../redux/features/playerSlice';
 import { useAuth } from "../../Context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 
 const cx = classname.bind(style)
 
 // function Track({data, onClick, index}) {
 function Track({data, index}) {
-    const { activeSong } = useSelector((state) => state.player);
-    const {tracks} = useAuth()
+    const { activeSong } = useSelector((state) => state.player);  
+    const {tracks, currentUser} = useAuth()
+
     const track = data.track
     const inFav = tracks.includes(track.id)
-    const {currentUser} = useAuth()
     const dispatch = useDispatch()
     const wrapperRef = useRef()
     const order = index + 1;
     const trackNameRef = useRef()
+
+    const nav = useNavigate()
 
     const [image, setImage] = useState(track.album.images)
     const [artists, setArtists] = useState(track.album.artists)
@@ -30,13 +33,13 @@ function Track({data, index}) {
 
     const imageUrl = image.find(item => item.height === 64)
 
+    const artistId = artists.map(item => item.id)
     const artistName = artists.map(item => item.name)
     
     const handleClicked = () => {
         dispatch(setActiveSong({track, index}));
         dispatch(playPause(false))
         dispatch(setActivePlayer(true))
-        console.log(track);
     }
 
     const handleAdd = async () => {
@@ -65,6 +68,12 @@ function Track({data, index}) {
         }
     }
 
+    const handleNav = (id) => {
+        dispatch(playerBar(false))
+        dispatch(setActivePlayer(false))
+        nav(`/artist/${id}`)
+    }
+
     return ( 
         <div 
             ref={wrapperRef}
@@ -80,7 +89,23 @@ function Track({data, index}) {
                         className={cx('wrapper-track-infor--main')} 
                     >
                         <span className={cx('wrapper-track--name')} ref={trackNameRef}>{track.name}</span>
-                        <span className={cx('wrapper-track--artist')}>{artistName.join(", ")}</span>
+                        <div className={cx('wrapper-artists')}>
+                            {
+                                artists.map(item => 
+                                    // <Link key={item.id} to={`/artist/${item.id}`} className={cx('wrapper-track--artist-link')}>
+                                    //         <span className={cx('wrapper-track--artist')}>
+                                    //             {item.name}
+                                    //         </span>
+                                    // </Link>
+                                    <div key={item.id} onClick={() => handleNav(item.id)} className={cx('wrapper-track--artist-link')}>
+                                        <span className={cx('wrapper-track--artist')}>
+                                            {item.name}
+                                        </span>
+                                    </div>
+                                )
+
+                            }
+                        </div>                                 
                     </div>
                 </div>         
                 <span className={cx('wrapper-duration')}>{minutes}</span>

@@ -5,18 +5,22 @@ import { HiOutlineHeart } from "react-icons/hi";
 import { HiPlay, HiBackward, HiForward, HiPause } from "react-icons/hi2";
 import { BiShuffle, BiRepeat } from "react-icons/bi";
 import { useSelector, useDispatch } from 'react-redux';
-
+import { useAuth } from "../../Context/AuthContext";
 import { nextSong, prevSong, playPause } from '../../redux/features/playerSlice';
+import { db } from "../../firebase";
+import { setDoc, doc } from "firebase/firestore";
 
 const cx = classname.bind(style)
 
 function PlayerBar() {
 
-    const { playerBar, currentSongs, currentIndex, isActive, isPlaying, currentPlaylist } = useSelector((state) => state.player)
+    const { currentSongs, currentIndex, isPlaying, currentPlaylist, bar } = useSelector((state) => state.player)
+    const {tracks, currentUser} = useAuth()
+
+    const inFav = tracks.includes(currentSongs.id)
 
     const audioRef = useRef()
     const wrapperRef = useRef()
-
     const [track, setTrack] = useState()
     const [url, setUrl] = useState()
     const [image, setImage] = useState()
@@ -26,15 +30,15 @@ function PlayerBar() {
     const [isRepeated, setIsRepeated] = useState(false)
 
     const dispatch = useDispatch()
-
+    
     useEffect(() => {
         setTrack(currentSongs)
     }, [currentSongs])
 
     useEffect(() => {
-        if (track) {
+        if (currentSongs) {
             setArtists(currentSongs?.artists)
-            setImage(currentSongs?.album.images)
+            setImage(currentSongs?.album?.images)
         }
 
         if (image !== undefined) {
@@ -48,7 +52,7 @@ function PlayerBar() {
             setArtist(artists.map(item => item.name))
         }
     
-    }, [currentSongs, image, artists])
+    }, [ image, artists, currentSongs])
 
     const handleRepeated = () => {
         setIsRepeated(!isRepeated)
@@ -69,7 +73,7 @@ function PlayerBar() {
     const handleNextTrack = () => {
         dispatch(playPause(false));
         audioRef.current.pause()
-        console.log(currentIndex);
+
         if (isRandom) {
             dispatch(nextSong(Math.floor(Math.random()*(currentPlaylist.length - currentIndex))));
         } else {
@@ -95,11 +99,33 @@ function PlayerBar() {
         dispatch(playPause(false));
     }
 
-    const handleOnEnded = () => {
+    const handleClicked = async () => {
+        const trackRef = doc(db, "tracks", currentUser.uid)
+        if (inFav) {
+            try {
+                await setDoc(trackRef, 
+                    {track: tracks.filter((item) => item !== track.id)},
+                    {merge: "true"}
+                )
+                alert(`${track.name} removed from Favourite!`)
+            } catch (error) {
+                alert(`${track.name} fail to removed from Favourite!`)
+            }
+        } else {
+            try {
+                await setDoc(trackRef, 
+                    {track: tracks ? [...tracks, track.id] : [track.id]},
+                )
+                
+                alert(`${track.name} added to Favourite!`)
+            } catch (error) {
+                alert(`${track.name} fail to added to Favourite!`)
+            }
+        }
     }
 
     return ( 
-        <div ref={wrapperRef} className={playerBar ? cx('wrapper', 'visible') : cx('wrapper', 'hide')}>
+        <div ref={wrapperRef} className={bar ?  cx('wrapper', 'visible') : cx('wrapper', 'hide')}>
             { currentSongs?.name
                 ?
                     <div className={cx('wrapper-track')}>
@@ -126,11 +152,16 @@ function PlayerBar() {
                         }
                         <HiForward className={cx('control-icon-small')} onClick={handleNextTrack}/>   
                     </div>                 
-                    <BiShuffle className={isRandom ? cx('clicked-button') : cx('random-icon')} onClick={handleRandomTrack}/>   
-                    <audio ref={audioRef} src={currentSongs?.preview_url} onEnded={handleOnEnded}/>
+                    <BiShuffle 
+                        className={isRandom ? cx('clicked-button') : cx('random-icon')} onClick={handleRandomTrack}
+                    />   
+                    <audio ref={audioRef} src={currentSongs?.preview_url}/>
             </div>
             <div className={cx('wrapper-feature')}>
-                <HiOutlineHeart className={cx('wrapper-track--infor-heart')}/>         
+                <HiOutlineHeart 
+                    className={inFav ? cx('wrapper-track--infor-heart', 'liked') : cx('wrapper-track--infor-heart')}
+                    onClick={currentUser ? handleClicked : undefined}
+                />         
             </div>
         </div>
     );

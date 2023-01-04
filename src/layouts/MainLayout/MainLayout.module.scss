@@ -2,7 +2,6 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-    // align-items: center;
     background-color: #3B3C60;
     overflow: hidden;
 }
@@ -171,12 +170,6 @@
 @media (max-width: 319px) {
     .wrapper {
         height: 100vh;
-        // overflow-y: scroll;
-    }
-
-    .container {
-        // height: unset;
-        height: 93%;
     }
 
     .wrapper-main {
@@ -204,6 +197,10 @@
         margin: 6px 0 6px 12px;
     }
 
+    .wrapper-music--list {
+        height: 65%;
+    }
+
     .wrapper-music--list-tracks {
         padding-left: 0;
     }
@@ -224,12 +221,6 @@
 @media (min-width: 320px) and (max-width: 399px) {
     .wrapper {
         height: 100vh;
-        // overflow-y: scroll;
-    }
-
-    .container {
-        height: 93%;
-        // height: unset;
     }
 
     .wrapper-main {
@@ -294,7 +285,7 @@
 
     .container {
         // height: unset;
-        height: 93%;
+        // height: 93%;
     }
 
     .wrapper-main {

@@ -5,15 +5,12 @@ import { useEffect, useState } from 'react';
 import Search from '../../components/Search/Search';
 import PlayerBar from '../../components/PlayerBar/PlayBar';
 import Sidebar from '../Sidebar/Sidebar';
-import { setBoolean, setCurrentPlaylist } from '../../redux/features/playerSlice';
+import { setBoolean, setCurrentPlaylist, setPage } from '../../redux/features/playerSlice';
 import { useAuth } from '../../Context/AuthContext';
 import MenuMobileButton from '../../components/MenuMobileButton/MenuMobileButton';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
 import axios from 'axios';
 import FavouriteTrack from '../../components/FavouriteTrack/FavouriteTrack';
-import spotifyApi from '../../api/spotifyApi';
-import Categories from '../../components/Categories/Categories';
-import { Link } from 'react-router-dom';
 
 
 const cx = classname.bind(style)
@@ -45,6 +42,7 @@ function FavouritesLayout() {
             try {
                 const result = await Promise.all(promises)   
                 dispatch(setCurrentPlaylist(result))        
+                dispatch(setPage('favourite'))
                 setFavouriteTracks(result.map(item => item.data))
             } catch (err) {
                 console.log(err)

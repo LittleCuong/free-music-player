@@ -88,6 +88,27 @@
     }
 }
 
+.wrapper-artists {
+    display: flex;
+    align-items: center;
+}
+
+.wrapper-track--artist-link {
+    color: var(--main-color);
+
+    margin-right: 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.wrapper-track--artist {
+    font-size: 1.2rem;
+
+    &:hover {
+        filter: brightness(1.75);
+    }
+}
+
 .webkit-scroll {
     -webkit-transition: 0.6s;
     -moz-transition: 0.6s;
@@ -96,15 +117,6 @@
     -webkit-transition-timing-function: linear;
     -moz-transition-timing-function: linear;
     transition-timing-function: linear;
-}
-
-.wrapper-track--artist {
-    font-size: 1.2rem;
-
-    &:hover {
-        color: var(--main-color);
-        filter: brightness(1.75);
-    }
 }
 
 .wrapper-track-heart {

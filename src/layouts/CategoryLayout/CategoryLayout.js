@@ -11,8 +11,8 @@ import { useAuth } from '../../Context/AuthContext';
 import MenuMobileButton from '../../components/MenuMobileButton/MenuMobileButton';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
 import { Link } from 'react-router-dom';
-import PlayerBar from '../../components/PlayerBar/PlayBar';
-import axios from 'axios';
+import { playerBar } from '../../redux/features/playerSlice';
+import { useDispatch } from 'react-redux';
 
 const cx = classname.bind(style)
 
@@ -22,7 +22,7 @@ function CategoryLayout() {
     const auth = JSON.parse(localStorage.getItem('token'))
     const {id} = useParams()
     const [playlists, setPlaylists] = useState([])
-
+    const dispatch = useDispatch()
     const searchInputRef = useRef()
 
     useEffect(() => {
@@ -31,6 +31,10 @@ function CategoryLayout() {
             setPlaylists(response.data.playlists.items)          
         }
         getCategoryPlaylist()
+
+
+      
+        dispatch(playerBar(false))
     }, [id, auth])
 
     return ( 
@@ -59,7 +63,7 @@ function CategoryLayout() {
                         </div>                         
                     </div>
                     <div className={cx('wrapper-main-body--right', 'col l-4 m-4 c-0')}>
-                        <div className={cx('wrapper-main-body--right')}>
+                        <div className={cx('wrapper-main-body--right--heading')}>
                             <h3 className={cx('main-body--right-header')}>Category</h3>
                             <Link to='/categories' className={cx('expand')}>See more</Link>
                         </div>
@@ -68,7 +72,6 @@ function CategoryLayout() {
                         </div>
                     </div>
                 </div>
-                <PlayerBar/> 
             </div>
             <SidebarMobile/>
         </div>

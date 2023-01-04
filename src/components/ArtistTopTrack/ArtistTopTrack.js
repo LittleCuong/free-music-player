@@ -1,17 +1,18 @@
 import { HiOutlineHeart } from "react-icons/hi";
 import classname from 'classnames/bind'
 import style from './ArtistTopTrack.module.scss'
-import { useRef, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from "../../firebase";
 import { setDoc, doc } from "firebase/firestore";
-import { playerBar, playPause, setActiveSong } from '../../redux/features/playerSlice';
+import { playerBar, playPause, setActivePlayer, setActiveSong } from '../../redux/features/playerSlice';
 import { useAuth } from "../../Context/AuthContext";
 
 const cx = classname.bind(style)
 
 function ArtistTopTrack({data, index}) {
     const { activeSong } = useSelector((state) => state.player);
+
     const {tracks} = useAuth()
     const track = data
     const inFav = tracks.includes(track.id)
@@ -33,9 +34,22 @@ function ArtistTopTrack({data, index}) {
     
     const handleClicked = () => {
         dispatch(setActiveSong({track, index}));
-        dispatch(playerBar(true))
         dispatch(playPause(false))
-        console.log(index);
+        dispatch(playerBar(true))
+
+    }
+
+    const handleAdd = async () => {
+        const trackRef = doc(db, "tracks", currentUser.uid)
+        try {
+            await setDoc(trackRef, 
+                {track: tracks ? [...tracks, track.id] : [track.id]},
+            )
+            
+            alert(`${track.name} added to Favourite!`)
+        } catch (error) {
+            alert(`${track.name} fail to added to Favourite!`)
+        }
     }
 
     const handleRemove= async () => {
@@ -72,11 +86,11 @@ function ArtistTopTrack({data, index}) {
                 <span className={cx('wrapper-duration')}>{minutes}</span>
                 <HiOutlineHeart 
                     className={inFav ? cx('wrapper-track-heart', 'saved') : cx('wrapper-track-heart')} 
-                    onClick={handleRemove}
+                    onClick={inFav ? handleRemove : handleAdd}
                 />
             </div>          
         </div>
     );
 }
 
-export default ArtistTopTrack;
+export default memo(ArtistTopTrack);
