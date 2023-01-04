@@ -40,12 +40,12 @@ function MainLayout() {
 
         if (activePlayer && window.innerWidth >= 1480) {
             playerRef.current.style.display = 'block'
-            wrapperMainRef.current.style.transform = 'translateX(32%)'
+            wrapperMainRef.current.style.transform = 'translateX(33%)'
             searchInputRef.current.style.transform = 'translateX(-90%)'
-            wrapperMainBodyRight.current.style.display = 'none'
-        } 
+            // wrapperMainBodyRight.current.style.display = 'none'
+        }
 
-        if (activePlayer === false) {
+        if (activePlayer === false && window.innerWidth >= 1480) {
             playerRef.current.style.display = 'none'
             wrapperMainRef.current.style.transform = 'translateX(0%)'
             searchInputRef.current.style.transform = 'translateX(0%)'
@@ -106,12 +106,13 @@ function MainLayout() {
                         </div>
                     </div>                                  
                 </div>
-                <PlayerBar 
+                
+            </div>
+            <PlayerBar 
                     data={track} 
                     index={order} 
                     height={height}
                 />
-            </div>
             <SidebarMobile/>
         </div>  
     );

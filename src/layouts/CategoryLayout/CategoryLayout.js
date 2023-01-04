@@ -59,7 +59,7 @@ function CategoryLayout() {
                         </div>                         
                     </div>
                     <div className={cx('wrapper-main-body--right', 'col l-4 m-4 c-0')}>
-                        <div className={cx('wrapper-main-body--right-header')}>
+                        <div className={cx('wrapper-main-body--right')}>
                             <h3 className={cx('main-body--right-header')}>Category</h3>
                             <Link to='/categories' className={cx('expand')}>See more</Link>
                         </div>

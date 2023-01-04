@@ -24,7 +24,7 @@ function FavouritesLayout() {
 
     const dispatch = useDispatch()
 
-    const { tracks } = useAuth()
+    const { tracks, currentUser} = useAuth()
     const { currentPlaylist, favourite } = useSelector((state) => state.player);
 
     const [favouritePlaylists, setFavouritePlaylists] = useState([])
@@ -61,7 +61,7 @@ function FavouritesLayout() {
                 <Sidebar/>
                 <div className={cx('wrapper-main', 'col l-11 m-11 c-12')}>
                     <div className={cx('wrapper-main--header')}>
-                        <h3 className={cx('header')}>Favourites</h3>      
+                        <h3 className={cx('header')}>Liked songs</h3>      
                         <MenuMobileButton/>            
                         <div  className={cx('wrapper-main--header-search')}>
                             <Search/>
@@ -69,6 +69,8 @@ function FavouritesLayout() {
                     </div>
                     <div className={cx('wrapper-main-body', 'grid row no-gutters')}>
                         <div className={cx('wrapper-background')}>
+                            <span className={cx('list-header')}>{currentUser.displayName}</span>
+                            <span className={cx('list-header')}>-</span>
                             <span className={cx('list-header')}>{tracks.length} songs</span>
                         </div>
                         <div className={cx('wrapper-main-body', 'col l-12 m-12 c-12')}>                                                                   

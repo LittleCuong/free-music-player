@@ -2,7 +2,7 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     background-color: #3B3C60;
     overflow: hidden;
 }
@@ -127,7 +127,8 @@
 
 .slide-wrapper {
     width: 100%;
-    height: 46%;
+    height: 310px;
+    // height: 46%;
     display: flex;
     justify-content: center;
 }
@@ -155,26 +156,27 @@
     padding-left: 14px;
 }
 
-@media (min-width: 560px) and (max-width: 739px)  {
-    .wrapper-main {
-        width: 100%;
-        height: 100%;
-    }
+// @media (min-width: 560px) and (max-width: 739px)  {
+//     .wrapper-main {
+//         width: 100%;
+//         height: 100%;
+//     }
 
-    .wrapper-main-body {
-        display: flex !important;
-        flex-direction: column;
-    }
-}
+//     .wrapper-main-body {
+//         display: flex !important;
+//         flex-direction: column;
+//     }
+// }
 
 @media (max-width: 319px) {
     .wrapper {
         height: 100vh;
-        overflow-y: scroll;
+        // overflow-y: scroll;
     }
 
     .container {
-        height: unset;
+        // height: unset;
+        height: 93%;
     }
 
     .wrapper-main {
@@ -195,10 +197,6 @@
 
     .slide-wrapper {
         height: 22%;
-    }
-
-    .wrapper-music--list {
-        height: 70%;
     }
 
     .wrapper-music--list-header {
@@ -226,11 +224,12 @@
 @media (min-width: 320px) and (max-width: 399px) {
     .wrapper {
         height: 100vh;
-        overflow-y: scroll;
+        // overflow-y: scroll;
     }
 
     .container {
-        height: unset;
+        height: 93%;
+        // height: unset;
     }
 
     .wrapper-main {
@@ -266,10 +265,6 @@
         height: 33%;
     }
 
-    .wrapper-music--list {
-        height: 58%;
-    }
-
     .wrapper-music--list-header {
         font-size: 1.2rem;
     }
@@ -294,11 +289,12 @@
 @media (min-width: 400px) and (max-width: 739px) {
     .wrapper {
         height: 100vh;
-        overflow-y: scroll;
+        // overflow-y: scroll;
     }
 
     .container {
-        height: unset;
+        // height: unset;
+        height: 93%;
     }
 
     .wrapper-main {
@@ -341,10 +337,6 @@
         height: unset;
     }
 
-    .wrapper-music--list {
-        height: unset;
-    }
-
     .wrapper-music--list-tracks {
         max-height: 590px;
         width: 100%;
@@ -382,6 +374,10 @@
         height: 30px;
     }
 
+    .wrapper-music--list {
+        height: 80%;
+    }
+
     .wrapper-music--list-tracks {
         max-height: 450px;
     }
@@ -392,10 +388,6 @@
 
     .slide-wrapper {
         height: 17%;
-    }
-
-    .wrapper-music--list {
-        height: 72%;
     }
 
     .main-body--right-header {

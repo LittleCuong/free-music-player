@@ -47,9 +47,9 @@ function PlaylistLayout() {
 
         if (activePlayer && window.innerWidth >= 1480) {
             playerRef.current.style.display = 'block'
-            wrapperMainRef.current.style.transform = 'translateX(32%)'
-            searchInputRef.current.style.transform = 'translateX(-90%)'
-            wrapperMainBodyRight.current.style.display = 'none'
+            wrapperMainRef.current.style.transform = 'translateX(33%)'
+            searchInputRef.current.style.transform = 'translateX(-140%)'
+            // wrapperMainBodyRight.current.style.display = 'none'
         } 
 
         if (activePlayer === false) {
@@ -57,7 +57,7 @@ function PlaylistLayout() {
             playerRef.current.style.display = 'none'
             wrapperMainRef.current.style.transform = 'translateX(0%)'
             searchInputRef.current.style.transform = 'translateX(0%)'
-            wrapperMainBodyRight.current.style.display = 'block'
+            // wrapperMainBodyRight.current.style.display = 'block'
         }
         
         if (window.innerWidth < 1480) {
@@ -88,7 +88,7 @@ function PlaylistLayout() {
                                 <Player/>
                             </div>                        
                         </div>
-                        <div ref={wrapperMainBodyRight} className={cx('wrapper-main-body--right', 'col l-4 m-4 c-12')}>
+                        <div ref={wrapperMainBodyRight} className={cx('wrapper-main-body--right', 'col l-4 m-4 c-0')}>
                             <PlaylistDetail id={playlistId}/>
                             <div className={cx('wrapper-main-body--right-header')}>
                                 <h3 className={cx('main-body--right-header')}>Category</h3>
