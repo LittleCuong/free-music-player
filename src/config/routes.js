@@ -5,7 +5,8 @@ const routes = {
     playlist: '/:playlistId',
     favourites: '/favourites',
     favouritesPlaylist: '/playlists',
-    artistDetail: '/artist/:id'
+    artistDetail: '/artist/:id',
+    search: '/search/:string',
 };
 
 export default routes;

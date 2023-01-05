@@ -3,50 +3,6 @@ import apiConfig from "./apiConfig";
 import axios from "axios";
 
 const spotifyApi = {
-    // getNewRelease: () => {
-    //     const url = 'browse/new-releases?country=VN&limit=5'
-    //     return axiosClient.get(url)
-    // },
-    // getTrendingTrack: (params) => {
-    //     const url = 'playlists/37i9dQZEVXbMDoHDwVN2tF'
-    //     return axiosClient.get(url, params);
-    // },
-    // getTodayTopHits: () => {
-    //     const url = '/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks'
-    //     return axiosClient.get(url)
-    // },
-    // getPlaylistCoverImage: (id) => {
-    //     const url = `/playlists/${id}/images`
-    //     return axiosClient.get(url)
-    // },
-    // getPlaylist: (id) => {
-    //     const url = `/playlists/${id}`
-    //     return axiosClient.get(url)
-    // },
-    // getArtistDetails: (id) => {
-    //     const url = 'artists/' + id;
-    //     return axiosClient.get(url, {params: {}});
-    // },
-    // getArtistsTopTracks: (id) => {
-    //     const url = `artists/${id}/top-tracks?market=ES`;
-    //     return axiosClient.get(url, {params: {}});
-    // },
-    // search: (cate, params) => {
-    //     const url = 'search/' + category[cate];
-    //     return axiosClient.get(url, params);
-    // },
-    // searchResult: (id) => {
-    //     const url = 'movie/' + id
-    //     return axiosClient.get(url, {params: {}})
-    // },
-    // getSongDetails: (id) => {
-    //     const url = `/tracks/${id}`;
-    //     return axiosClient.get(url, {params: {}})
-    // },
-    // getCategories: () => {
-    //     const url = '/browse/categories';
-    //     return axiosClient.get(url, {params: {}})
-    // },
     getCategoryPlaylist: async (id, token) => {
         const result = await axios(`https://api.spotify.com/v1/browse/categories/${id}/playlists`, {
             method: 'GET',
@@ -120,6 +76,13 @@ const spotifyApi = {
     },
     getAlbums: async (id, token) => {
         const result = await axios(`https://api.spotify.com/v1/artists/${id}/albums`, {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + token}
+        })
+        return result
+    },
+    getResults: async (string, token) => {
+        const result = await axios(`https://api.spotify.com/v1/search?q=${string}&type=track%2Cartist&limit=10`, {
             method: 'GET',
             headers: { 'Authorization' : 'Bearer ' + token}
         })

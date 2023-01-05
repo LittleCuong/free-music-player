@@ -8,12 +8,18 @@ const cx = classname.bind(style)
 
 
 function ArtistItem({data}) {
-
     const [value, setValue] = useState()
     const [images, setImages] = useState()
 
+    const format = new Intl.NumberFormat()
+
     useEffect(() => {
-        setValue(data.find(item => item))   
+        if (data.name) {
+            setValue(data)
+        } else {
+            setValue(data.find(item => item))   
+
+        }
     }, [data])
 
     useEffect(() => {
@@ -22,7 +28,7 @@ function ArtistItem({data}) {
         }     
     }, [value])
 
-    const imageUrl = images?.find(item => item.height === 160)
+    const imageUrl = images?.find(item => item.height === 160 || 60 )
 
     return ( 
         <Link to={`/artist/${value?.id}`} className={cx('wrapper')}>
@@ -31,7 +37,7 @@ function ArtistItem({data}) {
             </div>
             <div className={cx('wrapper-infor')}>
                 <span className={cx('wrapper-infor--name')}>{value?.name}</span>
-                <span className={cx('wrapper-infor--fame')}>{value?.followers.total} followers</span>
+                <span className={cx('wrapper-infor--fame')}>{format.format(value?.followers.total)} followers</span>
             </div>
         </Link>
     );

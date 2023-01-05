@@ -158,6 +158,10 @@
         border-radius: 0;
     }
 
+    .wrapper-track--img {
+        width: 20%;
+    }
+
     .wrapper-track--infor-name {
         font-size: 1rem;
     }
@@ -194,6 +198,10 @@
         border-radius: 0;
     }
 
+    .wrapper-track--img {
+        width: 20%;
+    }
+
     .wrapper-track--infor-name {
         font-size: 1.2rem;
     }
@@ -228,6 +236,10 @@
 @media (min-width: 400px) and (max-width: 739px) {
     .wrapper {
         border-radius: 0;
+    }
+
+    .wrapper-track--img {
+        width: 20%;
     }
 
     .wrapper-track--infor-name {
