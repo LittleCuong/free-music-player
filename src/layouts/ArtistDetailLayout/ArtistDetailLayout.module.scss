@@ -44,6 +44,8 @@
 }
 
 .wrapper-main--header-search {
+    display: flex;
+    align-items: center;
     width: 500px;
     height: 36px;
     margin-right: 20px;
@@ -180,19 +182,6 @@
     overflow-y: auto;
     // padding: 0 10px;
 }
-
-
-// @media (min-width: 560px) and (max-width: 739px)  {
-//     .wrapper-main {
-//         width: 100%;
-//         height: 100%;
-//     }
-
-//     .wrapper-main-body {
-//         display: flex !important;
-//         flex-direction: column;
-//     }
-// }
 
 @media (max-width: 319px) {
     .wrapper {

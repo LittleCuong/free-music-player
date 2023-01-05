@@ -1,7 +1,7 @@
 import { HiOutlineHeart } from "react-icons/hi";
 import classname from 'classnames/bind'
 import style from './Track.module.scss'
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from "../../firebase";
 import { setDoc, doc } from "firebase/firestore";
@@ -11,7 +11,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 const cx = classname.bind(style)
 
-// function Track({data, onClick, index}) {
 function Track({data, index}) {
     const { activeSong } = useSelector((state) => state.player);  
     const {tracks, currentUser} = useAuth()
@@ -40,6 +39,8 @@ function Track({data, index}) {
         dispatch(setActiveSong({track, index}));
         dispatch(playPause(false))
         dispatch(setActivePlayer(true))
+
+        console.log(artists.map(item => item.name).join(', '));
     }
 
     const handleAdd = async () => {
@@ -47,8 +48,7 @@ function Track({data, index}) {
         try {
             await setDoc(trackRef, 
                 {track: tracks ? [...tracks, track.id] : [track.id]},
-            )
-            
+            )           
             alert(`${track.name} added to Favourite!`)
         } catch (error) {
             alert(`${track.name} fail to added to Favourite!`)
@@ -92,18 +92,12 @@ function Track({data, index}) {
                         <div className={cx('wrapper-artists')}>
                             {
                                 artists.map(item => 
-                                    // <Link key={item.id} to={`/artist/${item.id}`} className={cx('wrapper-track--artist-link')}>
-                                    //         <span className={cx('wrapper-track--artist')}>
-                                    //             {item.name}
-                                    //         </span>
-                                    // </Link>
                                     <div key={item.id} onClick={() => handleNav(item.id)} className={cx('wrapper-track--artist-link')}>
                                         <span className={cx('wrapper-track--artist')}>
                                             {item.name}
                                         </span>
                                     </div>
                                 )
-
                             }
                         </div>                                 
                     </div>

@@ -18,7 +18,6 @@ function TracksList({data}) {
 
     const dispatch = useDispatch()
     const [playlists, setPlaylists] = useState([])
-    const { activeSong, isPlaying } = useSelector((state) => state.player);
 
     useEffect(() => { 
         const getList = async () => {

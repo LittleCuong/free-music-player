@@ -1,12 +1,14 @@
+import { useEffect, useRef, useState } from 'react';
+import { useAuth } from '../../Context/AuthContext';
+import { setActiveMenu } from '../../redux/features/menuButtonSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
 import classname from 'classnames/bind'
 import style from './FavouriteListLayout.module.scss'
-import { useEffect, useRef, useState } from 'react';
 import Search from '../../components/Search/Search';
-import Categories from '../../components/Categories/Categories';
 import spotifyApi from '../../api/spotifyApi';
 import Sidebar from '../Sidebar/Sidebar';
 import Playlist from '../../components/Playlist/Playlist';
-import { useAuth } from '../../Context/AuthContext';
 import MenuMobileButton from '../../components/MenuMobileButton/MenuMobileButton';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
 
@@ -16,9 +18,12 @@ function FavouriteListLayout() {
 
     const auth = JSON.parse(localStorage.getItem('token'))
 
+    const {active} = useSelector((state) => state.menuMobile)
     const { playlists } = useAuth()
 
     const [favouritePlaylists, setFavouritePlaylists] = useState([])
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const getPlaylist = async () => {
@@ -38,8 +43,14 @@ function FavouriteListLayout() {
 
     const searchInputRef = useRef()
 
-    return ( 
-        <div className={cx('wrapper', 'grid row no-gutters')}>
+    const handleClickOutside = () => {
+        if (active === true) {
+            dispatch(setActiveMenu(false))
+        }
+    }
+
+    return (  
+        <div className={cx('wrapper', 'grid row no-gutters')} onClick={handleClickOutside}>
             <Sidebar/>
             <div className={cx('wrapper-main', 'col l-11 m-11 c-12')}>
                 <div className={cx('wrapper-main--header')}>

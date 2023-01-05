@@ -2,11 +2,12 @@
     display: none;
     padding: 0 0 0 10px;
     border: none;
-    background-color: transparent;
+    // background-color: transparent;
 }
 
 .burger-icon {
     font-size: 2rem;
+    color:blueviolet;
 }
 
 @media (max-width: 319px) {

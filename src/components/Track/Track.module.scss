@@ -151,6 +151,15 @@
         font-size: .8rem;
     }
 
+    .wrapper-track--artist-link {
+        white-space: nowrap;
+        margin-right: 4px;
+    }
+
+    .wrapper-track--artist {
+        font-size: 1rem;
+    }
+
     .wrapper-duration {
         font-size: .8rem;
     }
@@ -169,6 +178,10 @@
         margin-left: 15px;
     }
 
+    .wrapper-track-infor--main {
+        width: 100%;
+    }
+
     .wrapper-track--infor-img {
         width: 30px;
         height: 30px;
@@ -177,6 +190,15 @@
 
     .wrapper-track--name {
         width: 200px;
+        font-size: 1rem;
+    }
+
+    .wrapper-track--artist-link {
+        white-space: nowrap;
+        margin-right: 4px;
+    }
+
+    .wrapper-track--artist {
         font-size: 1rem;
     }
 
@@ -198,6 +220,10 @@
         margin-left: 10px;
     }
 
+    .wrapper-track-infor--main {
+        width: 100%;
+    }
+
     .wrapper-track--infor-img {
         width: 35px;
         height: 35px;
@@ -212,11 +238,16 @@
     .wrapper-duration {
         font-size: 1.2rem;
     }
+
+    .wrapper-track--artist-link {
+        white-space: nowrap;
+        margin-right: 6px;
+    }
 }
 
 @media (min-width: 740px) and (max-width: 1023px) {
     .wrapper-track--name {
         width: 250px;
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
 }

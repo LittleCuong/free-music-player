@@ -1,7 +1,12 @@
+import { playerBar, setFavouritePlaylist } from '../../redux/features/playerSlice';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { setActiveMenu } from '../../redux/features/menuButtonSlice';
+import { useAuth } from '../../Context/AuthContext';
+import { Link } from 'react-router-dom';
+
 import classname from 'classnames/bind'
 import style from './MainLayout.module.scss'
-import { useEffect, useRef, useState } from 'react';
 import Search from '../../components/Search/Search';
 import Slide from '../../components/Slide/Slide';
 import Player from '../../components/Player/Player';
@@ -9,11 +14,8 @@ import PlayerBar from '../../components/PlayerBar/PlayBar';
 import Categories from '../../components/Categories/Categories';
 import Sidebar from '../Sidebar/Sidebar';
 import TracksList from '../../components/TracksList/TracksList';
-import { playerBar, setFavouritePlaylist } from '../../redux/features/playerSlice';
-import { useAuth } from '../../Context/AuthContext';
 import MenuMobileButton from '../../components/MenuMobileButton/MenuMobileButton';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
-import { Link } from 'react-router-dom';
 import Artists from '../../components/Artists/Artists';
 
 const cx = classname.bind(style)
@@ -25,14 +27,15 @@ function MainLayout() {
     const [track, setTrack] = useState([])
     const [order, setOrder] = useState()
     const [height, setHeight] = useState()
-    const {isActive, activePlayer, bar} = useSelector((state) => state.player);
+    const {activePlayer} = useSelector((state) => state.player);
+    const {active} = useSelector((state) => state.menuMobile)
 
     const dispatch = useDispatch()
     const wrapperMainRef = useRef()
-    const wrapperMainBodyRight = useRef()
     const searchInputRef = useRef()
     const playerRef = useRef()
-    const testRef = useRef()
+    const wrapperMainBodyRight = useRef()
+    const wrapperMainBodyLeft = useRef()
     const slideRef = useRef()
     const listRef = useRef()
 
@@ -56,14 +59,22 @@ function MainLayout() {
         if (activePlayer && window.innerWidth < 1480) {
             dispatch(playerBar(true))
         }    
+
+
     }, [dispatch, activePlayer])
+
+    const handleClickOutside = () => {
+        if (active === true) {
+            dispatch(setActiveMenu(false))
+        }
+    }
 
 
     return ( 
-        <div className={cx('wrapper', 'grid')}>
+        <div className={cx('wrapper', 'grid')} onClick={handleClickOutside}>
             <div className={cx('container', 'row no-gutters')}>
                 <Sidebar/>
-                <div ref={wrapperMainRef} className={cx('wrapper-main', 'col l-11 m-11 c-12')}>
+                <div ref={wrapperMainRef} className={cx('wrapper-main', 'col l-11 m-11 c-12')} >
                     <div className={cx('wrapper-main--header')}>
                         <h3 className={cx('header' ,'text-3xl font-bold underline')}>Home</h3>      
                         <MenuMobileButton/>            
@@ -72,7 +83,7 @@ function MainLayout() {
                         </div>
                     </div>
                     <div className={cx('wrapper-main-body', 'grid row no-gutters')}>
-                        <div ref={testRef} className={cx('wrapper-main-body--left', 'col l-8 m-8 c-12')}>
+                        <div ref={wrapperMainBodyLeft} className={cx('wrapper-main-body--left', 'col l-8 m-8 c-12')}>
                             <div ref={slideRef} className={cx('slide-wrapper')}> 
                                 <Slide className={cx('slide')}/>
                             </div>                                                 
@@ -106,14 +117,9 @@ function MainLayout() {
                             </div>
                         </div>
                     </div>                                  
-                </div>
-                
+                </div>                
             </div>
-            <PlayerBar 
-                    data={track} 
-                    index={order} 
-                    height={height}
-                />
+            <PlayerBar/>
             <SidebarMobile/>
         </div>  
     );

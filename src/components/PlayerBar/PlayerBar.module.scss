@@ -27,8 +27,8 @@
 }
 
 .wrapper-track--img {
-    width: 20%;
-    height: 100%;
+    width: 12%;
+    height: 90%;
     object-fit: cover;
 }
 
@@ -46,6 +46,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    cursor: default;
+
 }
 
 .wrapper-track--infor-artist {
@@ -54,11 +56,22 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
 }
 
 .wrapper-track--infor-heart {
     font-size: 2rem;
     color: var(--white-color);
+    transition: all 0.2s;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
 }
 
 .liked {

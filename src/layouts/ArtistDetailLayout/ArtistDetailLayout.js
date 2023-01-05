@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { setCurrentPlaylist, setPage } from '../../redux/features/playerSlice';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { setActiveMenu } from '../../redux/features/menuButtonSlice';
 
 import classname from 'classnames/bind'
 import style from './ArtistDetailLayout.module.scss'
@@ -21,6 +22,7 @@ function ArtistDetailLayout() {
     const auth = JSON.parse(localStorage.getItem('token'))
     const {id} = useParams()
     const dispatch = useDispatch()
+    const {active} = useSelector((state) => state.menuMobile)
     
     const [data, setData] = useState()
     const [images, setImages] = useState()
@@ -60,8 +62,14 @@ function ArtistDetailLayout() {
     const imageUrl = images?.find(item => item.height = 640)
     const format = new Intl.NumberFormat()
 
+    const handleClickOutside = () => {
+        if (active === true) {
+            dispatch(setActiveMenu(false))
+        }
+    }
+
     return ( 
-        <div className={cx('wrapper', 'grid row no-gutters')}>
+        <div className={cx('wrapper', 'grid row no-gutters')} onClick={handleClickOutside}>
             <Sidebar/>
             <div className={cx('wrapper-main', 'col l-11 m-11 c-12')} >
                 <div className={cx('wrapper-main--header')} style={{backgroundImage: `url(${imageUrl?.url})`}}>
@@ -71,8 +79,8 @@ function ArtistDetailLayout() {
                         <span className={cx('artist-infor--name', 'span')}>{data?.name}</span>
                         <span className={cx('artist-infor--fame', 'span')}>{format.format(data?.followers.total)} followers</span>
                     </div> 
-                    <MenuMobileButton/>
                     <div className={cx('wrapper-main--header-search')}>
+                        <MenuMobileButton/>
                         <Search/>
                     </div>                   
                 </div>

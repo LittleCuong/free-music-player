@@ -180,6 +180,16 @@
         display: none !important;
     }
 
+    .wrapper-main--header {
+        justify-content: center;
+        padding-left: 0;
+    }
+
+    .wrapper-main--header-search {
+        width: 70%;
+        margin-left: 20px;
+    }
+
     .header {
         display: none;
     } 
@@ -249,7 +259,9 @@
     } 
 
     .wrapper-main--header-search {
-        margin-right: 0;
+        width: 80%;
+        margin-bottom: 10px;
+        margin-left: 40px;
     }
 
     .slide-wrapper {
@@ -280,12 +292,9 @@
 @media (min-width: 400px) and (max-width: 739px) {
     .wrapper {
         height: 100vh;
-        // overflow-y: scroll;
     }
 
     .container {
-        // height: unset;
-        // height: 93%;
     }
 
     .wrapper-main {
@@ -315,9 +324,9 @@
     } 
     
     .wrapper-main--header-search {
-        margin-top: 10px;
+        width: 80%;
         margin-bottom: 10px;
-        margin-right: 0;
+        margin-left: 40px;
     }
     
     .wrapper-music--list-header {
