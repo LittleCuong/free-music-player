@@ -91,7 +91,7 @@ function Sidebar() {
                         <HiHome className={cx('sidebar-icon')} onClick={handleHome}/>
                     </div>
                 </Tippy>     
-                <Tippy content='Collection' placement='right'>
+                <Tippy content='Categories' placement='right'>
                     <div className={cx('wrapper-sidebar--icon')}>
                         <HiOutlineMusicNote className={cx('sidebar-icon')} onClick={handleCategories}/>
                     </div>

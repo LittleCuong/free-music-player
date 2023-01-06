@@ -16,7 +16,7 @@ function PlayerBar({page}) {
 
     const { currentSongs, currentIndex, isPlaying, currentPlaylist, bar } = useSelector((state) => state.player)
     const {tracks, currentUser} = useAuth()
-
+    console.log(currentPlaylist);
     const inFav = tracks.includes(currentSongs.id)
 
     const audioRef = useRef()
@@ -28,7 +28,7 @@ function PlayerBar({page}) {
     const [artists, setArtists] = useState()
     const [isRandom, setIsRandom] = useState(false)
     const [isRepeated, setIsRepeated] = useState(false)
-
+    const [playing, setPlaying] = useState(false)
     const dispatch = useDispatch()
     
     useEffect(() => {
@@ -96,8 +96,10 @@ function PlayerBar({page}) {
         setIsRandom(!isRandom)
     }
 
-    const handlePlay = () => {
-        audioRef.current.play()
+    
+
+   const handlePlay = async () => {
+        audioRef.current.play();
         dispatch(playPause(true));
     }
 
@@ -129,7 +131,7 @@ function PlayerBar({page}) {
                 alert(`${track.name} fail to added to Favourite!`)
             }
         }
-    }
+    }   
 
     return ( 
         <div ref={wrapperRef} className={bar ?  cx('wrapper', 'visible') : cx('wrapper', 'hide')}>

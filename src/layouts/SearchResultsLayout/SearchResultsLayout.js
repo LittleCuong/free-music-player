@@ -12,6 +12,7 @@ import spotifyApi from '../../api/spotifyApi';
 import { useParams } from 'react-router-dom';
 import ArtistItem from '../../components/ArtistItem/ArtistItem';
 import ResultTrack from '../../components/ResultTrack/ResultTrack';
+import { setCurrentPlaylist } from '../../redux/features/playerSlice';
 
 
 const cx = classname.bind(style)
@@ -33,6 +34,7 @@ function SearchResultsLayout() {
             console.log(res);
             setTracks(res.data.tracks.items)
             setArtists(res.data.artists.items)
+            dispatch(setCurrentPlaylist(res.data.tracks.items))
         }
         getResult()
     }, [string])
@@ -65,7 +67,7 @@ function SearchResultsLayout() {
                             </div>
                         </div>
                     </div>
-                    <PlayerBar/> 
+                    <PlayerBar page={'result'}/> 
                 </div>
             </div>
             <SidebarMobile/>

@@ -66,6 +66,35 @@ function Track({data, index}) {
         }
     }
 
+    const handleLikedTrack = async () => {
+        if (!currentUser) {
+            alert('You must login to use this feature')
+        } else {
+            const trackRef = doc(db, "tracks", currentUser.uid)
+            if (inFav) {
+                try {
+                    await setDoc(trackRef, 
+                        {track: tracks.filter((item) => item !== track.id)},
+                        {merge: "true"}
+                    )
+                    alert(`${track.name} removed from Favourite!`)
+                } catch (error) {
+                    alert(`${track.name} fail to removed from Favourite!`)
+                }
+            } else {
+                try {
+                    await setDoc(trackRef, 
+                        {track: tracks ? [...tracks, track.id] : [track.id]},
+                    )
+                    
+                    alert(`${track.name} added to Favourite!`)
+                } catch (error) {
+                    alert(`${track.name} fail to added to Favourite!`)
+                }
+            }
+        }
+    }
+
     const handleNav = (id) => {
         dispatch(playerBar(false))
         dispatch(setActivePlayer(false))
@@ -103,7 +132,7 @@ function Track({data, index}) {
                 <span className={cx('wrapper-duration')}>{minutes}</span>
                 <HiOutlineHeart 
                     className={inFav ? cx('wrapper-track-heart', 'saved') : cx('wrapper-track-heart')} 
-                    onClick={inFav ? handleRemove : handleAdd}
+                    onClick={handleLikedTrack}
                 />
             </div>          
         </div>

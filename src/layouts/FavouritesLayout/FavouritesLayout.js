@@ -71,7 +71,7 @@ function FavouritesLayout() {
                             <span className={cx('list-header')}>-</span>
                             <span className={cx('list-header')}>{tracks.length} songs</span>
                         </div>
-                        <div className={cx('wrapper-main-body', 'col l-12 m-12 c-12')}>                                                                   
+                        <div className={cx('wrapper-main-body-list', 'col l-12 m-12 c-12')}>                                                                   
                             <div className={cx('wrapper-music--list')}>
                                 {
                                     tracks.length == 0 

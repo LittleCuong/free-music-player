@@ -1,11 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    // activeSong: {},
     currentSongs: [],
     currentIndex: 0,
     currentPlaylist: [],
-    // isActive: false,
     isPlaying: false,
     activePlayer: false,
     bar: false,      
@@ -42,7 +40,6 @@ const playerSlice = createSlice({
         setActiveSong: (state, action) => {
             state.currentSongs = action.payload.track;
             state.currentIndex = action.payload.index;
-            // state.isActive = true;
         },
 
         setActivePlayer : (state, action) => {
@@ -59,6 +56,9 @@ const playerSlice = createSlice({
                     break;
                 case 'home':
                     state.currentSongs = state.currentPlaylist.at(action.payload).track                                     
+                    break;
+                case 'result':
+                    state.currentSongs = state.currentPlaylist.at(action.payload)                                    
                     break;
                 default: 
                     state.currentSongs = state.currentPlaylist.at(action.payload)                                    

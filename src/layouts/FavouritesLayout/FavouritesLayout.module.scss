@@ -42,8 +42,14 @@
 }
 
 .wrapper-main-body {
-    height: 92%;
+    height: 76%;
 }
+
+.wrapper-main-body-list {
+    height: 100%;
+    overflow-y: auto;
+}
+
 
 .list-header {
     margin-left: 14px;
@@ -52,6 +58,7 @@
 }
 
 .wrapper-background {
+    height: 40px;
     display: flex;
     margin-left: 10px;
 }
