@@ -11,7 +11,7 @@ import spotifyApi from '../../api/spotifyApi';
 
 const cx = classname.bind(style)
 
-function TracksList({data}) {
+function TracksList({data, page}) {
 
     const { token } = useAuth()
     const auth = JSON.parse(localStorage.getItem('token'))
@@ -20,14 +20,25 @@ function TracksList({data}) {
     const [playlists, setPlaylists] = useState([])
 
     useEffect(() => { 
-        const getList = async () => {
-            const response = await spotifyApi.getPlaylist(data, auth)
-            setPlaylists(response.data.tracks.items)
-            dispatch(setPage('home'))
-            dispatch(setCurrentPlaylist(response.data.tracks.items))
-        } 
-        getList()
-    }, [data, token, dispatch])
+        if (page !== 'albumTracksPage') {
+            const getList = async () => {
+                const response = await spotifyApi.getPlaylist(data, auth)
+                setPlaylists(response.data.tracks.items)
+                dispatch(setPage('home'))
+                dispatch(setCurrentPlaylist(response.data.tracks.items))
+            } 
+            getList()
+        } else {
+            const getList = async () => {
+                const response = await spotifyApi.getAlbumTracks(data, auth)
+                console.log(response.data);
+                setPlaylists(response.data.items)
+                dispatch(setCurrentPlaylist(response.data.items))
+            } 
+            getList()
+        }
+        
+    }, [data, token, dispatch, page])
 
 
 

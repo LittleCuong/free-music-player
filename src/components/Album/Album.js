@@ -18,7 +18,7 @@ function Album({data}) {
     const imageUrl = image?.find(item => item.height = 64)
 
     return ( 
-        <Link className={cx('wrapper')}>
+        <Link to={`/album/tracks/${data.id}`}  className={cx('wrapper')}>
         <div className={cx('wrapper-contain')}> 
             <img 
                 className={cx('wrapper-image')} 

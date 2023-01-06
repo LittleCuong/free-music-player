@@ -12,18 +12,23 @@
 
 @media (max-width: 319px) {
     .burger-btn {
-        display: block;
+        display: flex;
+        margin-right: 10px;
     }
 }
 
 @media (min-width: 320px) and (max-width: 399px) {
     .burger-btn {
-        display: block;
+        display: flex;
+        margin-right: 10px;
+
     }
 }
 
 @media (min-width: 400px) and (max-width: 739px) {
     .burger-btn {
-        display: block;
+        display: flex;
+        margin-right: 20px;
+        
     }
 }

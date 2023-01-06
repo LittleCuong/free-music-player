@@ -7,46 +7,6 @@
     overflow: hidden;
 }
 
-.wrapper-player {
-    display: none;
-    position: absolute;
-    top: -6%;
-    left: -42%;
-    width: 30%;
-    height: 100vh;
-    overflow: hidden;
-    animation-name: appear;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-}
-
-@keyframes appear {
-    from {
-        width: 0px;
-        opacity: 0;     
-        margin-left: 40%;
-    }
-    to {
-        margin-left: 0;
-        width: 400px;
-        opacity: 1;   
-        transform: translateX(-30px);
-    }
-}
-
-@keyframes hidden {
-    from {
-        width: 400px;
-        opacity: 1;     
-        margin-left: 0;
-    }
-    to {
-        margin-left: 40%;
-        width: 0px;
-        opacity: 0   
-    }
-}
-
 .wrapper-main {
     position: relative;
     width: 98%;
@@ -120,30 +80,8 @@
         display: none;
     } 
 
-   
-
     .burger-btn {
         display: block;
-    }
-
-    .slide-wrapper {
-        height: 22%;
-    }
-
-    .wrapper-music--list {
-        height: 70%;
-    }
-
-    .wrapper-music--list-header {
-        font-size: 1.8rem;
-    }
-
-    .wrapper-music--list-tracks {
-        padding-left: 0;
-    }
-
-    .wrapper-player {
-        display: none;
     }
 
     .list-header {
@@ -177,27 +115,6 @@
         width: 70%;
         margin-left: 20px;
         margin-bottom: 10px;
-    }
-
-    .slide-wrapper {
-        height: 33%;
-    }
-
-    .wrapper-music--list {
-        height: 58%;
-    }
-
-    .wrapper-music--list-header {
-        font-size: 1.8rem;
-    }
-
-    .wrapper-music--list-tracks {
-        // max-height: 450px;
-        padding-left: 0;
-    }
-
-    .wrapper-player {
-        display: none;
     }
 
     .list-header {
@@ -238,10 +155,6 @@
         font-size: 1.6rem;
     }
 
-    .slide-wrapper {
-        height: 35%;
-    }
-
     .wrapper-music--list {
         height: 50%;
     }
@@ -251,14 +164,6 @@
         width: 100%;
         padding-left: 0px;
     }  
-
-    .wrapper-player {
-        display: none;
-    }
-
-    .main-body--right-header {
-        font-size: 1.2rem;
-    }
 
     .expand {
         font-size: 1rem;
@@ -274,8 +179,7 @@
         height: 100%;
     }
 
-    .header,
-    .wrapper-music--list-header {
+    .header {
         font-size: 1.8rem;
     }
 
@@ -283,24 +187,8 @@
         height: 30px;
     }
 
-    .wrapper-music--list-tracks {
-        max-height: 450px;
-    }
-
-    .wrapper-player {
-        display: none;
-    }
-
-    .slide-wrapper {
-        height: 17%;
-    }
-
     .wrapper-music--list {
         height: 72%;
-    }
-
-    .main-body--right-header {
-        font-size: 1.2rem;
     }
 
     .main-body--right-category {

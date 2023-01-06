@@ -12,13 +12,13 @@ import { setDoc, doc } from "firebase/firestore";
 
 const cx = classname.bind(style)
 
-function PlayerBar() {
+function PlayerBar({page}) {
 
     const { currentSongs, currentIndex, isPlaying, currentPlaylist, bar } = useSelector((state) => state.player)
     const {tracks, currentUser} = useAuth()
 
     const inFav = tracks.includes(currentSongs.id)
-
+    console.log(currentPlaylist);
     const audioRef = useRef()
     const wrapperRef = useRef()
     const [track, setTrack] = useState()
@@ -36,10 +36,17 @@ function PlayerBar() {
     }, [currentSongs])
 
     useEffect(() => {
-        if (currentSongs) {
-            setArtists(currentSongs?.artists)
-            setImage(currentSongs?.album?.images)
+        if (page !== 'album') {
+            if (currentSongs) {
+                setArtists(currentSongs?.artists)
+                setImage(currentSongs?.album?.images)
+            }
+        } else {
+            if (currentSongs) {
+                setArtists(currentSongs?.artists)
+            }
         }
+       
 
         if (image !== undefined) {
             setUrl(image.find(item => {
@@ -129,7 +136,10 @@ function PlayerBar() {
             { currentSongs?.name
                 ?
                     <div className={cx('wrapper-track')}>
-                        <img className={cx('wrapper-track--img')} src={url?.url} alt="name"/>
+                        {url?.url 
+                            ? <img className={cx('wrapper-track--img')} src={url?.url} alt="name"/>
+                            : undefined
+                        }
                         <div className={cx('wrapper-track--infor')}>
                             <span className={cx('wrapper-track--infor-name')}>{currentSongs.name}</span>
                             <span className={cx('wrapper-track--infor-artist')}>{artist?.join(", ")}</span>               

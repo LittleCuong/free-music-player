@@ -40,7 +40,7 @@ const playerSlice = createSlice({
         },
 
         setActiveSong: (state, action) => {
-            state.activeSong = action.payload.track.album.images;
+            // state.activeSong = action.payload.track.album.images;
             state.currentSongs = action.payload.track;
             state.currentIndex = action.payload.index;
             state.isActive = true;
@@ -62,6 +62,7 @@ const playerSlice = createSlice({
                     state.currentSongs = state.currentPlaylist.at(action.payload).track                                     
                     break;
                 default: 
+                    state.currentSongs = state.currentPlaylist.at(action.payload)                                    
                     break;
             }
             state.currentIndex = action.payload;

@@ -1,44 +1,38 @@
 import { HiOutlineHeart } from "react-icons/hi";
 import classname from 'classnames/bind'
-import style from './Track.module.scss'
-import React, { useRef, useState } from 'react';
+import style from './AlbumTrack.module.scss'
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from "../../firebase";
 import { setDoc, doc } from "firebase/firestore";
-import { playPause, setActivePlayer, setActiveSong, playerBar } from '../../redux/features/playerSlice';
+import { playerBar, playPause, setActiveSong } from '../../redux/features/playerSlice';
 import { useAuth } from "../../Context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
 
 const cx = classname.bind(style)
 
-function Track({data, index}) {
-    const { activeSong } = useSelector((state) => state.player);  
-    const {tracks, currentUser} = useAuth()
-
-    const track = data.track
+function AlbumTrack({data, index}) {
+    const { activeSong } = useSelector((state) => state.player);
+    const {tracks} = useAuth()
+    const track = data
     const inFav = tracks.includes(track.id)
+    const {currentUser} = useAuth()
     const dispatch = useDispatch()
     const wrapperRef = useRef()
     const order = index + 1;
     const trackNameRef = useRef()
 
-    const nav = useNavigate()
-
-    const [image, setImage] = useState(track.album.images)
-    const [artists, setArtists] = useState(track.album.artists)
+    const [artists, setArtists] = useState(track.artists)
 
     const seconds = ((track.duration_ms % 60000) / 1000).toFixed(0);
     const minutes = Math.floor(track.duration_ms / 60000) + ":" + (seconds < 10 ? '0' : '') + seconds;
 
-    const imageUrl = image.find(item => item.height === 64)
-
-    const artistId = artists.map(item => item.id)
     const artistName = artists.map(item => item.name)
     
     const handleClicked = () => {
         dispatch(setActiveSong({track, index}));
+        dispatch(playerBar(true))
         dispatch(playPause(false))
-        dispatch(setActivePlayer(true))
+        console.log(index);
     }
 
     const handleAdd = async () => {
@@ -53,7 +47,7 @@ function Track({data, index}) {
         }
     }
 
-    const handleRemove= async () => {
+    const handleRemove = async () => {
         const trackRef = doc(db, "tracks", currentUser.uid)
         try {
             await setDoc(trackRef, 
@@ -66,12 +60,6 @@ function Track({data, index}) {
         }
     }
 
-    const handleNav = (id) => {
-        dispatch(playerBar(false))
-        dispatch(setActivePlayer(false))
-        nav(`/artist/${id}`)
-    }
-
     return ( 
         <div 
             ref={wrapperRef}
@@ -81,23 +69,12 @@ function Track({data, index}) {
         >
             <span className={cx('wrapper-track--index')}>{order}</span>
             <div className={cx('wrapper-right')} >
-                <div className={cx('wrapper-track--infor')} onClick={handleClicked}>              
-                    <img src={imageUrl.url} className={cx('wrapper-track--infor-img')} alt={track.name}/>  
+                <div className={cx('wrapper-track--infor')} onClick={handleClicked}>                            
                     <div 
                         className={cx('wrapper-track-infor--main')} 
                     >
                         <span className={cx('wrapper-track--name')} ref={trackNameRef}>{track.name}</span>
-                        <div className={cx('wrapper-artists')}>
-                            {
-                                artists.map(item => 
-                                    <div key={item.id} onClick={() => handleNav(item.id)} className={cx('wrapper-track--artist-link')}>
-                                        <span className={cx('wrapper-track--artist')}>
-                                            {item.name}
-                                        </span>
-                                    </div>
-                                )
-                            }
-                        </div>                                 
+                        <span className={cx('wrapper-track--artist')}>{artistName.join(", ")}</span>
                     </div>
                 </div>         
                 <span className={cx('wrapper-duration')}>{minutes}</span>
@@ -110,4 +87,4 @@ function Track({data, index}) {
     );
 }
 
-export default Track;
+export default AlbumTrack;

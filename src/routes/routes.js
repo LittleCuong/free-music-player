@@ -19,6 +19,8 @@ import artistDetailPage from '../pages/ArtistDetailPage/DiscoverPage';
 import ArtistDetailLayout from '../layouts/ArtistDetailLayout/ArtistDetailLayout';
 import ResultsPage from '../pages/ResultsPage/ResultsPage';
 import SearchResultsLayout from '../layouts/SearchResultsLayout/SearchResultsLayout';
+import AlbumTracksPage from '../pages/AlbumTracksPage/AlbumTracksPage';
+import AlbumTracksLayout from '../layouts/AlbumTracksLayout/AlbumTracksLayout';
 
 const publicRoutes = [
     { path: config.routes.home, component: Home},
@@ -28,7 +30,8 @@ const publicRoutes = [
     { path: config.routes.favourites, component: FavouritesPage, layout: FavouritesLayout },
     { path: config.routes.favouritesPlaylist, component: FavouritesPlaylistsPage, layout: FavouriteListLayout},
     { path: config.routes.artistDetail, component: artistDetailPage, layout: ArtistDetailLayout },
-    { path: config.routes.search, component: ResultsPage, layout: SearchResultsLayout }
+    { path: config.routes.search, component: ResultsPage, layout: SearchResultsLayout },
+    { path: config.routes.albumTracks, component: AlbumTracksPage, layout: AlbumTracksLayout },
 ]
 
 export { publicRoutes };

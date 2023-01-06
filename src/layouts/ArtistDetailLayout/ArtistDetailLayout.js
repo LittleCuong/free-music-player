@@ -53,6 +53,7 @@ function ArtistDetailLayout() {
         if (data!== undefined) {
             const getAlbums = async () => {
                 const res = await spotifyApi.getAlbums(data?.id, auth)
+                console.log(res.data.items);
                 setAlbums(res.data.items)
             }
             getAlbums()

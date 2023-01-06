@@ -12,6 +12,7 @@ const cx = classname.bind(style)
 
 function FavouriteTrack({data, index}) {
     const { activeSong } = useSelector((state) => state.player);
+
     const {tracks} = useAuth()
     const track = data
     const inFav = tracks.includes(track.id)

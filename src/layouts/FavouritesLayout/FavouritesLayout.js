@@ -82,7 +82,7 @@ function FavouritesLayout() {
                                                 {favouriteTracks?.map((item, index) => (
                                                     <FavouriteTrack data={item} key={index} index={index}/>
                                                 ))}
-                                        </div>
+                                            </div>
                                 }                               
                             </div>                   
                         </div>

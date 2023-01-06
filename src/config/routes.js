@@ -3,6 +3,7 @@ const routes = {
     categories: '/categories',
     category: '/:category/:id',
     playlist: '/:playlistId',
+    albumTracks: '/album/tracks/:id',
     favourites: '/favourites',
     favouritesPlaylist: '/playlists',
     artistDetail: '/artist/:id',

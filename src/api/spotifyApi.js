@@ -81,6 +81,13 @@ const spotifyApi = {
         })
         return result
     },
+    getAlbumTracks: async (id, token) => {
+        const result = await axios(`https://api.spotify.com/v1/albums/${id}/tracks`, {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + token}
+        })
+        return result
+    },
     getResults: async (string, token) => {
         const result = await axios(`https://api.spotify.com/v1/search?q=${string}&type=track%2Cartist&limit=10`, {
             method: 'GET',
