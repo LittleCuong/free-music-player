@@ -112,7 +112,6 @@ function AuthProvider({ children }) {
         token,
         currentUser,
         signInWithGoogle,
-        signInWithFacebook,
         logout,
         tracks,
         playlists,
