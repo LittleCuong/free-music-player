@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    activeSong: {},
+    // activeSong: {},
     currentSongs: [],
     currentIndex: 0,
     currentPlaylist: [],
-    isActive: false,
+    // isActive: false,
     isPlaying: false,
     activePlayer: false,
     bar: false,      
@@ -40,10 +40,9 @@ const playerSlice = createSlice({
         },
 
         setActiveSong: (state, action) => {
-            // state.activeSong = action.payload.track.album.images;
             state.currentSongs = action.payload.track;
             state.currentIndex = action.payload.index;
-            state.isActive = true;
+            // state.isActive = true;
         },
 
         setActivePlayer : (state, action) => {
