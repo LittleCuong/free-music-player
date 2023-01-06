@@ -1,5 +1,3 @@
-import classname from 'classnames/bind'
-import style from './Player.module.scss'
 import { useEffect, useRef, useState, memo } from 'react';
 import {HiArrowSmRight} from "react-icons/hi"
 import { HiPlay, HiBackward, HiForward, HiPause } from "react-icons/hi2";
@@ -7,6 +5,9 @@ import { BiShuffle, BiRepeat } from "react-icons/bi";
 import RecommendTrack from '../RecommendTrack/RecommendTrack';
 import { nextSong, prevSong, playPause, setArtistName, setImageUrl, setActivePlayer } from '../../redux/features/playerSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import classname from 'classnames/bind'
+import style from './Player.module.scss'
+
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'
 

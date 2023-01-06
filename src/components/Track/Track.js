@@ -1,13 +1,15 @@
-import { HiOutlineHeart } from "react-icons/hi";
-import classname from 'classnames/bind'
-import style from './Track.module.scss'
-import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from "../../firebase";
 import { setDoc, doc } from "firebase/firestore";
 import { playPause, setActivePlayer, setActiveSong, playerBar } from '../../redux/features/playerSlice';
 import { useAuth } from "../../Context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { HiOutlineHeart } from "react-icons/hi";
+
+import classname from 'classnames/bind'
+import style from './Track.module.scss'
+import React, { useRef, useState } from 'react';
+
 
 const cx = classname.bind(style)
 

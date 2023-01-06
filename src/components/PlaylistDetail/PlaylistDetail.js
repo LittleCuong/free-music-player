@@ -1,11 +1,13 @@
-import classname from 'classnames/bind'
-import style from './PlaylistDetail.module.scss'
-import spotifyApi from '../../api/spotifyApi';
 import { HiOutlineHeart } from "react-icons/hi";
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../Context/AuthContext';
 import { db } from "../../firebase";
 import { setDoc, doc } from "firebase/firestore";
+
+import classname from 'classnames/bind'
+import style from './PlaylistDetail.module.scss'
+import spotifyApi from '../../api/spotifyApi';
+
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'
 

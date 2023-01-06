@@ -1,8 +1,9 @@
-import classname from 'classnames/bind'
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import style from './Album.module.scss'
 import { HiPlay } from "react-icons/hi2";
+
+import classname from 'classnames/bind'
+import style from './Album.module.scss'
 
 const cx = classname.bind(style)
 

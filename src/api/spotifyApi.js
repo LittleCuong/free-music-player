@@ -1,5 +1,3 @@
-import axiosClient from "./apiClient";
-import apiConfig from "./apiConfig";
 import axios from "axios";
 
 const spotifyApi = {

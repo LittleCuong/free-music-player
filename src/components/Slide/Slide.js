@@ -1,9 +1,10 @@
-import classname from 'classnames/bind'
-import style from './Slide.module.scss'
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {Pagination, Autoplay } from 'swiper';
+import { Pagination, Autoplay } from 'swiper';
 import { setCurrentPlaylist } from '../../redux/features/playerSlice';
+
+import classname from 'classnames/bind'
+import style from './Slide.module.scss'
 import spotifyApi from '../../api/spotifyApi';
 import SlideCard from '../SlideCard/SlideCard';
 
@@ -27,7 +28,6 @@ function Slide({className}) {
     useEffect(() => {
         const getNewRelease = async () => {
             const response = await spotifyApi.getNewRelease(auth)
-            console.log(response);
             setAlbums(response.data.albums.items)
             dispatch(setCurrentPlaylist(response.data.albums.items))
         } 

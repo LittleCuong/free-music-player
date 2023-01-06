@@ -1,7 +1,4 @@
 import { useState } from 'react';
-import classname from 'classnames/bind'
-import style from './Sidebar.module.scss'
-import Tippy from '@tippyjs/react';
 import { HiHome, HiHeart, HiUser, HiOutlineMusicNote, HiCollection, HiLogout } from "react-icons/hi";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
@@ -9,13 +6,17 @@ import { playerBar} from '../../redux/features/playerSlice';
 import { useDispatch } from 'react-redux';
 import { setActivePlayer } from '../../redux/features/playerSlice';
 
+import classname from 'classnames/bind'
+import style from './Sidebar.module.scss'
+import Tippy from '@tippyjs/react';
+
 import 'tippy.js/dist/tippy.css'
 
 const cx = classname.bind(style)
 
 function Sidebar() {
 
-    const { logout, signInWithGoogle, signInWithFacebook, currentUser } = useAuth()
+    const { logout, signInWithGoogle, currentUser } = useAuth()
     const nav = useNavigate()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
@@ -28,7 +29,7 @@ function Sidebar() {
             setLoading(true)
             await signInWithGoogle()
         } catch {
-            setError('Faile to sign up')
+            setError('Failed to sign up')
         }
 
         setLoading(false)

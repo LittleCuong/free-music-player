@@ -32,7 +32,6 @@ function FavouriteListLayout() {
             })
             try {
                 const result = await Promise.all(promises)         
-                console.log(result);
                 setFavouritePlaylists(result.map(item => item.data))
             } catch (err) {
                 console.log(err)

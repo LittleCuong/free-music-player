@@ -1,6 +1,6 @@
-import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 import classname from 'classnames/bind'
-import { useEffect, useRef, useState } from 'react';
 import spotifyApi from '../../api/spotifyApi';
 import ArtistItem from '../ArtistItem/ArtistItem';
 import style from './Artists.module.scss'

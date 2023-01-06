@@ -1,11 +1,13 @@
-import classname from 'classnames/bind'
-import style from './SidebarMobile.module.scss'
 import { HiHome, HiHeart, HiUser, HiOutlineMusicNote, HiCollection, HiArrowLeft, HiLogout } from "react-icons/hi";
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveMenu } from '../../redux/features/menuButtonSlice';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
+
+import classname from 'classnames/bind'
+import style from './SidebarMobile.module.scss'
+
 
 const cx = classname.bind(style)
 
@@ -15,7 +17,7 @@ function SidebarMobile() {
     const wrapperRef = useRef()
 
     const dispatch = useDispatch()
-    const { logout, signInWithGoogle, signInWithFacebook, currentUser } = useAuth()
+    const { logout, signInWithGoogle, currentUser } = useAuth()
     const {active} = useSelector((state) => state.menuMobile)
 
     const [error, setError] = useState('')

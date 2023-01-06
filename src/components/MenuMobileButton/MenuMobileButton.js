@@ -1,8 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux';
-import classname from 'classnames/bind'
-import style from './MenuMobileButton.module.scss'
+import { useDispatch } from 'react-redux';
 import { HiMenuAlt2 } from "react-icons/hi";
 import { setActiveMenu } from '../../redux/features/menuButtonSlice';
+
+import classname from 'classnames/bind'
+import style from './MenuMobileButton.module.scss'
+
 
 const cx = classname.bind(style)
 

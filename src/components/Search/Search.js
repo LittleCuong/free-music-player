@@ -1,9 +1,9 @@
+import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {AiOutlineSearch, AiOutlineCloseCircle } from 'react-icons/ai'
+
 import classname from 'classnames/bind'
 import style from './Search.module.scss'
-import { useRef, useState } from 'react';
-
-import {AiOutlineSearch, AiOutlineCloseCircle, AiOutlineLoading} from 'react-icons/ai'
-import { useNavigate } from 'react-router-dom';
 
 
 const cx = classname.bind(style)
@@ -11,7 +11,6 @@ const cx = classname.bind(style)
 function Search() {
 
     const [searchValue, setSearchValue] = useState('')
-    const [loading, setLoading] = useState(false)
 
     const inputRef = useRef()
     const nav = useNavigate()
@@ -39,7 +38,7 @@ function Search() {
                     className={cx('input')}     
                     onChange={(e) => setSearchValue(e.target.value)}           
                 ></input>                 
-                {!!searchValue && !loading && (
+                {!!searchValue && (
                     <AiOutlineCloseCircle 
                         className={cx('delete-icon')} 
                         onClick={handleClear}

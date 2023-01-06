@@ -1,18 +1,19 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useAuth } from '../../Context/AuthContext';
+import { useParams } from 'react-router-dom';
+import { setCurrentPlaylist } from '../../redux/features/playerSlice';
+
 import classname from 'classnames/bind'
 import style from './SearchResultsLayout.module.scss'
-import { useEffect, useState } from 'react';
 import Search from '../../components/Search/Search';
 import PlayerBar from '../../components/PlayerBar/PlayBar';
 import Sidebar from '../Sidebar/Sidebar';
-import { useAuth } from '../../Context/AuthContext';
 import MenuMobileButton from '../../components/MenuMobileButton/MenuMobileButton';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
 import spotifyApi from '../../api/spotifyApi';
-import { useParams } from 'react-router-dom';
 import ArtistItem from '../../components/ArtistItem/ArtistItem';
 import ResultTrack from '../../components/ResultTrack/ResultTrack';
-import { setCurrentPlaylist } from '../../redux/features/playerSlice';
 
 
 const cx = classname.bind(style)

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
 import { Link } from 'react-router-dom';
-import { playerBar, playPause } from '../../redux/features/playerSlice';
+import { playerBar } from '../../redux/features/playerSlice';
 import { setActiveMenu } from '../../redux/features/menuButtonSlice';
 
 import classname from 'classnames/bind'

@@ -1,8 +1,9 @@
-import classname from 'classnames/bind'
-import style from './RecommendTrackItem.module.scss'
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { HiPlay } from "react-icons/hi2";
 import { useSelector, useDispatch } from 'react-redux';
+
+import classname from 'classnames/bind'
+import style from './RecommendTrackItem.module.scss'
 
 
 import 'swiper/css';

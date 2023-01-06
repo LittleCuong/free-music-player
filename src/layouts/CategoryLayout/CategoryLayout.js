@@ -32,8 +32,6 @@ function CategoryLayout() {
         }
         getCategoryPlaylist()
 
-
-      
         dispatch(playerBar(false))
     }, [id, auth])
 

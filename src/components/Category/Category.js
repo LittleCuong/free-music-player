@@ -1,7 +1,8 @@
-import classname from 'classnames/bind'
 import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import classname from 'classnames/bind'
 import style from './Category.module.scss'
 
 const cx = classname.bind(style)

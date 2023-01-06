@@ -1,9 +1,10 @@
-import classname from 'classnames/bind'
-import style from './Playlist.module.scss'
-import spotifyApi from '../../api/spotifyApi';
 import { HiPlay } from "react-icons/hi2";
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import classname from 'classnames/bind'
+import style from './Playlist.module.scss'
+
 
 const cx = classname.bind(style)
 

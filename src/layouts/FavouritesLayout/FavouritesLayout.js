@@ -1,17 +1,17 @@
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAuth } from '../../Context/AuthContext';
+import { setBoolean, setCurrentPlaylist, setPage } from '../../redux/features/playerSlice';
+
 import classname from 'classnames/bind'
 import style from './FavouritesLayout.module.scss'
-import { useEffect, useState } from 'react';
 import Search from '../../components/Search/Search';
 import PlayerBar from '../../components/PlayerBar/PlayBar';
 import Sidebar from '../Sidebar/Sidebar';
-import { setBoolean, setCurrentPlaylist, setPage } from '../../redux/features/playerSlice';
-import { useAuth } from '../../Context/AuthContext';
 import MenuMobileButton from '../../components/MenuMobileButton/MenuMobileButton';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
 import axios from 'axios';
 import FavouriteTrack from '../../components/FavouriteTrack/FavouriteTrack';
-
 
 const cx = classname.bind(style)
 
@@ -22,9 +22,7 @@ function FavouritesLayout() {
     const dispatch = useDispatch()
 
     const { tracks, currentUser} = useAuth()
-    const { currentPlaylist, favourite } = useSelector((state) => state.player);
 
-    const [favouritePlaylists, setFavouritePlaylists] = useState([])
     const [favouriteTracks, setFavouriteTracks] = useState([])
     
     useEffect(() => {  

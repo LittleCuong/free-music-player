@@ -16,7 +16,6 @@ import Sidebar from '../Sidebar/Sidebar';
 import spotifyApi from '../../api/spotifyApi';
 import MenuMobileButton from '../../components/MenuMobileButton/MenuMobileButton';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
-import FavouriteTrack from '../../components/FavouriteTrack/FavouriteTrack';
 import AlbumTrack from '../../components/AlbumTrack/AlbumTrack';
 
 const cx = classname.bind(style)
@@ -39,7 +38,6 @@ function AlbumTracksLayout() {
 
         const getList = async () => {
             const response = await spotifyApi.getAlbumTracks(id, auth)
-            console.log(response.data.items);
             setAlbum(response.data.items)
             dispatch(setCurrentPlaylist(response.data.items))
         } 
@@ -87,7 +85,7 @@ function AlbumTracksLayout() {
                             </div>
                         </div>
                     </div>
-                    <PlayerBar page={'album'}/>
+                    <PlayerBar/>
                 </div>
             </div>
             <SidebarMobile/>

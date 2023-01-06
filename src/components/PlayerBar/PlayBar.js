@@ -1,5 +1,3 @@
-import classname from 'classnames/bind'
-import style from './PlayerBar.module.scss'
 import { memo, useEffect, useRef, useState } from 'react';
 import { HiOutlineHeart } from "react-icons/hi";
 import { HiPlay, HiBackward, HiForward, HiPause } from "react-icons/hi2";
@@ -10,13 +8,15 @@ import { nextSong, prevSong, playPause } from '../../redux/features/playerSlice'
 import { db } from "../../firebase";
 import { setDoc, doc } from "firebase/firestore";
 
+import classname from 'classnames/bind'
+import style from './PlayerBar.module.scss'
+
 const cx = classname.bind(style)
 
 function PlayerBar({page}) {
 
     const { currentSongs, currentIndex, isPlaying, currentPlaylist, bar } = useSelector((state) => state.player)
     const {tracks, currentUser} = useAuth()
-    console.log(currentPlaylist);
     const inFav = tracks.includes(currentSongs.id)
 
     const audioRef = useRef()
@@ -28,7 +28,6 @@ function PlayerBar({page}) {
     const [artists, setArtists] = useState()
     const [isRandom, setIsRandom] = useState(false)
     const [isRepeated, setIsRepeated] = useState(false)
-    const [playing, setPlaying] = useState(false)
     const dispatch = useDispatch()
     
     useEffect(() => {

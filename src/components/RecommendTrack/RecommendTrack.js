@@ -1,18 +1,18 @@
-import axios from 'axios';
-import classname from 'classnames/bind'
-import style from './RecommendTrack.module.scss'
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useAuth } from "../../Context/AuthContext";
-import RecommendTrackItem from '../RecommendTrackItem/RecommendTrackItem';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {Pagination, Autoplay } from 'swiper';
+import { useSelector, useDispatch } from 'react-redux';
+
+import classname from 'classnames/bind'
+import style from './RecommendTrack.module.scss'
+import RecommendTrackItem from '../RecommendTrackItem/RecommendTrackItem';
+
 import spotifyApi from '../../api/spotifyApi';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-import { useSelector, useDispatch } from 'react-redux';
-import { setActiveSong } from '../../redux/features/playerSlice';
 
 
 const cx = classname.bind(style)

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GoogleAuthProvider, signInWithPopup, getAuth, FacebookAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import { auth, db } from "../firebase.js";
 
@@ -84,11 +84,6 @@ function AuthProvider({ children }) {
         auth.signInWithPopup(provider)
     }
 
-    function signInWithFacebook() {
-        const provider = new FacebookAuthProvider();
-        auth.signInWithPopup(provider)
-    }
-
     useEffect(() => {
         const unsubcriber = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
@@ -108,10 +103,8 @@ function AuthProvider({ children }) {
             method: 'POST'
         })
         .then(tokenResponse => {      
-            // console.log(tokenResponse);
             setToken(tokenResponse.data.access_token);
             localStorage.setItem('token', JSON.stringify(tokenResponse.data.access_token))
-            console.log(tokenResponse.data.access_token);
         });
     }, [clientId, clientSecret]); 
 
