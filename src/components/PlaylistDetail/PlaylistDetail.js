@@ -61,6 +61,34 @@ function PlaylistDetail({id}) {
         }
     }
 
+    const handleLikedTrack = async () => {
+        if (!currentUser) {
+            alert('You must login to use this feature')
+        } else {
+            const playlistRef = doc(db, "playlists", currentUser.uid)
+            if (inFav) {
+                try {
+                    await setDoc(playlistRef, 
+                        {playlist: playlists ? [...playlists, playlist.id] : [playlist.id]},
+                    )
+                    alert(`${playlist.name} added to Favourite!`)
+                } catch (error) {
+                    alert(`${playlist.name} fail to added to Favourite!`)
+                }
+            } else {
+                try {
+                    await setDoc(playlistRef, 
+                        {playlist: playlists.filter((item) => item !== playlist.id)},
+                        {merge: "true"}
+                    )
+                    alert(`${playlist.name} removed from Favourite!`)
+                } catch (error) {
+                    alert(`${playlist.name} fail to removed from Favourite!`)
+                }
+            }
+        }
+    }
+
     return ( 
         <div className={cx('wrapper')} style={{backgroundColor: `${playlist.primary_color}`}}>
             <div className={cx('wrapper-image')}>
@@ -78,8 +106,6 @@ function PlaylistDetail({id}) {
                 </Tippy>
                 
             </div>
-          
-
         </div>
     );
 }
