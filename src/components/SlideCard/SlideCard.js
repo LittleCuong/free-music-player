@@ -27,9 +27,14 @@ function SlideCard(data) {
         <div
             className={cx('wrapper')} 
             style={style}
-            onClick={handleClicked}
         >
-            <button className={cx('wrapper-button--explore')}>Explore now</button>   
+            
+            <button 
+                className={cx('wrapper-button--explore')} 
+                onClick={handleClicked}
+            >
+                Explore now
+            </button>   
         </div>
     );
 }

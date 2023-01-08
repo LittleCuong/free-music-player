@@ -81,7 +81,7 @@ function PlaylistLayout() {
                             </div>
                         </div>
                     </div>
-                    <PlayerBar/>
+                    <PlayerBar page={"playlist"}/>
                 </div>
             </div>
             <SidebarMobile/>

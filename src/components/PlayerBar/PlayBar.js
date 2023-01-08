@@ -41,6 +41,12 @@ function PlayerBar({page}) {
                     setImage(currentSongs?.album?.images)
                 }
                 break;
+            case 'playlist':
+                if (currentSongs) {
+                    setArtists(currentSongs?.artists)
+                    setImage(currentSongs?.album?.images)
+                }
+                break;
             case 'result':
                 if (currentSongs) {
                     setArtists(currentSongs?.artists)
@@ -63,17 +69,6 @@ function PlayerBar({page}) {
                 setArtists(currentSongs?.artists)
                 break;
         }
-        // if (page !== 'album') {
-        //     if (currentSongs) {
-        //         setArtists(currentSongs?.artists)
-        //         setImage(currentSongs?.album?.images)
-        //     }
-        // } else {
-        //     if (currentSongs) {
-        //         setArtists(currentSongs?.artists)
-        //     }
-        // }
-       
 
         if (image !== undefined) {
             setUrl(image.find(item => {
