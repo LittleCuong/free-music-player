@@ -2,12 +2,10 @@ import classname from 'classnames/bind'
 import style from './TracksList.module.scss'
 import { useEffect, useState } from 'react';
 import Track from '../../components/Track/Track';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useAuth } from '../../Context/AuthContext';
-import axios from 'axios';
 import { setCurrentPlaylist, setPage } from '../../redux/features/playerSlice';
 import spotifyApi from '../../api/spotifyApi';
-
 
 const cx = classname.bind(style)
 
@@ -31,7 +29,6 @@ function TracksList({data, page}) {
         } else {
             const getList = async () => {
                 const response = await spotifyApi.getAlbumTracks(data, auth)
-                console.log(response.data);
                 setPlaylists(response.data.items)
                 dispatch(setCurrentPlaylist(response.data.items))
             } 

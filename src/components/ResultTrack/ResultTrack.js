@@ -9,11 +9,11 @@ import classname from 'classnames/bind'
 
 import style from './ResultTrack.module.scss'
 
-
 const cx = classname.bind(style)
 
 function ResultTrack({data, index}) {
-    const { activeSong } = useSelector((state) => state.player);
+    const { activeSong, currentPlaylist } = useSelector((state) => state.player);
+    console.log(currentPlaylist);
     const {tracks} = useAuth()
     const track = data
     const inFav = tracks.includes(track.id)
@@ -37,7 +37,6 @@ function ResultTrack({data, index}) {
         dispatch(setActiveSong({track, index}));
         dispatch(playerBar(true))
         dispatch(playPause(false))
-        console.log(index);
     }
 
     const handleLikedTrack = async () => {

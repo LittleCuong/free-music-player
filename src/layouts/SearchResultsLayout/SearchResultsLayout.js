@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAuth } from '../../Context/AuthContext';
 import { useParams } from 'react-router-dom';
-import { setCurrentPlaylist } from '../../redux/features/playerSlice';
+import { setCurrentPlaylist, setPage } from '../../redux/features/playerSlice';
 
 import classname from 'classnames/bind'
 import style from './SearchResultsLayout.module.scss'
@@ -32,11 +32,11 @@ function SearchResultsLayout() {
     useEffect(() => {  
         const getResult = async () => {
             const res = await spotifyApi.getResults(string, auth)
-            console.log(res);
             setTracks(res.data.tracks.items)
             setArtists(res.data.artists.items)
             dispatch(setCurrentPlaylist(res.data.tracks.items))
         }
+        dispatch(setPage('result'))
         getResult()
     }, [string])
     

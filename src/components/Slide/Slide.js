@@ -30,7 +30,6 @@ function Slide({className}) {
         const getNewRelease = async () => {
             const response = await spotifyApi.getNewRelease(auth)
             setAlbums(response.data.albums.items)
-            console.log(response.data.albums.items);
         } 
         getNewRelease()
     }, [auth])

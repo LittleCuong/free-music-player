@@ -30,6 +30,8 @@ function ArtistDetailLayout() {
     const [albums, setAlbums] = useState()
 
     useEffect(() => {
+        dispatch(setPage('artist'))
+
         const getArtist = async () => {
             const res = await spotifyApi.getArtistDetails(id, auth)
             setData(res.data)

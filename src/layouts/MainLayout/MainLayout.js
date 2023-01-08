@@ -1,4 +1,4 @@
-import { playerBar, setActivePlayer, setFavouritePlaylist } from '../../redux/features/playerSlice';
+import { playerBar, setActivePlayer, setFavouritePlaylist, setPage } from '../../redux/features/playerSlice';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveMenu } from '../../redux/features/menuButtonSlice';
@@ -41,6 +41,7 @@ function MainLayout() {
 
     useEffect(() => {  
         dispatch(setFavouritePlaylist(false))
+        dispatch(setPage('home'))
 
         if (activePlayer && window.innerWidth >= 1480) {
             playerRef.current.style.display = 'block'
@@ -68,7 +69,6 @@ function MainLayout() {
             dispatch(setActiveMenu(false))
         }
     }
-
 
     return ( 
         <div className={cx('wrapper', 'grid')} onClick={handleClickOutside}>
@@ -117,7 +117,7 @@ function MainLayout() {
                             </div>
                         </div>
                     </div>                                  
-                <PlayerBar page={'home'}/>
+                    <PlayerBar page={'home'}/>
                 </div>                
             </div>
             <SidebarMobile/>

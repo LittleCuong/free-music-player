@@ -38,7 +38,6 @@ function ArtistTopTrack({data, index}) {
         dispatch(setActiveSong({track, index}));
         dispatch(playPause(false))
         dispatch(playerBar(true))
-
     }
 
     const handleLikedTrack = async () => {

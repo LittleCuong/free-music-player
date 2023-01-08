@@ -4,7 +4,7 @@ import { memo, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
 import { Link } from 'react-router-dom';
-import { playerBar, setCurrentPlaylist } from '../../redux/features/playerSlice';
+import { playerBar, setCurrentPlaylist, setPage } from '../../redux/features/playerSlice';
 import { setActiveMenu } from '../../redux/features/menuButtonSlice';
 
 import classname from 'classnames/bind'
@@ -37,6 +37,7 @@ function AlbumTracksLayout() {
     
     useEffect(() => {
         dispatch(playerBar(true))
+        dispatch(setPage('album'))
 
         const getList = async () => {
             const response = await spotifyApi.getAlbumTracks(id, auth)
