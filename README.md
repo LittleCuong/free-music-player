@@ -13,5 +13,5 @@ Features:
 Technologies:
   ReactJS, Redux - Redux toolkit, The Spotify API ...
 
-
-
+Note:
+  There is still some problems and I am trying my best to fix it!!
