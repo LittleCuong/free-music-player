@@ -49,7 +49,7 @@ function AlbumTracksLayout() {
             dispatch(setActiveMenu(false))
         }
     }
-    console.log(album);
+
     return ( 
         <div className={cx('wrapper', 'grid')} onClick={handleClickOutside}>
             <div className={cx('container', 'row no-gutters')}>

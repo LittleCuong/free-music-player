@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import classname from 'classnames/bind'
 import style from './SlideCard.module.scss'
@@ -24,7 +24,7 @@ function SlideCard(data) {
     const style = {backgroundImage: `url(${imageUrl})`}
 
     return ( 
-        <div 
+        <div
             className={cx('wrapper')} 
             style={style}
             onClick={handleClicked}

@@ -35,7 +35,7 @@ function AlbumTrack({data, index}) {
         dispatch(playPause(false))
     }
 
-        const handleLikedTrack = async () => {
+    const handleLikedTrack = async () => {
         if (!currentUser) {
             alert('You must login to use this feature')
         } else {

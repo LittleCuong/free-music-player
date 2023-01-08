@@ -1,4 +1,4 @@
-import { playerBar, setFavouritePlaylist } from '../../redux/features/playerSlice';
+import { playerBar, setActivePlayer, setFavouritePlaylist } from '../../redux/features/playerSlice';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveMenu } from '../../redux/features/menuButtonSlice';
@@ -41,7 +41,6 @@ function MainLayout() {
 
     useEffect(() => {  
         dispatch(setFavouritePlaylist(false))
-        dispatch(playerBar(false))
 
         if (activePlayer && window.innerWidth >= 1480) {
             playerRef.current.style.display = 'block'
@@ -118,9 +117,9 @@ function MainLayout() {
                             </div>
                         </div>
                     </div>                                  
+                <PlayerBar/>
                 </div>                
             </div>
-            <PlayerBar/>
             <SidebarMobile/>
         </div>  
     );

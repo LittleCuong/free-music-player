@@ -64,7 +64,7 @@ const playerSlice = createSlice({
                     state.currentSongs = state.currentPlaylist.at(action.payload)                                    
                     break;
                 default: 
-                    // state.currentSongs = state.currentPlaylist.at(action.payload)                                    
+                    state.currentSongs = state.currentPlaylist.at(action.payload)                                    
                     break;
             }
             state.currentIndex = action.payload;
@@ -89,6 +89,7 @@ const playerSlice = createSlice({
                     state.currentSongs = state.currentPlaylist.at(action.payload)                                    
                     break;    
                 default: 
+                    state.currentSongs = state.currentPlaylist.at(action.payload)                                    
                     break;
             }
             state.currentIndex = action.payload;

@@ -112,11 +112,11 @@ function Player() {
                 <div className={cx('wrapper-main-image')}>
                     <img className={cx('track-image')} 
                         src={imageUrl} 
-                        alt={currentSongs.name}
+                        alt={currentSongs?.name}
                     />
                 </div>
                 <div className={cx('wrapper-main-infor')}>
-                    <span className={cx('track-name')}>{currentSongs.name}</span>
+                    <span className={cx('track-name')}>{currentSongs?.name}</span>
                     <span className={cx('track-artist')}>
                         {artistName?.join(", ")}
                     </span>    

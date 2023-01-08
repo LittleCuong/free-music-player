@@ -20,18 +20,18 @@ function Album({data}) {
 
     return ( 
         <Link to={`/album/tracks/${data.id}`}  className={cx('wrapper')}>
-        <div className={cx('wrapper-contain')}> 
-            <img 
-                className={cx('wrapper-image')} 
-                src={imageUrl?.url}
-                alt={data.name}
-            />
-            <div className={cx('wrapper-text')}>
-                <span className={cx('text')}>{data.name}</span>
+            <div className={cx('wrapper-contain')}> 
+                <img 
+                    className={cx('wrapper-image')} 
+                    src={imageUrl?.url}
+                    alt={data.name}
+                />
+                <div className={cx('wrapper-text')}>
+                    <span className={cx('text')}>{data.name}</span>
+                </div>
+                <HiPlay className={cx('wrapper-icon')}/>
             </div>
-            <HiPlay className={cx('wrapper-icon')}/>
-        </div>
-    </Link>
+        </Link>
     );
 }
 
