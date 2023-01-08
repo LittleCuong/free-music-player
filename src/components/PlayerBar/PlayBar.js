@@ -17,8 +17,9 @@ function PlayerBar({page}) {
 
     const { currentSongs, currentIndex, isPlaying, currentPlaylist, bar } = useSelector((state) => state.player)
     const {tracks, currentUser} = useAuth()
-    const inFav = tracks.includes(currentSongs.id)
-    console.log(currentSongs.name);
+    const inFav = tracks.includes(currentSongs?.id)
+    console.log(currentSongs?.name);
+    console.log(currentPlaylist);
     const audioRef = useRef()
     const wrapperRef = useRef()
     const [track, setTrack] = useState()
@@ -95,9 +96,7 @@ function PlayerBar({page}) {
         setIsRandom(!isRandom)
     }
 
-    
-
-   const handlePlay = async () => {
+    const handlePlay = async () => {
         audioRef.current.play();
         dispatch(playPause(true));
     }
