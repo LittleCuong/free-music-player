@@ -18,7 +18,7 @@ function PlayerBar({page}) {
     const { currentSongs, currentIndex, isPlaying, currentPlaylist, bar } = useSelector((state) => state.player)
     const {tracks, currentUser} = useAuth()
     const inFav = tracks.includes(currentSongs.id)
-
+    console.log(currentSongs.name);
     const audioRef = useRef()
     const wrapperRef = useRef()
     const [track, setTrack] = useState()
