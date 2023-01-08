@@ -11,8 +11,6 @@ import style from './Player.module.scss'
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'
 
-
-
 const cx = classname.bind(style)
 
 function Player() {

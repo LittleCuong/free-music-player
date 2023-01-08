@@ -69,9 +69,9 @@ function PlayerBar({page}) {
         audioRef.current.pause()
 
         if (isRandom) {
-            dispatch(nextSong(Math.floor(Math.random()*currentIndex)));
+            dispatch(prevSong(Math.floor(Math.random()*currentIndex)));
         } else {
-            dispatch(nextSong(currentIndex - 1));   
+            dispatch(prevSong(currentIndex - 1));   
 
         }
     }
