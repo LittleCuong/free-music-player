@@ -24,12 +24,13 @@ function Slide({className}) {
     const auth = JSON.parse(localStorage.getItem('token'))
     const [albums, setAlbums] = useState([])
     const dispatch = useDispatch()
+    const array = ['1Xyo4u8uXC1ZmMpatF05PJ', '1URnnhqYAYcrqrcwql10ft', '06HL4z0CvFAxyc27GXpf02', '3TVXtAsR1Inumwj472S9r4', '2wY79sveU1sp5g7SokKOiI']
 
     useEffect(() => {
         const getNewRelease = async () => {
             const response = await spotifyApi.getNewRelease(auth)
             setAlbums(response.data.albums.items)
-            dispatch(setCurrentPlaylist(response.data.albums.items))
+            console.log(response.data.albums.items);
         } 
         getNewRelease()
     }, [auth])

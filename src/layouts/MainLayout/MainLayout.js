@@ -117,7 +117,7 @@ function MainLayout() {
                             </div>
                         </div>
                     </div>                                  
-                <PlayerBar/>
+                <PlayerBar page={'home'}/>
                 </div>                
             </div>
             <SidebarMobile/>

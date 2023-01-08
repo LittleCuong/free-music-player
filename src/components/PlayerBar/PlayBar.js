@@ -17,7 +17,6 @@ function PlayerBar({page}) {
 
     const { currentSongs, currentIndex, isPlaying, currentPlaylist, bar } = useSelector((state) => state.player)
     const {tracks, currentUser} = useAuth()
-    console.log(currentSongs);
     const inFav = tracks.includes(currentSongs?.id)
     const audioRef = useRef()
     const wrapperRef = useRef()
@@ -29,22 +28,51 @@ function PlayerBar({page}) {
     const [isRandom, setIsRandom] = useState(false)
     const [isRepeated, setIsRepeated] = useState(false)
     const dispatch = useDispatch()
-    
+
     useEffect(() => {
         setTrack(currentSongs)
     }, [currentSongs])
 
     useEffect(() => {
-        if (page !== 'album') {
-            if (currentSongs) {
+        switch (page) {
+            case 'home':
+                if (currentSongs) {
+                    setArtists(currentSongs?.artists)
+                    setImage(currentSongs?.album?.images)
+                }
+                break;
+            case 'result':
+                if (currentSongs) {
+                    setArtists(currentSongs?.artists)
+                    setImage(currentSongs?.album?.images)
+                }
+                break;
+            case 'favourite':
+                if (currentSongs) {
+                    setArtists(currentSongs?.artists)
+                    setImage(currentSongs?.album?.images)
+                }
+                break;
+            case 'artist': 
+                if (currentSongs) {
+                    setArtists(currentSongs?.artists)
+                    setImage(currentSongs?.album?.images)
+                }
+                break;   
+            case 'album':
                 setArtists(currentSongs?.artists)
-                setImage(currentSongs?.album?.images)
-            }
-        } else {
-            if (currentSongs) {
-                setArtists(currentSongs?.artists)
-            }
+                break;
         }
+        // if (page !== 'album') {
+        //     if (currentSongs) {
+        //         setArtists(currentSongs?.artists)
+        //         setImage(currentSongs?.album?.images)
+        //     }
+        // } else {
+        //     if (currentSongs) {
+        //         setArtists(currentSongs?.artists)
+        //     }
+        // }
        
 
         if (image !== undefined) {
@@ -58,7 +86,7 @@ function PlayerBar({page}) {
             setArtist(artists.map(item => item.name))
         }
     
-    }, [ image, artists, currentSongs])
+    }, [page, image, artists, currentSongs])
 
     const handleRepeated = () => {
         setIsRepeated(!isRepeated)
@@ -176,4 +204,4 @@ function PlayerBar({page}) {
     );
 }
 
-export default memo(PlayerBar);
+export default PlayerBar;

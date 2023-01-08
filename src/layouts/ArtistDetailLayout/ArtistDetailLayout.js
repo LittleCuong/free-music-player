@@ -103,7 +103,7 @@ function ArtistDetailLayout() {
                                     ))}
                                 </div>
                             </div>
-                            <PlayBar/>                         
+                            <PlayBar page={'artist'}/>                         
                         </div>
                     </div> 
                 </div>

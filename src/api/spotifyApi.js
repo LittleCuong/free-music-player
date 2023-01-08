@@ -79,6 +79,14 @@ const spotifyApi = {
         })
         return result
     },
+    getTest: async (id, token) => {
+        const result = await axios(`https://api.spotify.com/v1/artists/1Xyo4u8uXC1ZmMpatF05PJ/albums`, {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + token}
+        })
+        return result
+    },
+    
     getAlbumTracks: async (id, token) => {
         const result = await axios(`https://api.spotify.com/v1/albums/${id}/tracks`, {
             method: 'GET',

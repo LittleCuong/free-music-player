@@ -26,6 +26,8 @@ function AlbumTracksLayout() {
     const auth = JSON.parse(localStorage.getItem('token'))
 
     const {active} = useSelector((state) => state.menuMobile)
+    const {currentPlaylist} = useSelector((state) => state.player)
+
     const {token} = useAuth()
     const { id } = useParams()
 
@@ -42,7 +44,7 @@ function AlbumTracksLayout() {
             dispatch(setCurrentPlaylist(response.data.items))
         } 
         getList()
-    }, [id, auth])
+    }, [id])
 
     const handleClickOutside = () => {
         if (active === true) {
@@ -68,7 +70,7 @@ function AlbumTracksLayout() {
                                 <div className={cx('wrapper-music--list-tracks')}>
                                     <div className={cx('track-list')}>
                                         {album?.map((item, index) => (
-                                            <AlbumTrack data={item} key={item.id} index={index} />
+                                            <AlbumTrack data={item} key={item.id} index={index}/>
                                         ))}
                                     </div>
                                 </div>
@@ -85,7 +87,7 @@ function AlbumTracksLayout() {
                             </div>
                         </div>
                     </div>
-                    <PlayerBar page={"album"}/>
+                    <PlayerBar page={'album'}/>
                 </div>
             </div>
             <SidebarMobile/>

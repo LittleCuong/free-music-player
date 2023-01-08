@@ -14,7 +14,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 
-
 const cx = classname.bind(style)
 
 function RecommendTrack({index}) {
@@ -22,8 +21,7 @@ function RecommendTrack({index}) {
     
     const { token } = useAuth()
 
-    const dispatch = useDispatch()
-    const { currentSongs, isPlaying } = useSelector((state) => state.player)
+    const { currentSongs } = useSelector((state) => state.player)
     const [artists, setArtists] = useState()
     const [artist, setArtist] = useState()
     const [tracks, setTracks] = useState()
@@ -34,7 +32,6 @@ function RecommendTrack({index}) {
             const getRecommend = async () => {
                 const response = await spotifyApi.getArtistsTopTracks(array, token)
                 setTracks(response.data.tracks)
-                console.log(response);
             }
             getRecommend()
         }
