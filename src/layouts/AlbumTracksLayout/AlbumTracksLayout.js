@@ -85,7 +85,7 @@ function AlbumTracksLayout() {
                             </div>
                         </div>
                     </div>
-                    <PlayerBar/>
+                    <PlayerBar page={"album"}/>
                 </div>
             </div>
             <SidebarMobile/>

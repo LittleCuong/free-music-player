@@ -41,6 +41,7 @@ function MainLayout() {
 
     useEffect(() => {  
         dispatch(setFavouritePlaylist(false))
+        dispatch(playerBar(false))
 
         if (activePlayer && window.innerWidth >= 1480) {
             playerRef.current.style.display = 'block'

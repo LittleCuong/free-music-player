@@ -60,8 +60,11 @@ const playerSlice = createSlice({
                 case 'result':
                     state.currentSongs = state.currentPlaylist.at(action.payload)                                    
                     break;
-                default: 
+                case 'album':
                     state.currentSongs = state.currentPlaylist.at(action.payload)                                    
+                    break;
+                default: 
+                    // state.currentSongs = state.currentPlaylist.at(action.payload)                                    
                     break;
             }
             state.currentIndex = action.payload;
@@ -79,10 +82,15 @@ const playerSlice = createSlice({
                 case 'home':
                     state.currentSongs = state.currentPlaylist.at(action.payload).track                                     
                     break;
+                case 'result':
+                    state.currentSongs = state.currentPlaylist.at(action.payload)                                    
+                    break;
+                case 'album':
+                    state.currentSongs = state.currentPlaylist.at(action.payload)                                    
+                    break;    
                 default: 
                     break;
             }
-            // state.currentSongs = state.currentPlaylist.at(action.payload).track
             state.currentIndex = action.payload;
             state.isActive = true;
         },

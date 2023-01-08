@@ -9,11 +9,9 @@ import { HiOutlineHeart } from "react-icons/hi";
 import classname from 'classnames/bind'
 import style from './AlbumTrack.module.scss'
 
-
 const cx = classname.bind(style)
 
 function AlbumTrack({data, index}) {
-    console.log(data.id);
     const { activeSong } = useSelector((state) => state.player);
     const {tracks} = useAuth()
     const track = data
@@ -35,7 +33,6 @@ function AlbumTrack({data, index}) {
         dispatch(setActiveSong({track, index}));
         dispatch(playerBar(true))
         dispatch(playPause(false))
-        console.log(index);
     }
 
         const handleLikedTrack = async () => {
