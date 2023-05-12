@@ -15,3 +15,4 @@ Technologies:
 
 Note:
   There is still some problems and I am trying my best to fix it!!
+![image](https://github.com/LittleCuong/free-music-player/assets/91473760/d53eb376-7d7d-4443-bd01-9ee562f3962c)
